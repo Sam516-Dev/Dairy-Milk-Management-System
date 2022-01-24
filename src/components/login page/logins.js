@@ -7,8 +7,6 @@ import {
   Buttondiv,
 } from '../styled-componets/loginpage.styled'
 
-//this is just a comment
-// this is the second comment
 function Loginpage() {
   return (
     <div>
