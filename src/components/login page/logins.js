@@ -13,20 +13,24 @@ function Loginpage() {
       <Form>
         <Label>
           UserName:
-          <Input type="text" name="name" placeholder="username" />
+          <Input type="text" name="name" placeholder="username..." required />
         </Label>
       </Form>
       <Form>
         <Label>
           Email:
-          <Input type="text" name="name" placeholder="email@gmail.com" />
+          <Input
+            type="text"
+            name="name"
+            placeholder="email@gmail.com..."
+            required
+          />
         </Label>
       </Form>
 
       <Buttondiv>
         <Button> login </Button>
       </Buttondiv>
-      <button> hey there </button>
     </div>
   )
 }
