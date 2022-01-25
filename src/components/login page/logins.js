@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Form,
   Input,
@@ -8,6 +8,10 @@ import {
 } from '../styled-componets/loginpage.styled'
 
 function Loginpage() {
+  // const [username, setusername] = useState('')
+  // const [email, setemail] = useState('')
+  // const [password, setpassword] = useState('')
+
   return (
     <div>
       <Form>

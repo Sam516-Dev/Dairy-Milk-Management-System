@@ -3,8 +3,14 @@ import styled from 'styled-components'
 export const Title = styled.h1`
   font-size: 2em;
   text-align: center;
-  color: white;
+  color: black;
   margin-top: 50px;
+`
+
+export const Hometitle = styled.h2`
+  font-size: medium;
+  color: blue;
+  text-align: center;
 `
 
 export const Label = styled.label`
