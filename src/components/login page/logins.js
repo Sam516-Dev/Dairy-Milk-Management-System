@@ -5,7 +5,7 @@ import {
   Button,
   Label,
   Buttondiv,
-} from '../styled-componets/loginpage.styled'
+} from '../styled-componets/styles'
 
 function Loginpage() {
   // const [username, setusername] = useState('')
