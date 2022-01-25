@@ -11,16 +11,18 @@ function App() {
   //added this comment to test something
 
   return (
-    <>
-      <GlobalStyles />
-      <Wrapper>
-        <Title> DAIRY MILK MANAGEMENT SYSTEM </Title>
-        <Loginpage />
-      </Wrapper>
-    </>
+    <div>
+      <Homepage />
+    </div>
   )
 }
 
 export default App
 
 // the login stuff
+
+// <GlobalStyles />
+//       <Wrapper>
+//         <Title> DAIRY MILK MANAGEMENT SYSTEM </Title>
+//         <Loginpage />
+//       </Wrapper>

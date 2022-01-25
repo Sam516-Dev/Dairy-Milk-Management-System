@@ -7,10 +7,18 @@ export const Title = styled.h1`
   margin-top: 50px;
 `
 
+export const Hometable = styled.table`
+  align-items: center;
+  background-color: blue;
+  justify-content: center;
+  color: white;
+`
+
 export const Hometitle = styled.h2`
-  font-size: medium;
+  font-size: 2em;
   color: blue;
-  text-align: center;
+  text-align: left;
+  padding-left: 45px;
 `
 
 export const Label = styled.label`
