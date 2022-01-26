@@ -107,3 +107,26 @@ export const Hometitle = styled.h2`
 //end of home page
 
 //milk per litre styles
+export const Milktitle = styled.h2`
+  font-size: 2.5em;
+  color: #008080;
+  text-align-last: center;
+  margin-top: 100px;
+`
+
+export const MilkLabel = styled.label`
+  color: #008080;
+  font-size: 2em;
+  text-align: center;
+  margin-left: 620px;
+  font-weight: bold;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+`
+
+export const Milkp = styled.p`
+  color: #008080;
+  font-size: 1.5em;
+  text-align: center;
+  text-decoration-line: underline;
+`
