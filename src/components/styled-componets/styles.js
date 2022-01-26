@@ -7,20 +7,6 @@ export const Title = styled.h1`
   margin-top: 50px;
 `
 
-export const Hometable = styled.table`
-  align-items: center;
-  background-color: blue;
-  justify-content: center;
-  color: white;
-`
-
-export const Hometitle = styled.h2`
-  font-size: 2em;
-  color: blue;
-  text-align: left;
-  padding-left: 45px;
-`
-
 export const Label = styled.label`
   color: white;
   font-size: 1.5em;
@@ -93,3 +79,31 @@ export const Button = styled.button`
   /* margin-left: 50px; */
   background-color: #fdda0d;
 `
+
+//home page
+export const Tablerow = styled.header`
+  display: inline;
+  font-weight: bold;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin: 10px;
+`
+
+export const Hometable = styled.table`
+  align-items: center;
+  margin-top: 100px;
+  color: #008080;
+
+  font-size: 22px;
+  margin-left: 400px;
+  text-transform: uppercase;
+`
+
+export const Hometitle = styled.h2`
+  font-size: 2em;
+  color: blue;
+  text-align: left;
+  padding-left: 45px;
+`
+//end of home page
+
+//milk per litre styles
