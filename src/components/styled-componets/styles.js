@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const Title = styled.h1`
   font-size: 2em;
@@ -88,22 +89,32 @@ export const Tablerow = styled.header`
   margin: 10px;
 `
 
-export const Hometable = styled.table`
-  align-items: center;
-  margin-top: 100px;
-  color: #008080;
-
-  font-size: 22px;
-  margin-left: 400px;
-  text-transform: uppercase;
-`
-
 export const Hometitle = styled.h2`
   font-size: 2em;
   color: blue;
   text-align: left;
   padding-left: 45px;
 `
+export const Homediv = styled.div`
+  margin-top: 100px;
+  color: #008080;
+
+  text-transform: uppercase;
+`
+
+export const NavbarLink = styled(Link)`
+  font-size: 22px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  align-items: center;
+  font-weight: bold;
+  display: inline;
+
+  margin-left: 200px;
+  margin-top: 100px;
+  color: #008080;
+`
+
 //end of home page
 
 //milk per litre styles

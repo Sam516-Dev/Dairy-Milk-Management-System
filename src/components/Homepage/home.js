@@ -3,23 +3,18 @@ import React from 'react'
 import {
   Title,
   Hometitle,
-  Hometable,
+  Homediv,
   Tablerow,
+  NavbarLink,
 } from '../styled-componets/styles'
 
 function Homepage() {
   return (
-    <div>
-      <Hometable>
-        <thead>
-          <tr>
-            <Tablerow> home </Tablerow>
-            <Tablerow>farmers </Tablerow>
-            <Tablerow> Deliveries</Tablerow>
-            <Tablerow> milk price</Tablerow>
-          </tr>
-        </thead>
-      </Hometable>
+    <Homediv>
+      <NavbarLink to="/"> Home</NavbarLink>
+      <NavbarLink to="/famers"> farmers </NavbarLink>
+      <NavbarLink to="/deliveries"> Deliveries </NavbarLink>
+      <NavbarLink to="/milkprice"> milk price</NavbarLink>
 
       <img
         src="/homeimages/dairy cows.jpg"
@@ -27,7 +22,18 @@ function Homepage() {
         width="100%"
         height="600px"
       />
-    </div>
+    </Homediv>
   )
 }
 export default Homepage
+
+// <Hometable>
+// <thead>
+//   <tr>
+//     <Tablerow> home </Tablerow>
+//     <Tablerow>farmers </Tablerow>
+//     <Tablerow> Deliveries</Tablerow>
+//     <Tablerow> milk price</Tablerow>
+//   </tr>
+// </thead>
+// </Hometable>

@@ -1,14 +1,16 @@
 import { FaEdit } from 'react-icons/fa'
 
+import { Milktitle, MilkLabel, Milkp } from '../styled-componets/styles'
+
 function MilkPerLitreApp() {
   return (
     <>
-      <h2> MILK PRICE PER LITRE:</h2>
+      <Milktitle> MILK PRICE PER LITRE</Milktitle>
 
-      <label>KSH.40</label>
-      <p>
-        Edit the price: <FaEdit size="1.1em" color="#008080" />
-      </p>
+      <MilkLabel>KSH.40</MilkLabel>
+      <Milkp>
+        Edit the price: <FaEdit size="0.8em" color="#008080" />
+      </Milkp>
     </>
   )
 }
