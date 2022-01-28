@@ -5,6 +5,8 @@ import Loginpage from './components/login page/logins'
 import Homepage from './components/Homepage/home'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import FarmersRoute from './components/Homepage/FarmersRoute/FarmersPage'
+import DeliveriesPage from './components/Homepage/DeliveriesPage/DeliveriesPage'
+import { AiOutlineHome } from 'react-icons/ai'
 
 import { Title, Wrapper } from './components/styled-componets/styles'
 
@@ -14,11 +16,13 @@ function App() {
   return (
     <>
       <Title> DAIRY MILK MANAGEMENT SYSTEM </Title>
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/milkprice" element={<MilkPerLitreApp />} />
           <Route path="/farmers" element={<FarmersRoute />} />
+          <Route path="/deliveries" element={<DeliveriesPage />} />
         </Routes>
       </BrowserRouter>
     </>
