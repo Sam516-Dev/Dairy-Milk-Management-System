@@ -15,7 +15,7 @@ td {
   border: 1px solid #ffffff;
   text-align: left;
   padding: 8px;
-  font-size: 32px;
+  font-size: 2em;
 }
 
 th {
@@ -37,5 +37,15 @@ form td:last-child {
 }
 
 form * {
-  font-size: 28px;
+  font-size: 20px;
+}
+
+input {
+  font-size: 19px;
+  background-color: rgb(255, 255, 255);
+  width: 70%;
+}
+
+input:focus {
+  background-color: rgb(202, 242, 255);
 }

@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom'
 export const Title = styled.h1`
   font-size: 2em;
   text-align: center;
-  color: black;
+  color: #008080;
   margin-top: 50px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 `
 
 export const Label = styled.label`
@@ -96,7 +97,7 @@ export const Hometitle = styled.h2`
   padding-left: 45px;
 `
 export const Homediv = styled.div`
-  margin-top: 100px;
+  margin-top: 55px;
   color: #008080;
 
   text-transform: uppercase;
@@ -112,15 +113,17 @@ export const NavbarLink = styled(Link)`
 
   margin-left: 200px;
   margin-top: 100px;
-  color: #008080;
+  color: #1c95a6;
 `
 
 //end of home page
 
 //milk per litre styles
 export const Milktitle = styled.h2`
-  font-size: 2.5em;
+  font-size: 2em;
   color: #008080;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   text-align-last: center;
   margin-top: 100px;
 `
@@ -129,7 +132,7 @@ export const MilkLabel = styled.label`
   color: #008080;
   font-size: 2em;
   text-align: center;
-  margin-left: 620px;
+  margin-left: 590px;
   font-weight: bold;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
