@@ -10,16 +10,16 @@ const DeliveriesPage = () => {
   const [contacts, setContacts] = useState(data)
   const [addFormData, setAddFormData] = useState({
     fullName: '',
-    address: '',
-    phoneNumber: '',
-    email: '',
+    quantity: '',
+    date: '',
+    farmersID: '',
   })
 
   const [editFormData, setEditFormData] = useState({
     fullName: '',
-    address: '',
-    phoneNumber: '',
-    email: '',
+    quantity: '',
+    date: '',
+    farmersID: '',
   })
 
   const [editContactId, setEditContactId] = useState(null)
@@ -54,9 +54,9 @@ const DeliveriesPage = () => {
     const newContact = {
       id: nanoid(),
       fullName: addFormData.fullName,
-      address: addFormData.address,
-      phoneNumber: addFormData.phoneNumber,
-      email: addFormData.email,
+      quantity: addFormData.quantity,
+      date: addFormData.date,
+      farmersID: addFormData.farmersID,
     }
 
     const newContacts = [...contacts, newContact]
@@ -69,9 +69,9 @@ const DeliveriesPage = () => {
     const editedContact = {
       id: editContactId,
       fullName: editFormData.fullName,
-      address: editFormData.address,
-      phoneNumber: editFormData.phoneNumber,
-      email: editFormData.email,
+      quantity: editFormData.quantity,
+      date: editFormData.date,
+      farmersID: editFormData.farmersID,
     }
 
     const newContacts = [...contacts]
@@ -90,9 +90,9 @@ const DeliveriesPage = () => {
 
     const formValues = {
       fullName: contact.fullName,
-      address: contact.address,
-      phoneNumber: contact.phoneNumber,
-      email: contact.email,
+      quantity: contact.quantity,
+      date: contact.date,
+      farmersID: contact.farmersID,
     }
 
     setEditFormData(formValues)
@@ -119,9 +119,10 @@ const DeliveriesPage = () => {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Address</th>
-              <th>Phone Number</th>
-              <th>Email</th>
+
+              <th>Quantity (kg) </th>
+              <th>Date</th>
+              <th>farmersID</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -147,7 +148,7 @@ const DeliveriesPage = () => {
         </table>
       </form>
 
-      <h2>Add a Contact</h2>
+      <h2>Add a new delivery </h2>
       <form onSubmit={handleAddFormSubmit}>
         <input
           type="text"
@@ -157,24 +158,24 @@ const DeliveriesPage = () => {
           onChange={handleAddFormChange}
         />
         <input
-          type="text"
-          name="address"
+          type="number"
+          name="quantity"
           required="required"
-          placeholder="Enter an addres..."
+          placeholder="Enter quantity..."
           onChange={handleAddFormChange}
         />
         <input
-          type="text"
-          name="phoneNumber"
+          type="date"
+          name="date"
           required="required"
-          placeholder="Enter a phone number..."
+          placeholder="Enter the date..."
           onChange={handleAddFormChange}
         />
         <input
-          type="email"
-          name="email"
+          type="number"
+          name="farmersID"
           required="required"
-          placeholder="Enter an email..."
+          placeholder="famers no..."
           onChange={handleAddFormChange}
         />
         <button type="submit">Add</button>
