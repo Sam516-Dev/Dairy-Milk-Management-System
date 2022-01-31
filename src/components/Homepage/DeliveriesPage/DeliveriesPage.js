@@ -61,6 +61,14 @@ const DeliveriesPage = () => {
 
     const newContacts = [...contacts, newContact]
     setContacts(newContacts)
+
+    //here
+    // setContacts = useState({
+    //   fullName: '',
+    //   quantity: '',
+    //   date: '',
+    //   farmersID: '',
+    // })
   }
 
   const handleEditFormSubmit = (event) => {
