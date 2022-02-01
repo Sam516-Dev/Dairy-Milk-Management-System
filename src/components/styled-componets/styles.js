@@ -1,11 +1,22 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { AiOutlineHome } from 'react-icons/ai'
+
+export const HomeIcon = styled(AiOutlineHome)`
+  color: #008080;
+  font-size: 40px;
+  margin-left: 85px;
+  margin-top: 10px;
+  :hover {
+    cursor: pointer;
+  }
+`
 
 export const Title = styled.h1`
   font-size: 2em;
   text-align: center;
   color: #008080;
-  margin-top: 50px;
+  //margin-top: 50px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 `
 
