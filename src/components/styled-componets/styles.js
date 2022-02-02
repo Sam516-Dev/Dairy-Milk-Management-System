@@ -13,9 +13,9 @@ export const HomeIcon = styled(AiOutlineHome)`
 `
 
 export const Title = styled.h1`
-  font-size: 2em;
+  font-size: 2.5em;
   text-align: center;
-  color: #008080;
+  color: white;
   //margin-top: 50px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 `
@@ -23,20 +23,28 @@ export const Title = styled.h1`
 export const Label = styled.label`
   color: white;
   font-size: 1.5em;
+  background-color: #009999;
   width: 200px;
   margin-right: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 30px;
+  //padding-top: -10px;
+  padding: -20px 0px;
 `
 
 // from here
 
 export const Wrapper = styled.section`
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 100%;
-  /* margin-right: 60px; */
+  width: 500px;
+  margin: auto;
+  border-radius: 40px 40px 40px 40px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  padding: 100px;
+  background-color: #009999;
 `
 
 export const Form = styled.form`
@@ -48,19 +56,18 @@ export const Form = styled.form`
   flex-direction: column;
   position: relative;
   margin-right: 100px;
+  background-color: #009999;
+  margin-top: -10px;
 `
 
 export const Input = styled.input`
-  width: fit-content;
-  height: fit-content;
-  padding: 11px 100px;
-  background: #f9f9fa;
-  color: #f03d4e;
-  margin-bottom: 0rem;
-  border-radius: 4px;
-  outline: 0;
-  border: 1px solid rgba(245, 245, 245, 0.7);
-  font-size: 15px;
+  border-radius: 10px 10px 10px 10px;
+  width: 300px;
+  padding: 13px 30px;
+  margin: 8px 0;
+  font-size: 18px;
+  border: 0;
+  font-family: 'Roboto', sans-serif;
 `
 
 export const Buttondiv = styled.div`
@@ -69,27 +76,24 @@ export const Buttondiv = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-
+  background-color: #009999;
+  margin-left: 20px;
   height: 70;
 `
 
 export const Button = styled.button`
-  /* max-width: 100%; */
+  border-radius: 10px;
   padding: 11px 30px;
   color: white;
   margin-bottom: 10px;
   font-weight: 600;
   font-size: 20px;
   text-transform: uppercase;
-  background: #f03d4e;
-  border: none;
+  border-color: #fdda0d;
+  tab-size: 0ch;
   width: 150px;
-  border-radius: 3px;
-  outline: 0;
   cursor: pointer;
   margin-top: 0.6rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
-  /* margin-left: 50px; */
   background-color: #fdda0d;
 `
 

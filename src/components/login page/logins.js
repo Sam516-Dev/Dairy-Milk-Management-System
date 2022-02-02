@@ -13,29 +13,25 @@ function Loginpage() {
   // const [password, setpassword] = useState('')
 
   return (
-    <div>
+    <>
       <Form>
-        <Label>
-          UserName:
-          <Input type="text" name="name" placeholder="username..." required />
-        </Label>
+        <Label>UserName:</Label>
+        <Input type="text" name="username" placeholder="username..." required />
       </Form>
       <Form>
-        <Label>
-          Email:
-          <Input
-            type="text"
-            name="name"
-            placeholder="email@gmail.com..."
-            required
-          />
-        </Label>
+        <Label>Password:</Label>
+        <Input
+          type="password"
+          name="password"
+          placeholder="password..."
+          required
+        />
       </Form>
 
       <Buttondiv>
-        <Button> login </Button>
+        <Button> Login </Button>
       </Buttondiv>
-    </div>
+    </>
   )
 }
 
