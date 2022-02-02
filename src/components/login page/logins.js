@@ -9,9 +9,11 @@ import {
 } from '../styled-componets/styles'
 
 function Loginpage() {
-  // const [username, setusername] = useState('')
-  // const [email, setemail] = useState('')
-  // const [password, setpassword] = useState('')
+  const [username, setusername] = useState('')
+  const [email, setemail] = useState('')
+  const [password, setpassword] = useState('')
+
+  const submit = () => {}
 
   return (
     <Wrapper>
@@ -30,7 +32,7 @@ function Loginpage() {
       </Form>
 
       <Buttondiv>
-        <Button> Login </Button>
+        <Button onClick={submit}> Login </Button>
       </Buttondiv>
     </Wrapper>
   )

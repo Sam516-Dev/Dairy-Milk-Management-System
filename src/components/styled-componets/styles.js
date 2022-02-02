@@ -123,10 +123,11 @@ export const NavbarLink = styled(Link)`
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
   align-items: center;
+  display: flex;
   font-weight: bold;
   display: inline;
-
-  margin-left: 200px;
+justify-content: center;
+  margin-left: 125px;
   margin-top: 100px;
   color: #1c95a6;
 `

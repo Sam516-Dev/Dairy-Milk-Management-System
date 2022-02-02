@@ -15,6 +15,7 @@ function Homepage() {
       <NavbarLink to="/farmers"> farmers </NavbarLink>
       <NavbarLink to="/deliveries"> Deliveries </NavbarLink>
       <NavbarLink to="/milkprice"> milk price</NavbarLink>
+      <NavbarLink to="/analytics"> Analytics </NavbarLink>
 
       <img
         src="/homeimages/dairy cows.jpg"

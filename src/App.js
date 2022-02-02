@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import FarmersRoute from './components/Homepage/FarmersRoute/FarmersPage'
 import DeliveriesPage from './components/Homepage/DeliveriesPage/DeliveriesPage'
 import GobackHomeApp from './components/Homepage/FarmersRoute/GobackHomePage'
+import AnalyticsApp from './components/Analytics/Analytics'
 
 import { HomeIcon, Title, Wrapper } from './components/styled-componets/styles'
 
@@ -24,10 +25,10 @@ function App() {
         <Route path="/milkprice" element={<MilkPerLitreApp />} />
         <Route path="/farmers" element={<FarmersRoute />} />
         <Route path="/deliveries" element={<DeliveriesPage />} />
+        <Route path="/analytics" element={<AnalyticsApp />} />
       </Routes>
     </>
   )
 }
 
 export default App
-
