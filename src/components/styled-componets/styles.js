@@ -15,7 +15,7 @@ export const HomeIcon = styled(AiOutlineHome)`
 export const Title = styled.h1`
   font-size: 2.5em;
   text-align: center;
-  color: white;
+  color: #008080;
   //margin-top: 50px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 `

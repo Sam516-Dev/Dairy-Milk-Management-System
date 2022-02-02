@@ -15,28 +15,19 @@ function App() {
 
   return (
     <>
-    <GlobalStyles />
+      <GlobalStyles />
       <GobackHomeApp />
       <Title> DAIRY MILK MANAGEMENT SYSTEM </Title>
-      
-      <Wrapper>
-        <Loginpage />
-      </Wrapper>
+      <Routes>
+        <Route path="/login" element={<Loginpage />} />
+        <Route path="/" element={<Homepage />} />
+        <Route path="/milkprice" element={<MilkPerLitreApp />} />
+        <Route path="/farmers" element={<FarmersRoute />} />
+        <Route path="/deliveries" element={<DeliveriesPage />} />
+      </Routes>
     </>
   )
 }
 
 export default App
 
-
-
-
-//<MilkPerLitreApp/> </MilkPerLitreApp>
-
-
-// <Routes>
-//         <Route path="/" element={<Homepage />} />
-//         <Route path="/milkprice" element={<MilkPerLitreApp />} />
-//         <Route path="/farmers" element={<FarmersRoute />} />
-//         <Route path="/deliveries" element={<DeliveriesPage />} />
-//       </Routes>

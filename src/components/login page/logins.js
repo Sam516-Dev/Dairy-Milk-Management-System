@@ -5,6 +5,7 @@ import {
   Button,
   Label,
   Buttondiv,
+  Wrapper,
 } from '../styled-componets/styles'
 
 function Loginpage() {
@@ -13,7 +14,7 @@ function Loginpage() {
   // const [password, setpassword] = useState('')
 
   return (
-    <>
+    <Wrapper>
       <Form>
         <Label>UserName:</Label>
         <Input type="text" name="username" placeholder="username..." required />
@@ -31,7 +32,7 @@ function Loginpage() {
       <Buttondiv>
         <Button> Login </Button>
       </Buttondiv>
-    </>
+    </Wrapper>
   )
 }
 
