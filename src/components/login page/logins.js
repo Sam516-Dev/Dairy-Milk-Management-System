@@ -9,6 +9,7 @@ import {
 } from '../styled-componets/styles'
 
 function Loginpage() {
+  //states of the application
   const [username, setusername] = useState('')
   const [email, setemail] = useState('')
   const [password, setpassword] = useState('')

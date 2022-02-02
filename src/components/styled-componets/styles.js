@@ -16,7 +16,6 @@ export const Title = styled.h1`
   font-size: 2.5em;
   text-align: center;
   color: #008080;
-  //margin-top: 50px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 `
 
@@ -30,7 +29,6 @@ export const Label = styled.label`
   align-items: center;
   justify-content: center;
   margin-left: 30px;
-  //padding-top: -10px;
   padding: -20px 0px;
 `
 
@@ -114,7 +112,6 @@ export const Hometitle = styled.h2`
 export const Homediv = styled.div`
   margin-top: 55px;
   color: #008080;
-
   text-transform: uppercase;
 `
 
