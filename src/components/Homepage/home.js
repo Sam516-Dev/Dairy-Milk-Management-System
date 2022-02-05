@@ -11,9 +11,9 @@ import {
 function Homepage() {
   return (
     <Homediv>
-      <NavbarLink to="/"> Home</NavbarLink>
-      <NavbarLink to="/farmers"> farmers </NavbarLink>
-      <NavbarLink to="/deliveries"> Deliveries </NavbarLink>
+      <NavbarLink to="/"> Hooome</NavbarLink>
+      <NavbarLink to="/farmers"> farppmers </NavbarLink>
+      <NavbarLink to="/deliveries"> Depliveries </NavbarLink>
       <NavbarLink to="/milkprice"> milk price</NavbarLink>
       <NavbarLink to="/analytics"> Analytics </NavbarLink>
 

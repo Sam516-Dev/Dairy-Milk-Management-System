@@ -4,7 +4,7 @@ import { Milktitle } from '../styled-componets/styles'
 function AnalyticsApp() {
   return (
     <>
-      <Milktitle> HERE ARE YOUR ANALYTICS </Milktitle>
+      <Milktitle> HERE ARE YOUR ANALYTICS !! </Milktitle>
     </>
   )
 }

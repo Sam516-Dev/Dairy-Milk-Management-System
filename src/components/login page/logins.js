@@ -10,16 +10,16 @@ import {
 
 function Loginpage() {
   //states of the application
-  const [username, setusername] = useState('')
-  const [email, setemail] = useState('')
-  const [password, setpassword] = useState('')
+  // const [username, setusername] = useState('')
+  // const [email, setemail] = useState('')
+  // const [password, setpassword] = useState('')
 
   const submit = () => {}
 
   return (
     <Wrapper>
       <Form>
-        <Label>UserName:</Label>
+        <Label>UserotttName:</Label>
         <Input type="text" name="username" placeholder="username..." required />
       </Form>
       <Form>
