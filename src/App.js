@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios'
+import Axios from 'axios';
 
 import GlobalStyles from './components/styled-componets/Global.styled'
 import MilkPerLitreApp from './components/MilkPerLitre/MilkPerLitre'
@@ -10,6 +10,7 @@ import FarmersRoute from './components/Homepage/FarmersRoute/FarmersPage'
 import DeliveriesPage from './components/Homepage/DeliveriesPage/DeliveriesPage'
 import GobackHomeApp from './components/Homepage/FarmersRoute/GobackHomePage'
 import AnalyticsApp from './components/Analytics/Analytics'
+import Registerpage from './components/register/register'
 
 import { HomeIcon, Title, Wrapper } from './components/styled-componets/styles'
 
@@ -23,6 +24,7 @@ function App() {
       <Title> DAIRY MILK MANAGEMENT SYSTEM </Title>
       <Routes>
         <Route path="/login" element={<Loginpage />} />
+        <Route path="/register" element={<Registerpage />} />
         <Route path="/" element={<Homepage />} />
         <Route path="/milkprice" element={<MilkPerLitreApp />} />
         <Route path="/farmers" element={<FarmersRoute />} />

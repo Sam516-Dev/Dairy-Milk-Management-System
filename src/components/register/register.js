@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Axios from 'axios';
 
+
 import {
   Form,
   Input,
@@ -10,29 +11,25 @@ import {
   Wrapper,
 } from '../styled-componets/styles'
 
-function Loginpage() {
-  //states of the application
+function Registerpage() {
+  //states of the application ...
   const [username, setusername] = useState('')
   const [password, setpassword] = useState('')
 
-  const [loginStatus, setLoginStatus] = useState('')
-
   //post request
-  const login = () => {
-    Axios.post('http://localhost:3001/login', {
+  const register = () => {
+    Axios.post('http://localhost:3001/register', {
       username: username,
       password: password,
-    }).then((response) => {
-      if (!response.data.message) {
-        setLoginStatus(response.data.message)
-      } else {
-        setLoginStatus(response.data[0].message)
-      }
-    })
-  }
+     }).then((response) => {
+        console.log(response);
+     });
+   };
+
 
   return (
     <Wrapper>
+      
       <Form>
         <Label>UserName:</Label>
         <Input
@@ -53,12 +50,12 @@ function Loginpage() {
       </Form>
 
       <Buttondiv>
-        <Button onClick={login}> Login </Button>
+        <Button onClick={register}> Register here  </Button>
       </Buttondiv>
     </Wrapper>
   )
 }
 
-export default Loginpage
+export default Registerpage
 
 //<Input type="submit" value="Submit" />
