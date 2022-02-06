@@ -18,7 +18,7 @@ function App() {
     <>
       <GlobalStyles />
       <GobackHomeApp />
-      <Title> DAIRY MILK MANAGEMENT kweraa SYSTEM </Title>
+      <Title> DAIRY MILK MANAGEMENT SYSTEM </Title>
       <Routes>
         <Route path="/login" element={<Loginpage />} />
         <Route path="/" element={<Homepage />} />
