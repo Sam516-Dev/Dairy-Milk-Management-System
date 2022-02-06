@@ -18,16 +18,22 @@ function Loginpage() {
   const [loginStatus, setLoginStatus] = useState('')
 
   //post request
+  // const login = () => {
+  //   Axios.post('http://localhost:3001/login', {
+  //     username: username,
+  //     password: password,
+  //   }).then((response) => {
+  //     if (!response.data.message) {
+  //       setLoginStatus(response.data.message)
+  //     } else {
+  //       setLoginStatus(response.data[0].message)
+  //     }
+  //   })
+  // }
+
   const login = () => {
-    Axios.post('http://localhost:3001/login', {
-      username: username,
-      password: password,
-    }).then((response) => {
-      if (!response.data.message) {
-        setLoginStatus(response.data.message)
-      } else {
-        setLoginStatus(response.data[0].message)
-      }
+    Axios.post('http://localhost:3001/login').then((response) => {
+      console.log(response)
     })
   }
 
