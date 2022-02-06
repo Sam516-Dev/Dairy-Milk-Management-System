@@ -20,8 +20,8 @@ function Registerpage() {
     Axios.post('http://localhost:3001/register', {
       username: username,
       password: password,
-    }).then(() => {
-      console.log('inserted in the database successifully ')
+    }).then((response) => {
+      console.log(response)
     })
   }
 

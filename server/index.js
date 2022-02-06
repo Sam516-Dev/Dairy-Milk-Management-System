@@ -4,9 +4,9 @@ var cors = require('cors')
 const app = express()
 const port = 3001
 
-// const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser')
+// app.use(bodyParser.urlencoded({ extended: false }))
 
-// app.use(bodyParser.urlencoded({ extended: false }));
 //cors- Cross-Origin Resource Sharing
 // app.use(
 //   cors({
@@ -55,9 +55,9 @@ app.post('/login', (req, res) => {
   const username = req.body.username
   const password = req.body.password
 
-  db.execute(
-    'SELECT * FROM users WHERE username = ? AND password = ?',
-    [username, password],
+  db.query(
+    'SELECT * FROM admin WHERE username = ? AND password = ?',
+    console.log(username + password)[(username, password)],
     (err, result) => {
       if (err) {
         res.send({ err: err })
