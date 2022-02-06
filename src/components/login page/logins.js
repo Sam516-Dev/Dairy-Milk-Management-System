@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Axios } from 'axios'
+
 import {
   Form,
   Input,
@@ -13,31 +15,40 @@ function Loginpage() {
   const [username, setusername] = useState('')
   const [password, setpassword] = useState('')
 
-  //event 
-  const onChange = (e) => {
-    setInputOne(e.target.value);
+  //post request
+  const login = () => {
+    Axios.post('http://localhost:3001/login', {
+      username: username,
+      password: password,
+     }).then((response) => {
+        console.log(response);
+     });
+   };
 
-
-
-  const submit = () => {}
 
   return (
     <Wrapper>
       <Form>
         <Label>UserName:</Label>
-        <Input type="text" name="username" placeholder="username..." required onChange={onChange}/>
+        <Input
+          type="text"
+          name="username"
+          placeholder="username..."
+          required
+          onChange={(e) => setusername(e.target.value)}
+        />
         <Label>Password:</Label>
         <Input
           type="password"
           name="password"
           placeholder="password..."
           required
-          onChange={onChange}
+          onChange={(e) => setpassword(e.target.value)}
         />
       </Form>
 
       <Buttondiv>
-        <Button onClick={submit}> Login </Button>
+        <Button onClick={login}> Login </Button>
       </Buttondiv>
     </Wrapper>
   )
