@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import Axios from 'axios';
-
+import Axios from 'axios'
 
 import {
   Form,
@@ -21,15 +20,17 @@ function Registerpage() {
     Axios.post('http://localhost:3001/register', {
       username: username,
       password: password,
-     }).then((response) => {
-        console.log(response);
-     });
-   };
+    }).then(() => {
+      console.log('inserted in the database successifully ')
+    })
+  }
 
+  // const register = () => {
+  //     console.log(username + password)
+  // }
 
   return (
     <Wrapper>
-      
       <Form>
         <Label>UserName:</Label>
         <Input
@@ -50,7 +51,7 @@ function Registerpage() {
       </Form>
 
       <Buttondiv>
-        <Button onClick={register}> Register here  </Button>
+        <Button onClick={register}> Register here </Button>
       </Buttondiv>
     </Wrapper>
   )
