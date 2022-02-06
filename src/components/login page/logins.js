@@ -11,8 +11,13 @@ import {
 function Loginpage() {
   //states of the application
   const [username, setusername] = useState('')
-  
   const [password, setpassword] = useState('')
+
+  //event 
+  const onChange = (e) => {
+    setInputOne(e.target.value);
+
+
 
   const submit = () => {}
 
@@ -20,15 +25,14 @@ function Loginpage() {
     <Wrapper>
       <Form>
         <Label>UserName:</Label>
-        <Input type="text" name="username" placeholder="username..." required />
-      </Form>
-      <Form>
+        <Input type="text" name="username" placeholder="username..." required onChange={onChange}/>
         <Label>Password:</Label>
         <Input
           type="password"
           name="password"
           placeholder="password..."
           required
+          onChange={onChange}
         />
       </Form>
 
