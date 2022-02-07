@@ -56,8 +56,10 @@ app.post('/login', (req, res) => {
   const password = req.body.password
 
   db.query(
-    'SELECT * FROM admin WHERE username = ? AND password = ?',
-    console.log(username + password)[(username, password)],
+    //'SELECT * FROM admin n WHERE username = ? AND password = ?',
+    'SELECT username, password FROM admin WHERE username = ? AND password = ?'[
+      (username, password)
+    ],
     (err, result) => {
       if (err) {
         res.send({ err: err })
@@ -70,3 +72,14 @@ app.post('/login', (req, res) => {
   )
   res.send(`Username: ${username} Password: ${password}`)
 })
+
+//......was a test, delete this
+// app.post('/login', (req, res) => {
+//   db.query('SELECT * FROM admin ', (err, result) => {
+//     if (err) {
+//       console.log(err)
+//     } else {
+//       res.send(result)
+//     }
+//   })
+// })

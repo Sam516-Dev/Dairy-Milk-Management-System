@@ -32,8 +32,8 @@ function Loginpage() {
   // }
 
   const login = () => {
-    Axios.post('http://localhost:3001/login').then((response) => {
-      console.log(response)
+    Axios.post('http://localhost:3001/login').then(() => {
+      console.log(username + password)
     })
   }
 
