@@ -4,8 +4,14 @@ var cors = require('cors')
 const app = express()
 const port = 3001
 
-const bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({ extended: false }))
+//const bodyParser = require('body-parser')
+//app.use(bodyParser.urlencoded({ extended: false }))
+
+// // support parsing of application/json type post data
+//app.use(bodyParser.json())
+
+// //support parsing of application/x-www-form-urlencoded post data
+//app.use(bodyParser.urlencoded({ extended: true }))
 
 //cors- Cross-Origin Resource Sharing
 // app.use(
@@ -56,21 +62,22 @@ app.post('/login', (req, res) => {
   const password = req.body.password
 
   db.query(
-    //'SELECT * FROM admin n WHERE username = ? AND password = ?',
-    'SELECT username, password FROM admin WHERE username = ? AND password = ?'[
-      (username, password)
-    ],
+    'SELECT * FROM admin WHERE username = ? AND password = ?',
+    //'SELECT username, password FROM admin WHERE username = ? AND password = ?',
+    [username, password],
     (err, result) => {
       if (err) {
-        res.send({ err: err })
+        return res.send({ err: err })
       }
 
       if (result.length > 0) {
         res.send(result)
-      } else ({ message: 'Wrong username/password comination!' })
+      } else {
+        res.send({ message: 'Wrong username/password comination!' })
+      }
     },
   )
-  res.send(`Username: ${username} Password: ${password}`)
+  //res.send(`Username: ${username} Password: ${password}`)
 })
 
 //......was a test, delete this
