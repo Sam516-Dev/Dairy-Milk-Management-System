@@ -4,6 +4,14 @@ var cors = require('cors')
 const app = express()
 const port = 3001
 
+
+//for hashing passwords
+const bcrypt = require('bcrypt');
+
+//defines the number of hashing rounds is done during the bcrypt hashing
+const saltRound = 10;
+
+
 //const bodyParser = require('body-parser')
 //app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -73,7 +81,7 @@ app.post('/login', (req, res) => {
       if (result.length > 0) {
         res.send(result)
       } else {
-        res.send({ message: 'Wrong username/password comination!' })
+        res.send({ message: 'Wrong username/password combination!' })
       }
     },
   )

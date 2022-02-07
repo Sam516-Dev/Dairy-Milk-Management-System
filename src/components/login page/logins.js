@@ -64,8 +64,7 @@ function Loginpage() {
       <Buttondiv>
         <Button onClick={login}> Login </Button>
       </Buttondiv>
-  
-      <h1> {loginStatus} </h1>
+      <h1> {loginStatus}</h1>
     </Wrapper>
   )
 }
