@@ -1,19 +1,60 @@
 const express = require('express')
 const mysql = require('mysql')
-var cors = require('cors')
+const cors = require('cors')
 const app = express()
 const port = 3001
 
+
+   
+//app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(
+  cors({
+      origin: ["http://localhost:3000"],
+      methods: ["GET", "POST"],
+      credentials: true,
+  })
+);
+
+
+
+
+//app.use(cors())
+app.use(express.json())
+
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+
 //for hashing passwords
 const bcrypt = require('bcrypt')
-
 //defines the number of hashing rounds is done during the bcrypt hashing
 const saltRound = 10
 
-//const bodyParser = require('body-parser')
-//app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-// // support parsing of application/json type post data
+app.use(
+  session({
+    key: 'userId',
+    secret: 'subscribe',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 60 * 60 * 24,
+    },
+  }),
+)
+
+//get method here
+app.get('/login', (req, res) => {
+  if (req.session.user) {
+    res.send({ loggedIn: true, user: req.session.user })
+  } else {
+    res.send({ loggedIn: false })
+  }
+})
+
+// support parsing of application/json type post data
 //app.use(bodyParser.json())
 
 // //support parsing of application/x-www-form-urlencoded post data
@@ -27,9 +68,6 @@ const saltRound = 10
 //     credentials: true,
 //   }),
 // )
-
-app.use(cors())
-app.use(express.json())
 
 // creating database connection
 const db = mysql.createConnection({
@@ -65,30 +103,6 @@ app.listen(port, () => {
   console.log(`listening on port ${port}...`)
 })
 
-//login route
-// app.post('/login', (req, res) => {
-//   const username = req.body.username
-//   const password = req.body.password
-
-//   db.query(
-//     'SELECT * FROM admin WHERE username = ? AND password = ?',
-//     //'SELECT username, password FROM admin WHERE username = ? AND password = ?',
-//     [username, password],
-//     (err, result) => {
-//       if (err) {
-//         return res.send({ err: err })
-//       }
-
-//       if (result.length > 0) {
-//        return res.send(result)
-//       } else {
-//         res.send({ message: 'Wrong username/password combination!' })
-//       }
-//     },
-//   )
-//   //res.send(`Username: ${username} Password: ${password}`)
-// })
-
 app.post('/login', (req, res) => {
   const username = req.body.username
   const password = req.body.password
@@ -103,6 +117,8 @@ app.post('/login', (req, res) => {
       if (result.length > 0) {
         bcrypt.compare(password, result[0].password, (error, response) => {
           if (response) {
+            req.session.user = result
+            console.log(req.session.user)
             return res.send(result)
           } else {
             res.send({ message: 'Wrong username/ password comination!' })

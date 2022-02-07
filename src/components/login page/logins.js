@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 
 import {
@@ -14,8 +14,10 @@ function Loginpage() {
   //states of the application
   const [username, setusername] = useState('')
   const [password, setpassword] = useState('')
+  const [role, setRole] = useState('')
 
   const [loginStatus, setLoginStatus] = useState('')
+  Axios.defaults.withCredentials = true
 
   //post request
   const login = () => {
@@ -30,6 +32,16 @@ function Loginpage() {
       }
     })
   }
+
+  //keeps the user logged in
+  useEffect(() => {
+    Axios.get('http://localhost:3001/login').then((response) => {
+      if (response.data.loggedIn == true) {
+        setLoginStatus(response.data.user[0].username)
+     
+      }
+    })
+  }, [])
 
   // const login = () => {
   //   Axios.post('http://localhost:3001/login', {
