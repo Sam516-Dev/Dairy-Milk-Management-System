@@ -4,13 +4,11 @@ var cors = require('cors')
 const app = express()
 const port = 3001
 
-
 //for hashing passwords
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt')
 
 //defines the number of hashing rounds is done during the bcrypt hashing
-const saltRound = 10;
-
+const saltRound = 10
 
 //const bodyParser = require('body-parser')
 //app.use(bodyParser.urlencoded({ extended: false }))
@@ -45,19 +43,22 @@ app.post('/register', (req, res) => {
   const username = req.body.username
   const password = req.body.password
 
-  console.log(req.body)
-
-  db.query(
-    'INSERT INTO admin (username, password) VALUES (?,?)',
-    [username, password],
-    (err, result) => {
-      if (err) {
-        console.log(err)
-      } else {
-        res.send('values inserted to the database')
-      }
-    },
-  )
+  bcrypt.hash(password, saltRound, (err, hash) => {
+    if (err) {
+      return console.log(err)
+    }
+    db.query(
+      'INSERT INTO admin (username, password) VALUES (?,?)',
+      [username, hash],
+      (err, result) => {
+        if (err) {
+          console.log(err)
+        } else {
+          res.send('values inserted to the database')
+        }
+      },
+    )
+  })
 })
 
 app.listen(port, () => {
@@ -65,36 +66,51 @@ app.listen(port, () => {
 })
 
 //login route
+// app.post('/login', (req, res) => {
+//   const username = req.body.username
+//   const password = req.body.password
+
+//   db.query(
+//     'SELECT * FROM admin WHERE username = ? AND password = ?',
+//     //'SELECT username, password FROM admin WHERE username = ? AND password = ?',
+//     [username, password],
+//     (err, result) => {
+//       if (err) {
+//         return res.send({ err: err })
+//       }
+
+//       if (result.length > 0) {
+//        return res.send(result)
+//       } else {
+//         res.send({ message: 'Wrong username/password combination!' })
+//       }
+//     },
+//   )
+//   //res.send(`Username: ${username} Password: ${password}`)
+// })
+
 app.post('/login', (req, res) => {
   const username = req.body.username
   const password = req.body.password
 
   db.query(
-    'SELECT * FROM admin WHERE username = ? AND password = ?',
-    //'SELECT username, password FROM admin WHERE username = ? AND password = ?',
-    [username, password],
+    'SELECT * FROM admin WHERE username = ?;',
+    [username],
     (err, result) => {
       if (err) {
         return res.send({ err: err })
       }
-
       if (result.length > 0) {
-        res.send(result)
+        bcrypt.compare(password, result[0].password, (error, response) => {
+          if (response) {
+            return res.send(result)
+          } else {
+            res.send({ message: 'Wrong username/ password comination!' })
+          }
+        })
       } else {
-        res.send({ message: 'Wrong username/password combination!' })
+        res.send({ message: "User doesn't exists" })
       }
     },
   )
-  //res.send(`Username: ${username} Password: ${password}`)
 })
-
-//......was a test, delete this
-// app.post('/login', (req, res) => {
-//   db.query('SELECT * FROM admin ', (err, result) => {
-//     if (err) {
-//       console.log(err)
-//     } else {
-//       res.send(result)
-//     }
-//   })
-// })
