@@ -18,7 +18,7 @@ app.use(
 
 
 
-//app.use(cors())
+//app.use(cors())... cross origin resource sharing
 app.use(express.json())
 
 const bodyParser = require('body-parser')
