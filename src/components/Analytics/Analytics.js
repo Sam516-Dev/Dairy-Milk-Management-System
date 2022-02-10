@@ -5,6 +5,7 @@ function AnalyticsApp() {
   return (
     <>
       <Milktitle> HERE ARE YOUR ANALYTICS </Milktitle>
+      <p> welcome to see your milk analysis </p>
     </>
   )
 }

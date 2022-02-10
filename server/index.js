@@ -60,14 +60,6 @@ app.get('/login', (req, res) => {
 // //support parsing of application/x-www-form-urlencoded post data
 //app.use(bodyParser.urlencoded({ extended: true }))
 
-//cors- Cross-Origin Resource Sharing
-// app.use(
-//   cors({
-//     origin: ['http://localhost:3000'],
-//     methods: ['GET', 'POST'],
-//     credentials: true,
-//   }),
-// )
 
 // creating database connection
 const db = mysql.createConnection({
@@ -121,7 +113,7 @@ app.post('/login', (req, res) => {
             console.log(req.session.user)
             return res.send(result)
           } else {
-            res.send({ message: 'Wrong username/ password comination!' })
+            res.send({ message: 'Wrong username / password comination!' })
           }
         })
       } else {
