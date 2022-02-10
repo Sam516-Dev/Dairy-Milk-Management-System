@@ -14,7 +14,7 @@ function Loginpage() {
   //states of the application
   const [username, setusername] = useState('')
   const [password, setpassword] = useState('')
-  const [role, setRole] = useState('')
+  //const [role, setRole] = useState('')
 
   const [loginStatus, setLoginStatus] = useState('')
   Axios.defaults.withCredentials = true
