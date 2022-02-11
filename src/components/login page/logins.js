@@ -25,7 +25,7 @@ function Loginpage() {
       username: username,
       password: password,
     }).then((response) => {
-      if (!response.data.message) {
+      if (response.data.message) {
         return setLoginStatus(response.data.message)
       } else {
         setLoginStatus(response.data[0].username)

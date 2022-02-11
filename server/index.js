@@ -61,14 +61,14 @@ app.post('/register', (req, res) => {
   const username = req.body.username
   const password = req.body.password
 
-  console.log('this is the registration filed')
-  //check if the user exists
-  // const oldUser =  User.findOne({ username });
+  // console.log('this is the registration filed')
+  // //check if the user exists
+  // const oldUser = username.findOne(username)
 
   // if (oldUser) {
-  //   return res.status(409).send("User Already Exist. Please Login");
+  //   res.status(409).send('User Already Exist. Please Login')
+  //   console.log('old user exists ')
   // }
-
   bcrypt.hash(password, saltRound, (err, hash) => {
     if (err) {
       return console.log(err)
@@ -96,9 +96,9 @@ app.post('/login', (req, res) => {
   const password = req.body.password
 
   //check if the input field are empty...
-  if (!(username && password)) {
-    return res.status(400).send('All input is required')
-  }
+  // if (!(username && password)) {
+  //   return res.status(400).send('All input is required')
+  // }
 
   db.query(
     'SELECT * FROM admin WHERE username = ?;',
