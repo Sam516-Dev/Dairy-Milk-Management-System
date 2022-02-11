@@ -4,19 +4,14 @@ const cors = require('cors')
 const app = express()
 const port = 3001
 
-
-   
 //app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(
   cors({
-      origin: ["http://localhost:3000"],
-      methods: ["GET", "POST"],
-      credentials: true,
-  })
-);
-
-
-
+    origin: ['http://localhost:3000'],
+    methods: ['GET', 'POST'],
+    credentials: true,
+  }),
+)
 
 //app.use(cors())... cross origin resource sharing
 app.use(express.json())
@@ -54,13 +49,6 @@ app.get('/login', (req, res) => {
   }
 })
 
-// support parsing of application/json type post data
-//app.use(bodyParser.json())
-
-// //support parsing of application/x-www-form-urlencoded post data
-//app.use(bodyParser.urlencoded({ extended: true }))
-
-
 // creating database connection
 const db = mysql.createConnection({
   host: 'localhost',
@@ -72,6 +60,14 @@ const db = mysql.createConnection({
 app.post('/register', (req, res) => {
   const username = req.body.username
   const password = req.body.password
+
+  console.log('this is the registration filed')
+  //check if the user exists
+  // const oldUser =  User.findOne({ username });
+
+  // if (oldUser) {
+  //   return res.status(409).send("User Already Exist. Please Login");
+  // }
 
   bcrypt.hash(password, saltRound, (err, hash) => {
     if (err) {
@@ -99,6 +95,11 @@ app.post('/login', (req, res) => {
   const username = req.body.username
   const password = req.body.password
 
+  //check if the input field are empty...
+  if (!(username && password)) {
+    return res.status(400).send('All input is required')
+  }
+
   db.query(
     'SELECT * FROM admin WHERE username = ?;',
     [username],
@@ -113,7 +114,9 @@ app.post('/login', (req, res) => {
             console.log(req.session.user)
             return res.send(result)
           } else {
-            res.send({ message: 'Wrong username / password comination!' })
+            return res.send({
+              message: 'Wrong username / password comination!',
+            })
           }
         })
       } else {
