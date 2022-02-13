@@ -36,7 +36,6 @@ const DeliveriesPage = () => {
     setAddFormData(newFormData)
   }
 
-
   //this handles the editted data
   const handleEditFormChange = (event) => {
     event.preventDefault()
@@ -122,6 +121,11 @@ const DeliveriesPage = () => {
     setContacts(newContacts)
   }
 
+  const handleAdd = () => {
+    console.log(contacts)
+    console.log('Hey boy, lala sasa ')
+  }
+
   return (
     <div className="app-container">
       <form onSubmit={handleEditFormSubmit}>
@@ -188,7 +192,9 @@ const DeliveriesPage = () => {
           placeholder="famers no..."
           onChange={handleAddFormChange}
         />
-        <button type="submit">Add</button>
+        <button onClick={handleAdd} type="submit">
+          Add
+        </button>
       </form>
     </div>
   )
