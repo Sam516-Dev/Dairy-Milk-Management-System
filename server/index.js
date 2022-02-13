@@ -87,10 +87,6 @@ app.post('/register', (req, res) => {
   })
 })
 
-app.listen(port, () => {
-  console.log(`listening on port ${port}...`)
-})
-
 app.post('/login', (req, res) => {
   const username = req.body.username
   const password = req.body.password
@@ -124,4 +120,8 @@ app.post('/login', (req, res) => {
       }
     },
   )
+})
+
+app.listen(port, () => {
+  console.log(`listening on port ${port}...`)
 })

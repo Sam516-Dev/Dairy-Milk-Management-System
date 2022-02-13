@@ -36,6 +36,8 @@ const DeliveriesPage = () => {
     setAddFormData(newFormData)
   }
 
+
+  //this handles the editted data
   const handleEditFormChange = (event) => {
     event.preventDefault()
 
@@ -62,7 +64,7 @@ const DeliveriesPage = () => {
     const newContacts = [...contacts, newContact]
     setContacts(newContacts)
 
-    //here
+    // here
     // setContacts = useState({
     //   fullName: '',
     //   quantity: '',

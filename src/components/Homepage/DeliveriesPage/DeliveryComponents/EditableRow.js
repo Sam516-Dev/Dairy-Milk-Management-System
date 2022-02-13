@@ -1,10 +1,10 @@
 import React from 'react'
 
-const EditableRow = ({
-  editFormData,
-  handleEditFormChange,
-  handleCancelClick,
-}) => {
+
+
+// this component is used to edit the user who already exist in the list, save them or cancel the edits
+
+const EditableRow = ({ editFormData,handleEditFormChange,handleCancelClick}) => {
   return (
     <tr>
       <td>
