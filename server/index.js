@@ -60,7 +60,6 @@ const db = mysql.createConnection({
 app.post('/register', (req, res) => {
   const username = req.body.username
   const password = req.body.password
-
   // console.log('this is the registration filed')
   // //check if the user exists
   // const oldUser = username.findOne(username)
@@ -117,6 +116,31 @@ app.post('/login', (req, res) => {
         })
       } else {
         res.send({ message: "User doesn't exists" })
+      }
+    },
+  )
+})
+
+//inserting deliveries in the database
+app.post('/adddelivery', (req, res) => {
+  const fullName = req.body.fullName
+  const quantity = req.body.quantity
+  const date = req.body.date
+  const farmersid = req.body.farmersID
+
+  console.log(' details above this message')
+  db.query(
+    // 'INSERT INTO deliveries (farmersID, fullName, quantity, date) VALUES ?',
+    `INSERT INTO deliveries (farmersid, fullName, quantity, date) VALUES ( "${farmersid}", "${fullName}", "${quantity}", "${date}", NOW())`[
+      (fullName, quantity, date, farmersid)
+    ],
+
+    (err, result) => {
+      if (err) {
+        console.log(err)
+        console.log(fullName + quantity + date + farmersid)
+      } else {
+        console.log('values inserted in the database successifully ')
       }
     },
   )

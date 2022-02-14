@@ -5,6 +5,7 @@ import data from '../DeliveriesPage/DeliveryComponents/mock-data.json'
 
 import ReadOnlyRow from './DeliveryComponents/ReadOnlyRaw'
 import EditableRow from './DeliveryComponents/EditableRow'
+import Axios from 'axios'
 
 const DeliveriesPage = () => {
   const [contacts, setContacts] = useState(data)
@@ -124,6 +125,13 @@ const DeliveriesPage = () => {
   const handleAdd = () => {
     console.log(contacts)
     console.log('Hey boy, lala sasa ')
+
+    // Axios.post('http://localhost:3001/adddelivery', {
+    //   contacts: contacts,
+    // }).then((response) => {
+    //   console.log(response)
+    //   console.log('sam here we go ....')
+    // })
   }
 
   return (
