@@ -127,17 +127,9 @@ app.post('/adddelivery', (req, res) => {
   const quantity = req.body.quantity
   const date = req.body.date
   const farmersId = req.body.farmersID
-  const newContact = req.body.newContact
-
-  console.log(' details above this message')
-  //console.log(newContact)
-  //console.log(fullName)
   console.log(fullName + quantity + date + farmersId)
   db.query(
-    //'INSERT INTO deliveries (farmersID, fullName, quantity, date) VALUES ( ?, ?,?,?)',
-    // [
     `INSERT INTO deliveries (farmersId, fullName, quantity, date) VALUES ( "${farmersId}", "${fullName}", "${quantity}", "${date}")`,
-    // `INSERT INTO deliveries (farmersID, fullName, quantity, date) VALUES ('"+farmersID+"', '"+fullName+"', '"+quantity+"', '"+date+"')`,
     [(farmersId, fullName, quantity, date)],
 
     (err, result) => {
@@ -149,6 +141,19 @@ app.post('/adddelivery', (req, res) => {
       }
     },
   )
+  res.send({ message: 'values inserted in the database' })
+})
+
+//tying to fetch deliveries
+app.get('/fetchalldeliveries', (req, res) => {
+  db.query('SELECT * FROM deliveries;', (err, results) => {
+    if (err) {
+      return res.send({ err: err })
+    } else {
+      res.send(results)
+      //console.log(results)
+    }
+  })
 })
 
 app.listen(port, () => {

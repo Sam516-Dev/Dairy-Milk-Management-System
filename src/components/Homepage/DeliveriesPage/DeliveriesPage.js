@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import { nanoid } from 'nanoid'
 import './DeliveriesPage.css'
 import data from '../DeliveriesPage/DeliveryComponents/mock-data.json'
@@ -7,7 +7,14 @@ import ReadOnlyRow from './DeliveryComponents/ReadOnlyRaw'
 import EditableRow from './DeliveryComponents/EditableRow'
 import Axios from 'axios'
 
+
+
+
 const DeliveriesPage = () => {
+
+  const [ alldeliveries, setdeliveries ] = useState([])
+
+
   const [contacts, setContacts] = useState(data)
   const [addFormData, setAddFormData] = useState({
     fullName: '',
@@ -64,8 +71,8 @@ const DeliveriesPage = () => {
     const newContacts = [...contacts, newContact]
     setContacts(newContacts)
 
-     console.log('this is the newContact Mr.Sam!')
-     console.log(newContact.fullName)
+    console.log('this is the newContact Mr.Sam!')
+    console.log(newContact.fullName)
 
     // Axios.post('http://localhost:3001/adddelivery', {
     //   contacts: contacts,
@@ -131,11 +138,8 @@ const DeliveriesPage = () => {
 
     setContacts(newContacts)
   }
-  
-
 
   const handleAdd = () => {
-  
     const newContact = {
       fullName: addFormData.fullName,
       quantity: addFormData.quantity,
@@ -145,29 +149,37 @@ const DeliveriesPage = () => {
 
     const newContacts = [...contacts, newContact]
     setContacts(newContacts)
-    
+
     const addedfarmer = {
       fullName: newContact.fullName,
-        quantity : newContact.quantity,
-          date : newContact.date,
-      farmersID: newContact.farmersID
+      quantity: newContact.quantity,
+      date: newContact.date,
+      farmersID: newContact.farmersID,
     }
 
-    console.log(newContact.fullName)
     console.log('Hey boy, lala sasa ')
 
     Axios.post('http://localhost:3001/adddelivery', {
       newContact: newContact,
       fullName: newContact.fullName,
-      quantity : newContact.quantity,
-          date : newContact.date,
-      farmersID: newContact.farmersID
+      quantity: newContact.quantity,
+      date: newContact.date,
+      farmersID: newContact.farmersID,
     }).then((response) => {
       console.log(response)
-      console.log('sam here we go (date iko hapa)....')
-      // console.log(newContact.date)
     })
   }
+
+//useEffect hook for rendering all deliveries
+useEffect(() => {
+  Axios.get('http://localhost:3001/fetchalldeliveries').then((response) => {
+    if (response.data) {
+      setdeliveries(response.data)
+   
+    }
+  })
+}, [])
+
 
   return (
     <div className="app-container">
@@ -184,23 +196,11 @@ const DeliveriesPage = () => {
             </tr>
           </thead>
           <tbody>
-            {contacts.map((contact) => (
-              <Fragment>
-                {editContactId === contact.id ? (
-                  <EditableRow
-                    editFormData={editFormData}
-                    handleEditFormChange={handleEditFormChange}
-                    handleCancelClick={handleCancelClick}
-                  />
-                ) : (
-                  <ReadOnlyRow
-                    contact={contact}
-                    handleEditClick={handleEditClick}
-                    handleDeleteClick={handleDeleteClick}
-                  />
-                )}
-              </Fragment>
-            ))}
+            {
+              alldeliveries.map((val) => {
+                return <h1> {val.fullName} </h1>
+              })
+            }
           </tbody>
         </table>
       </form>
@@ -278,3 +278,24 @@ export default DeliveriesPage
 
 
 */
+
+
+
+//return this in the tbody section -- quite important
+// {contacts.map((contact) => (
+//   <Fragment>
+//     {editContactId === contact.id ? (
+//       <EditableRow
+//         editFormData={editFormData}
+//         handleEditFormChange={handleEditFormChange}
+//         handleCancelClick={handleCancelClick}
+//       />
+//     ) : (
+//       <ReadOnlyRow
+//         contact={contact}
+//         handleEditClick={handleEditClick}
+//         handleDeleteClick={handleDeleteClick}
+//       />
+//     )}
+//   </Fragment>
+// ))}
