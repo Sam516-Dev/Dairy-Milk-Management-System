@@ -64,6 +64,16 @@ const DeliveriesPage = () => {
     const newContacts = [...contacts, newContact]
     setContacts(newContacts)
 
+     console.log('this is the newContact Mr.Sam!')
+     console.log(newContact.fullName)
+
+    // Axios.post('http://localhost:3001/adddelivery', {
+    //   contacts: contacts,
+    // }).then((response) => {
+    //   console.log(response)
+    //   console.log('sam here we go data testing ....')
+    // })
+
     // here
     // setContacts = useState({
     //   fullName: '',
@@ -121,17 +131,42 @@ const DeliveriesPage = () => {
 
     setContacts(newContacts)
   }
+  
+
 
   const handleAdd = () => {
-    console.log(contacts)
+  
+    const newContact = {
+      fullName: addFormData.fullName,
+      quantity: addFormData.quantity,
+      date: addFormData.date,
+      farmersID: addFormData.farmersID,
+    }
+
+    const newContacts = [...contacts, newContact]
+    setContacts(newContacts)
+    
+    const addedfarmer = {
+      fullName: newContact.fullName,
+        quantity : newContact.quantity,
+          date : newContact.date,
+      farmersID: newContact.farmersID
+    }
+
+    console.log(newContact.fullName)
     console.log('Hey boy, lala sasa ')
 
-    // Axios.post('http://localhost:3001/adddelivery', {
-    //   contacts: contacts,
-    // }).then((response) => {
-    //   console.log(response)
-    //   console.log('sam here we go ....')
-    // })
+    Axios.post('http://localhost:3001/adddelivery', {
+      newContact: newContact,
+      fullName: newContact.fullName,
+      quantity : newContact.quantity,
+          date : newContact.date,
+      farmersID: newContact.farmersID
+    }).then((response) => {
+      console.log(response)
+      console.log('sam here we go (date iko hapa)....')
+      // console.log(newContact.date)
+    })
   }
 
   return (
@@ -209,3 +244,37 @@ const DeliveriesPage = () => {
 }
 
 export default DeliveriesPage
+
+//mock JSON data here
+/*
+{
+    "id": 2,
+    "fullName": "Jessica warren",
+    "quantity": "4",
+    "date": "28/01/2022",
+    "farmersID": "45"
+  },
+  {
+    "id": 3,
+    "fullName": "Tony Frank",
+    "quantity": "11 ",
+    "date": "28/01/2022",
+    "farmersID": "5"
+  },
+  {
+    "id": 4,
+    "fullName": "Jeremy Clark",
+    "quantity": "33",
+    "date": "28/01/2022",
+    "farmersID": "3"
+  },
+  {
+    "id": 5,
+    "fullName": "Raymond Edwards",
+    "quantity": "9",
+    "date": "28/01/2022",
+    "farmersID": "44"
+  }
+
+
+*/

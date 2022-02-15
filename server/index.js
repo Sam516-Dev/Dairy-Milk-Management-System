@@ -126,19 +126,24 @@ app.post('/adddelivery', (req, res) => {
   const fullName = req.body.fullName
   const quantity = req.body.quantity
   const date = req.body.date
-  const farmersid = req.body.farmersID
+  const farmersId = req.body.farmersID
+  const newContact = req.body.newContact
 
   console.log(' details above this message')
+  //console.log(newContact)
+  //console.log(fullName)
+  console.log(fullName + quantity + date + farmersId)
   db.query(
-    // 'INSERT INTO deliveries (farmersID, fullName, quantity, date) VALUES ?',
-    `INSERT INTO deliveries (farmersid, fullName, quantity, date) VALUES ( "${farmersid}", "${fullName}", "${quantity}", "${date}", NOW())`[
-      (fullName, quantity, date, farmersid)
-    ],
+    //'INSERT INTO deliveries (farmersID, fullName, quantity, date) VALUES ( ?, ?,?,?)',
+    // [
+    `INSERT INTO deliveries (farmersId, fullName, quantity, date) VALUES ( "${farmersId}", "${fullName}", "${quantity}", "${date}")`,
+    // `INSERT INTO deliveries (farmersID, fullName, quantity, date) VALUES ('"+farmersID+"', '"+fullName+"', '"+quantity+"', '"+date+"')`,
+    [(farmersId, fullName, quantity, date)],
 
     (err, result) => {
       if (err) {
         console.log(err)
-        console.log(fullName + quantity + date + farmersid)
+        console.log(fullName + quantity + date + farmersId)
       } else {
         console.log('values inserted in the database successifully ')
       }
