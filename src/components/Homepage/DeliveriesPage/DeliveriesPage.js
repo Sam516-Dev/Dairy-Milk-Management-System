@@ -7,13 +7,8 @@ import ReadOnlyRow from './DeliveryComponents/ReadOnlyRaw'
 import EditableRow from './DeliveryComponents/EditableRow'
 import Axios from 'axios'
 
-
-
-
 const DeliveriesPage = () => {
-
-  const [ alldeliveries, setdeliveries ] = useState([])
-
+  const [alldeliveries, setdeliveries] = useState([])
 
   const [contacts, setContacts] = useState(data)
   const [addFormData, setAddFormData] = useState({
@@ -170,16 +165,14 @@ const DeliveriesPage = () => {
     })
   }
 
-//useEffect hook for rendering all deliveries
-useEffect(() => {
-  Axios.get('http://localhost:3001/fetchalldeliveries').then((response) => {
-    if (response.data) {
-      setdeliveries(response.data)
-   
-    }
-  })
-}, [])
-
+  //useEffect hook for rendering all deliveries
+  useEffect(() => {
+    Axios.get('http://localhost:3001/fetchalldeliveries').then((response) => {
+      if (response.data) {
+        setdeliveries(response.data)
+      }
+    })
+  }, [])
 
   return (
     <div className="app-container">
@@ -196,11 +189,12 @@ useEffect(() => {
             </tr>
           </thead>
           <tbody>
-            {
-              alldeliveries.map((val) => {
-                return <h1> {val.fullName} </h1>
-              })
-            }
+            {alldeliveries.map((val) => {
+        
+              return (<h1> {val.fullName}  </h1>)
+              
+         
+            })}
           </tbody>
         </table>
       </form>
@@ -278,8 +272,6 @@ export default DeliveriesPage
 
 
 */
-
-
 
 //return this in the tbody section -- quite important
 // {contacts.map((contact) => (
