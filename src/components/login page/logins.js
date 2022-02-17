@@ -21,7 +21,7 @@ function Loginpage() {
 
   //post request
   const login = () => {
-    Axios.post('http://localhost:3001/login', {
+        Axios.post('http://localhost:3001/login', {
       username: username,
       password: password,
     }).then((response) => {
@@ -31,14 +31,23 @@ function Loginpage() {
         setLoginStatus(response.data[0].username)
       }
     })
+
   }
+
+  // const handlesubmit = (e) => {
+  //   e.preventDefault()
+  //   console.log(username, password)
+  //   console.log('expect field cleared !!')
+  //   // clearing the values
+  //   password.value = "";
+  //   username.value = "";
+  // }
 
   //keeps the user logged in
   useEffect(() => {
     Axios.get('http://localhost:3001/login').then((response) => {
       if (response.data.loggedIn == true) {
         setLoginStatus(response.data.user[0].username)
-     
       }
     })
   }, [])
@@ -54,7 +63,7 @@ function Loginpage() {
 
   return (
     <Wrapper>
-      <Form>
+      <Form >
         <Label>UserName:</Label>
         <Input
           type="text"

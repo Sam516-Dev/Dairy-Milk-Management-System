@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from 'react'
+import React, { useState, Fragment, setState, useEffect } from 'react'
 import { nanoid } from 'nanoid'
 import './DeliveriesPage.css'
 import data from '../DeliveriesPage/DeliveryComponents/mock-data.json'
@@ -69,6 +69,14 @@ const DeliveriesPage = () => {
     console.log('this is the newContact Mr.Sam!')
     console.log(newContact.fullName)
 
+
+//tried to clear the input field
+    // setState = ({
+    //   fullName: '',
+    //   quantity: '',
+    //   date: '',
+    //   farmersID: ''
+    // })
     // Axios.post('http://localhost:3001/adddelivery', {
     //   contacts: contacts,
     // }).then((response) => {
@@ -174,6 +182,22 @@ const DeliveriesPage = () => {
     })
   }, [])
 
+
+
+  const renderTable = () => {
+    return alldeliveries.map((val) => {
+      return (
+        <tr>
+          <td>{val.fullName}</td>
+          <td>{val.quantity}</td>
+          <td>{val.date}</td>
+        </tr>
+      )
+    })
+  }
+
+
+
   return (
     <div className="app-container">
       <form onSubmit={handleEditFormSubmit}>
@@ -188,19 +212,12 @@ const DeliveriesPage = () => {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {alldeliveries.map((val) => {
-        
-              return (<h1> {val.fullName}  </h1>)
-              
-         
-            })}
-          </tbody>
+          <tbody>{renderTable()}</tbody>
         </table>
       </form>
 
       <h2>Add a new delivery </h2>
-      <form onSubmit={handleAddFormSubmit}>
+      <form >
         <input
           type="text"
           name="fullName"
