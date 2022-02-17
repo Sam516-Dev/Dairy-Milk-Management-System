@@ -92,4 +92,3 @@ function Loginpage() {
 
 export default Loginpage
 
-//<Input type="submit" value="Submit" />
