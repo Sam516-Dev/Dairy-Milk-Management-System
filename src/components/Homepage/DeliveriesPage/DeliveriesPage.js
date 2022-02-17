@@ -40,34 +40,34 @@ const DeliveriesPage = () => {
   }
 
   //this handles the editted data
-  const handleEditFormChange = (event) => {
-    event.preventDefault()
+  // const handleEditFormChange = (event) => {
+  //   event.preventDefault()
 
-    const fieldName = event.target.getAttribute('name')
-    const fieldValue = event.target.value
+  //   const fieldName = event.target.getAttribute('name')
+  //   const fieldValue = event.target.value
 
-    const newFormData = { ...editFormData }
-    newFormData[fieldName] = fieldValue
+  //   const newFormData = { ...editFormData }
+  //   newFormData[fieldName] = fieldValue
 
-    setEditFormData(newFormData)
-  }
+  //   setEditFormData(newFormData)
+  // }
 
-  const handleAddFormSubmit = (event) => {
-    event.preventDefault()
+  // const handleAddFormSubmit = (event) => {
+  //   event.preventDefault()
 
-    const newContact = {
-      id: nanoid(),
-      fullName: addFormData.fullName,
-      quantity: addFormData.quantity,
-      date: addFormData.date,
-      farmersID: addFormData.farmersID,
-    }
+  //   const newContact = {
+  //     id: nanoid(),
+  //     fullName: addFormData.fullName,
+  //     quantity: addFormData.quantity,
+  //     date: addFormData.date,
+  //     farmersID: addFormData.farmersID,
+  //   }
 
-    const newContacts = [...contacts, newContact]
-    setContacts(newContacts)
+  //   const newContacts = [...contacts, newContact]
+  //   setContacts(newContacts)
 
-    console.log('this is the newContact Mr.Sam!')
-    console.log(newContact.fullName)
+  //   console.log('this is the newContact Mr.Sam!')
+  //   console.log(newContact.fullName)
 
 
 //tried to clear the input field
@@ -91,7 +91,7 @@ const DeliveriesPage = () => {
     //   date: '',
     //   farmersID: '',
     // })
-  }
+  //}
 
   const handleEditFormSubmit = (event) => {
     event.preventDefault()
@@ -114,33 +114,33 @@ const DeliveriesPage = () => {
     setEditContactId(null)
   }
 
-  const handleEditClick = (event, contact) => {
-    event.preventDefault()
-    setEditContactId(contact.id)
+  // const handleEditClick = (event, contact) => {
+  //   event.preventDefault()
+  //   setEditContactId(contact.id)
 
-    const formValues = {
-      fullName: contact.fullName,
-      quantity: contact.quantity,
-      date: contact.date,
-      farmersID: contact.farmersID,
-    }
+  //   const formValues = {
+  //     fullName: contact.fullName,
+  //     quantity: contact.quantity,
+  //     date: contact.date,
+  //     farmersID: contact.farmersID,
+  //   }
 
-    setEditFormData(formValues)
-  }
+  //   setEditFormData(formValues)
+  // }
 
-  const handleCancelClick = () => {
-    setEditContactId(null)
-  }
+  // const handleCancelClick = () => {
+  //   setEditContactId(null)
+  // }
 
-  const handleDeleteClick = (contactId) => {
-    const newContacts = [...contacts]
+  // const handleDeleteClick = (contactId) => {
+  //   const newContacts = [...contacts]
 
-    const index = contacts.findIndex((contact) => contact.id === contactId)
+  //   const index = contacts.findIndex((contact) => contact.id === contactId)
 
-    newContacts.splice(index, 1)
+  //   newContacts.splice(index, 1)
 
-    setContacts(newContacts)
-  }
+  //   setContacts(newContacts)
+  // }
 
   const handleAdd = () => {
     const newContact = {
@@ -153,12 +153,12 @@ const DeliveriesPage = () => {
     const newContacts = [...contacts, newContact]
     setContacts(newContacts)
 
-    const addedfarmer = {
-      fullName: newContact.fullName,
-      quantity: newContact.quantity,
-      date: newContact.date,
-      farmersID: newContact.farmersID,
-    }
+    // const addedfarmer = {
+    //   fullName: newContact.fullName,
+    //   quantity: newContact.quantity,
+    //   date: newContact.date,
+    //   farmersID: newContact.farmersID,
+    // }
 
     console.log('Hey boy, lala sasa ')
 
@@ -178,6 +178,7 @@ const DeliveriesPage = () => {
     Axios.get('http://localhost:3001/fetchalldeliveries').then((response) => {
       if (response.data) {
         setdeliveries(response.data)
+        console.log(response.data)
       }
     })
   }, [])
@@ -187,10 +188,15 @@ const DeliveriesPage = () => {
   const renderTable = () => {
     return alldeliveries.map((val) => {
       return (
+        
         <tr>
           <td>{val.fullName}</td>
           <td>{val.quantity}</td>
-          <td>{val.date}</td>
+          <td>{new Date(val.date).toLocaleDateString()}</td>
+          <td>{val.farmersid}</td>
+          <button class='btn-update'> Update </button>
+          <button class='btn-delete'> Delete </button>
+          
         </tr>
       )
     })
