@@ -160,7 +160,7 @@ const DeliveriesPage = () => {
     //   farmersID: newContact.farmersID,
     // }
 
-    console.log('Hey boy, lala sasa ')
+
 
     Axios.post('http://localhost:3001/adddelivery', {
       newContact: newContact,

@@ -159,3 +159,15 @@ app.get('/fetchalldeliveries', (req, res) => {
 app.listen(port, () => {
   console.log(`listening on port ${port}...`)
 })
+
+
+//API for adding/put/update deliveries that are already in the database
+//app.put()
+
+
+
+//an Api for deleting deliveries contents in the database
+//app.delete()
+
+
+
