@@ -190,6 +190,19 @@ const DeliveriesPage = () => {
   }, [])
 
 
+  //this is function is called when the delete button is clicked
+  const deleteDelivery = (id) => {
+    Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
+      // setEmployeeList(
+      //   employeeList.filter((val) => {
+      //     return val.id != id;
+      //   })
+      // );
+      console.log("user deleted successifully !")
+      toast.success('record was successifully deleted')
+    });
+  };
+
 
   const renderTable = () => {
     return alldeliveries.map((val) => {
@@ -201,7 +214,9 @@ const DeliveriesPage = () => {
           <td>{new Date(val.date).toLocaleDateString()}</td>
           <td>{val.farmersid}</td>
           <button class='btn-update'> Update </button>
-          <button class='btn-delete'> Delete </button>
+          <button class='btn-delete'  onClick={() => {
+            deleteDelivery(val.id);
+          }}> Delete </button>
           
         </tr>
       )
