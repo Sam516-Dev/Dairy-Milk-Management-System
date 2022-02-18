@@ -29,8 +29,6 @@ function Update() {
 
   return (
     <div>
-      <Milktitle> HERE ARE YOUR ANALYTICS </Milktitle>
-      <p> you wanna edit a contact buddy !!! </p>
       <form
         style={{
           margin: 'auto',
