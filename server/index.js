@@ -8,7 +8,7 @@ const port = 3001
 app.use(
   cors({
     origin: ['http://localhost:3000'],
-    methods: ['GET', 'POST','DELETE'],
+    methods: ['GET', 'POST', 'DELETE'],
     credentials: true,
   }),
 )
@@ -156,32 +156,24 @@ app.get('/fetchalldeliveries', (req, res) => {
   })
 })
 
-
 //this is the route for deleting deliveries from the backened
-app.delete("/delete/:id", (req, res) => {
-  const id = req.params.id;
-  db.query("DELETE FROM deliveries WHERE id = ?", id, (err, result) => {
+app.delete('/delete/:id', (req, res) => {
+  const id = req.params.id
+  db.query('DELETE FROM deliveries WHERE id = ?', id, (err, result) => {
     if (err) {
-      console.log(err);
+      console.log(err)
     } else {
-      res.send(result);
+      res.send(result)
     }
-  });
-});
-
+  })
+})
 
 app.listen(port, () => {
   console.log(`listening on port ${port}...`)
 })
 
-
 //API for adding/put/update deliveries that are already in the database
 //app.put()
 
-
-
 //an Api for deleting deliveries contents in the database
 //app.delete()
-
-
-
