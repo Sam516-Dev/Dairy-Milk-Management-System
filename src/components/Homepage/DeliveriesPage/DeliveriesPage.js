@@ -2,7 +2,8 @@ import React, { useState, Fragment, setState, useEffect } from 'react'
 import { nanoid } from 'nanoid'
 import './DeliveriesPage.css'
 import data from '../DeliveriesPage/DeliveryComponents/mock-data.json'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ReadOnlyRow from './DeliveryComponents/ReadOnlyRaw'
 import EditableRow from './DeliveryComponents/EditableRow'
 import Axios from 'axios'
@@ -27,15 +28,13 @@ const DeliveriesPage = () => {
 
   const [editContactId, setEditContactId] = useState(null)
 
+  //this function runs when we try a new delivery in the deliveries list
   const handleAddFormChange = (event) => {
     event.preventDefault()
-
     const fieldName = event.target.getAttribute('name')
     const fieldValue = event.target.value
-
     const newFormData = { ...addFormData }
     newFormData[fieldName] = fieldValue
-
     setAddFormData(newFormData)
   }
 
@@ -96,24 +95,27 @@ const DeliveriesPage = () => {
   const handleEditFormSubmit = (event) => {
     event.preventDefault()
 
-    const editedContact = {
-      id: editContactId,
-      fullName: editFormData.fullName,
-      quantity: editFormData.quantity,
-      date: editFormData.date,
-      farmersID: editFormData.farmersID,
+    
+      
+
+
+      const editedContact = {
+        id: editContactId,
+        fullName: editFormData.fullName,
+        quantity: editFormData.quantity,
+        date: editFormData.date,
+        farmersID: editFormData.farmersID,
+      }
+
+      const newContacts = [...contacts]
+
+      const index = contacts.findIndex((contact) => contact.id === editContactId)
+
+      newContacts[index] = editedContact
+
+      setContacts(newContacts)
+      setEditContactId(null)
     }
-
-    const newContacts = [...contacts]
-
-    const index = contacts.findIndex((contact) => contact.id === editContactId)
-
-    newContacts[index] = editedContact
-
-    setContacts(newContacts)
-    setEditContactId(null)
-  }
-
   // const handleEditClick = (event, contact) => {
   //   event.preventDefault()
   //   setEditContactId(contact.id)
@@ -149,30 +151,34 @@ const DeliveriesPage = () => {
       date: addFormData.date,
       farmersID: addFormData.farmersID,
     }
+    if (!addFormData.fullName || !addFormData.quantity || !addFormData.date || !addFormData.farmersID) {
+      toast.error("please input all the fields");
+      console.log("no details entered !!")
+    } else {
 
-    const newContacts = [...contacts, newContact]
-    setContacts(newContacts)
+      const newContacts = [...contacts, newContact]
+      setContacts(newContacts)
 
-    // const addedfarmer = {
-    //   fullName: newContact.fullName,
-    //   quantity: newContact.quantity,
-    //   date: newContact.date,
-    //   farmersID: newContact.farmersID,
-    // }
+      // const addedfarmer = {
+      //   fullName: newContact.fullName,
+      //   quantity: newContact.quantity,
+      //   date: newContact.date,
+      //   farmersID: newContact.farmersID,
+      // }
+      toast.success("a new delivery added successifully");
 
 
-
-    Axios.post('http://localhost:3001/adddelivery', {
-      newContact: newContact,
-      fullName: newContact.fullName,
-      quantity: newContact.quantity,
-      date: newContact.date,
-      farmersID: newContact.farmersID,
-    }).then((response) => {
-      console.log(response)
-    })
+      Axios.post('http://localhost:3001/adddelivery', {
+        newContact: newContact,
+        fullName: newContact.fullName,
+        quantity: newContact.quantity,
+        date: newContact.date,
+        farmersID: newContact.farmersID,
+      }).then((response) => {
+        console.log(response)
+      })
+    }
   }
-
   //useEffect hook for rendering all deliveries
   useEffect(() => {
     Axios.get('http://localhost:3001/fetchalldeliveries').then((response) => {
@@ -205,7 +211,9 @@ const DeliveriesPage = () => {
 
 
   return (
+    
     <div className="app-container">
+    <ToastContainer position='top-center' />
       <form onSubmit={handleEditFormSubmit}>
         <table>
           <thead>
@@ -262,39 +270,6 @@ const DeliveriesPage = () => {
 
 export default DeliveriesPage
 
-//mock JSON data here
-/*
-{
-    "id": 2,
-    "fullName": "Jessica warren",
-    "quantity": "4",
-    "date": "28/01/2022",
-    "farmersID": "45"
-  },
-  {
-    "id": 3,
-    "fullName": "Tony Frank",
-    "quantity": "11 ",
-    "date": "28/01/2022",
-    "farmersID": "5"
-  },
-  {
-    "id": 4,
-    "fullName": "Jeremy Clark",
-    "quantity": "33",
-    "date": "28/01/2022",
-    "farmersID": "3"
-  },
-  {
-    "id": 5,
-    "fullName": "Raymond Edwards",
-    "quantity": "9",
-    "date": "28/01/2022",
-    "farmersID": "44"
-  }
-
-
-*/
 
 //return this in the tbody section -- quite important
 // {contacts.map((contact) => (
