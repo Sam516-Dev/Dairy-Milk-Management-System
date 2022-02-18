@@ -10,7 +10,7 @@ import DeliveriesPage from './components/Homepage/DeliveriesPage/DeliveriesPage'
 import GobackHomeApp from './components/Homepage/FarmersRoute/GobackHomePage'
 import AnalyticsApp from './components/Analytics/Analytics'
 import Registerpage from './components/register/register'
-
+import Update from './components/Homepage/DeliveriesPage/DeliveryComponents/Update'
 import { HomeIcon, Title, Wrapper } from './components/styled-componets/styles'
 
 function App() {
@@ -29,6 +29,7 @@ function App() {
         <Route path="/farmers" element={<FarmersRoute />} />
         <Route path="/deliveries" element={<DeliveriesPage />} />
         <Route path="/analytics" element={<AnalyticsApp />} />
+        <Route path="/Update" element={<Update/>} />
       </Routes>
     </>
   )

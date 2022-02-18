@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import './DeliveriesPage.css'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Axios from 'axios'
+import { Link } from 'react-router-dom'
+
+
 
 const DeliveriesPage = () => {
   const [alldeliveries, setalldeliveries] = useState([])
@@ -11,18 +14,14 @@ const DeliveriesPage = () => {
   // const [data, setdate] = useState('')
   // const[farmersID, setfarmersID ] = useState(0)
 
-
   const [contacts, setContacts] = useState('')
 
-  const [addFormData, setAddFormData] = useState({
+  const [initialData, setinitialData] = useState({
     fullName: '',
     quantity: '',
     date: '',
     farmersID: '',
   })
-
-
- 
 
   //this function runs when we try a new delivery in the deliveries list
   //newFormData is the current entered element in the input field through spread (...)
@@ -30,31 +29,37 @@ const DeliveriesPage = () => {
     event.preventDefault()
     const fieldName = event.target.getAttribute('name')
     const fieldValue = event.target.value
-    const newFormData = { ...addFormData }
+    const newFormData = { ...initialData }
     newFormData[fieldName] = fieldValue
-    setAddFormData(newFormData)
+    setinitialData(initialData)
   }
-  
 
   const handleEditFormSubmit = (event) => {
     event.preventDefault()
-    }
- 
+  }
+
+  //this function runs whenever the add button is clicked
   const handleAdd = () => {
     const newContact = {
-      fullName: addFormData.fullName,
-      quantity: addFormData.quantity,
-      date: addFormData.date,
-      farmersID: addFormData.farmersID,
+      fullName: initialData.fullName,
+      quantity: initialData.quantity,
+      date: initialData.date,
+      farmersID: initialData.farmersID,
     }
-    if (!addFormData.fullName || !addFormData.quantity || !addFormData.date || !addFormData.farmersID) {
-      toast.error("please input all the fields");
-      console.log("no details entered !!")
-    } else {
 
+    //initially it was addFormData
+    if (
+      !initialData.fullName ||
+      !initialData.quantity ||
+      !initialData.date ||
+      !initialData.farmersID
+    ) {
+      toast.error('please input all the fields')
+      console.log('no details entered !!')
+    } else {
       const newContacts = [...contacts, newContact]
       setContacts(newContacts)
-      toast.success("a new delivery added successifully");
+      toast.success('a new delivery added successifully')
       Axios.post('http://localhost:3001/adddelivery', {
         newContact: newContact,
         fullName: newContact.fullName,
@@ -80,46 +85,41 @@ const DeliveriesPage = () => {
     Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
       setalldeliveries(
         alldeliveries.filter((val) => {
-          return val.id != id;
-        })
-      );
-      console.log("the record was successifully deleted !!")
+          return val.id != id
+        }),
+      )
+      console.log('the record was successifully deleted !!')
       toast.success('record was successifully deleted')
-    });
-  };
+    })
+  }
 
   //here we're rendering the table through maping all the data in the database
-  const renderTable = () => {
-    return alldeliveries.map((val) => {
+  const renderTable =()=> {
+    return alldeliveries.map((val, )=>{
       return (
-        
         <tr>
           <td>{val.fullName}</td>
           <td>{val.quantity}</td>
           <td>{new Date(val.date).toLocaleDateString()}</td>
           <td>{val.farmersid}</td>
-          <button class='btn-update'> Update </button>
-          <button class='btn-delete'  onClick={() => {
-            deleteDelivery(val.id);
-          }}> Delete </button>
-          
+          <Link to={`\Update/${val.id}`}>
+          <button class="btn-update">Update</button>
+          </Link>
+         
+          <button class="btn-delete"onClick={()=>{deleteDelivery(val.id)}}>Delete</button>
         </tr>
       )
     })
   }
 
-
-
   return (
-    
     <div className="app-container">
-    <ToastContainer position='top-center' />
+      <ToastContainer position="top-center" />
       <form onSubmit={handleEditFormSubmit}>
         <table>
           <thead>
             <tr>
               <th>Name</th>
-
               <th>Quantity (kg) </th>
               <th>Date</th>
               <th>farmersID</th>
@@ -131,7 +131,7 @@ const DeliveriesPage = () => {
       </form>
 
       <h2>Add a new delivery </h2>
-      <form >
+      <form>
         <input
           type="text"
           name="fullName"
@@ -169,7 +169,6 @@ const DeliveriesPage = () => {
 }
 
 export default DeliveriesPage
-
 
 //return this in the tbody section -- quite important
 // {contacts.map((contact) => (
