@@ -16,8 +16,8 @@ function Update() {
 
   const { fullName, quantity, date, farmersID } = initialData
 
-  const handleEditFormSubmit = (event) => {
-    event.preventDefault()
+  const handleFormSubmit = (e) => {
+    e.preventDefault()
   }
 
   const handlechange = (e) => {
