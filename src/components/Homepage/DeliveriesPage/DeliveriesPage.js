@@ -28,7 +28,8 @@ const DeliveriesPage = () => {
   //   newFormData[fieldName] = fieldValue
   //   setinitialData(initialData)
   // }
-
+  //this function runs when we try a new delivery in the deliveries list
+  //newFormData is the current entered element in the input field through spread (...)
   const handleAddFormChange = (event) => {
     const { name, value } = event.target
     setinitialData({ ...initialData, [name]: value })
@@ -41,19 +42,13 @@ const DeliveriesPage = () => {
   //this function runs whenever the add button is clicked
   const handleAdd = (event) => {
     event.preventDefault()
-
-    console.log('add pt')
     const newContact = {
       fullName: initialData.fullName,
       quantity: initialData.quantity,
       date: initialData.date,
       farmersID: initialData.farmersID,
     }
-    //console.log(initialData.fullName)
-    //initialData has replaced the previous addFormData
-
     console.log(`this is the fullName ${initialData.fullName}`)
-
     if (
       !initialData.fullName ||
       !initialData.quantity ||
@@ -72,10 +67,19 @@ const DeliveriesPage = () => {
         quantity: newContact.quantity,
         date: newContact.date,
         farmersID: newContact.farmersID,
-      }).then((response) => {
-        console.log(response)
+      }).then(() => {
+        setalldeliveries([
+          ...alldeliveries,
+          {
+            fullName: newContact.fullName,
+            quantity: newContact.quantity,
+            date: newContact.date,
+            farmersID: newContact.farmersID,
+          },
+        ])
       })
       toast.success('a new delivery added successifully')
+      setinitialData(initialData)
     }
   }
   //useEffect hook for rendering all deliveries
@@ -109,18 +113,22 @@ const DeliveriesPage = () => {
           <td>{val.quantity}</td>
           <td>{new Date(val.date).toLocaleDateString()}</td>
           <td>{val.farmersid}</td>
-          <Link to={`\Update/${val.id}`}>
-            <button class="btn-update">Update</button>
-          </Link>
+          
+          //when this button is clicked, it redirects you to edit contacts page
+          <div class="button-wrap">
+            <Link to={`\Update/${val.id}`}>
+              <button class="btn-update">Update</button>
+            </Link>
 
-          <button
-            class="btn-delete"
-            onClick={() => {
-              deleteDelivery(val.id)
-            }}
-          >
-            Delete
-          </button>
+            <button
+              class="btn-delete"
+              onClick={() => {
+                deleteDelivery(val.id)
+              }}
+            >
+              Delete
+            </button>
+          </div>
         </tr>
       )
     })

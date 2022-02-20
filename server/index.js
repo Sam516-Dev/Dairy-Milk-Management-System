@@ -62,12 +62,12 @@ app.post('/register', (req, res) => {
   const password = req.body.password
   // console.log('this is the registration filed')
   // //check if the user exists
-  // const oldUser = username.findOne(username)
+  //  const oldUser = username.findOne(username)
 
-  // if (oldUser) {
+  //  if (oldUser) {
   //   res.status(409).send('User Already Exist. Please Login')
-  //   console.log('old user exists ')
-  // }
+  //    console.log('old user exists ')
+  //  }
   bcrypt.hash(password, saltRound, (err, hash) => {
     if (err) {
       return console.log(err)
