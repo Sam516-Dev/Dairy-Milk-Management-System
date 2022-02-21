@@ -114,7 +114,7 @@ const DeliveriesPage = () => {
           <td>{new Date(val.date).toLocaleDateString()}</td>
           <td>{val.farmersid}</td>
           
-          //when this button is clicked, it redirects you to edit contacts page
+         
           <div class="button-wrap">
             <Link to={`\Update/${val.id}`}>
               <button class="btn-update">Update</button>

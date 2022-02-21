@@ -21,7 +21,7 @@ function Loginpage() {
 
   //post request
   const login = () => {
-        Axios.post('http://localhost:3001/login', {
+    Axios.post('http://localhost:3001/login', {
       username: username,
       password: password,
     }).then((response) => {
@@ -31,7 +31,6 @@ function Loginpage() {
         setLoginStatus(response.data[0].username)
       }
     })
-
   }
 
   // const handlesubmit = (e) => {
@@ -63,7 +62,7 @@ function Loginpage() {
 
   return (
     <Wrapper>
-      <Form >
+      <Form>
         <Label>UserName:</Label>
         <Input
           type="text"
@@ -91,4 +90,3 @@ function Loginpage() {
 }
 
 export default Loginpage
-
