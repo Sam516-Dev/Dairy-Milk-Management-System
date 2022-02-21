@@ -4,14 +4,17 @@ import { useHistory, useLocation, useParams } from 'react-router-dom'
 import Axios from 'axios'
 import './Update.css'
 
-const initialData = {
-  fullName: '',
-  quantity: '',
-  date: '',
-  farmersID: '',
-}
 
 function Update() {
+
+  const initialData = {
+    fullName: '',
+    quantity: '',
+    date: '',
+    farmersID: '',
+  }
+  
+
   const [State, setState] = useState(initialData)
 
   const { fullName, quantity, date, farmersID } = initialData
@@ -29,10 +32,11 @@ function Update() {
     let { name, value } = e.target
     setState({ ...State, [name]: value })
   }
-
+    
   const { id } = useParams()
 
   console.log(id)
+  console.log(initialData)
 
   useEffect(() => {
     if (id) {
@@ -42,7 +46,7 @@ function Update() {
 
   const Singleuser = (id) => {
     Axios.get(`http://localhost:3001/delete/${id}`).then((response) => {
-      if (response===200) {
+      if (response.status===200) {
         setState({ ...response.data[0] })
         console.log(`this is the response ${response}`)
       }
@@ -59,7 +63,7 @@ function Update() {
           placeholder="Enter a fullname..."
           onChange={handlechange}
           value={fullName}
-          required
+      
         />
 
         <input
@@ -69,7 +73,7 @@ function Update() {
           placeholder="Enter the quantity..."
           onChange={handlechange}
           value={quantity}
-          required
+  
         />
 
         <input
@@ -79,7 +83,6 @@ function Update() {
           placeholder="Enter the date..."
           onChange={handlechange}
           value={date}
-          required
         />
 
         <input
@@ -89,7 +92,7 @@ function Update() {
           placeholder="Enter the farmersID..."
           onChange={handlechange}
           value={farmersID}
-          required
+        
         />
         <button type="submit" value="Add" onSubmit={Handledefault}>
           update
