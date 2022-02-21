@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Milktitle } from '../../../styled-componets/styles'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useLocation, useParams } from 'react-router-dom'
 import Axios from 'axios'
 import './Update.css'
 
@@ -20,15 +20,38 @@ function Update() {
     e.preventDefault()
   }
 
+  const Handledefault = (e) => {
+    e.preventDefault()
+  }
+
   const handlechange = (e) => {
+    e.preventDefault()
     let { name, value } = e.target
     setState({ ...State, [name]: value })
   }
 
+  const { id } = useParams()
+
+  console.log(id)
+
+  useEffect(() => {
+    if (id) {
+      Singleuser(id)
+    }
+  }, [id])
+
+  const Singleuser = (id) => {
+    Axios.get(`http://localhost:3001/delete/${id}`).then((response) => {
+      if (response===200) {
+        setState({ ...response.data[0] })
+        console.log(`this is the response ${response}`)
+      }
+    })
+  }
+
   return (
     <div>
-      <form>
-        <label htmlFor="date"> fullName </label>
+      <form onSubmit={handleFormSubmit}>
         <input
           type="text"
           id="fullName"
@@ -36,8 +59,9 @@ function Update() {
           placeholder="Enter a fullname..."
           onChange={handlechange}
           value={fullName}
+          required
         />
-        <label htmlFor="quantity"> quantity </label>
+
         <input
           type="text"
           id="quantity"
@@ -45,8 +69,9 @@ function Update() {
           placeholder="Enter the quantity..."
           onChange={handlechange}
           value={quantity}
+          required
         />
-        <label htmlFor="date"> date </label>
+
         <input
           type="date"
           id="date"
@@ -54,9 +79,9 @@ function Update() {
           placeholder="Enter the date..."
           onChange={handlechange}
           value={date}
+          required
         />
 
-        <label htmlFor="farmersID"> farmersID </label>
         <input
           type="farmersID"
           id="farmersID"
@@ -64,8 +89,11 @@ function Update() {
           placeholder="Enter the farmersID..."
           onChange={handlechange}
           value={farmersID}
+          required
         />
-        <input type="submit" value="Add" />
+        <button type="submit" value="Add" onSubmit={Handledefault}>
+          update
+        </button>
       </form>
     </div>
   )
