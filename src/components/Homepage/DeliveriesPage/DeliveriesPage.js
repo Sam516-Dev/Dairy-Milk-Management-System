@@ -87,13 +87,12 @@ const DeliveriesPage = () => {
     Axios.get('http://localhost:3001/fetchalldeliveries').then((response) => {
       if (response.data) {
         setalldeliveries(response.data)
-       // console.log(response.data)
+        // console.log(response.data)
       }
     })
   }, [])
   //this is function is called when the delete button is clicked
   const deleteDelivery = (id) => {
-
     Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
       setalldeliveries(
         alldeliveries.filter((val) => {
@@ -114,10 +113,9 @@ const DeliveriesPage = () => {
           <td>{val.quantity}</td>
           <td>{new Date(val.date).toLocaleDateString()}</td>
           <td>{val.farmersid}</td>
-          
-         
+
           <div class="button-wrap">
-            <Link to={`\Update/${val.id}`}>
+            <Link to={`/deliveries/Update`} state={val}>
               <button class="btn-update">Update</button>
             </Link>
 

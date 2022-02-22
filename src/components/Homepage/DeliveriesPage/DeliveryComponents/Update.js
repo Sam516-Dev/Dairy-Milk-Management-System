@@ -4,20 +4,23 @@ import { useHistory, useLocation, useParams } from 'react-router-dom'
 import Axios from 'axios'
 import './Update.css'
 
-
 function Update() {
+  // const initialData = {
+  //   fullName: '',
+  //   quantity: '',
+  //   date: '',
+  //   farmersID: '',
+  // }
 
-  const initialData = {
-    fullName: '',
-    quantity: '',
-    date: '',
-    farmersID: '',
-  }
-  
+  // const [State, setState] = useState(initialData)
 
-  const [State, setState] = useState(initialData)
+  // const { fullName, quantity, date, farmersID } = initialData
 
-  const { fullName, quantity, date, farmersID } = initialData
+  const [fullName, setfullName] = useState('')
+  const [quantity, setquantity] = useState('')
+
+  const [date, setdate] = useState('')
+  const [farmersID, setfarmersID] = useState('')
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
@@ -27,31 +30,42 @@ function Update() {
     e.preventDefault()
   }
 
+  // this fuction hundles deafault
   const handlechange = (e) => {
     e.preventDefault()
     let { name, value } = e.target
-    setState({ ...State, [name]: value })
+    // setState({ ...State, [name]: value })
   }
-    
-  const { id } = useParams()
 
-  console.log(id)
-  console.log(initialData)
+  const location = useLocation()
+  const val = location?.state
+
+  //console.log('test', val)
 
   useEffect(() => {
-    if (id) {
-      Singleuser(id)
-    }
-  }, [id])
+    if (val) {
+      setfullName(val.fullName)
+      setquantity(val.quantity)
+      setdate(new Date(val.date).toLocaleDateString())
+      setfarmersID(val.farmersid)
 
-  const Singleuser = (id) => {
-    Axios.get(`http://localhost:3001/delete/${id}`).then((response) => {
-      if (response.status===200) {
-        setState({ ...response.data[0] })
-        console.log(`this is the response ${response}`)
-      }
-    })
-  }
+      // console.log(fullName + quantity + date + farmersID)
+    }
+  }, [val])
+  console.log(date)
+  console.log(val.id);
+  // const renderTable = () => {
+  //   setState.map((val) => {
+  //     <tr>
+  //       <td>{val.fullName}</td>
+  //       <td>{val.quantity}</td>
+  //       <td>{new Date(val.date).toLocaleDateString()}</td>
+  //       <td>{val.farmersid}</td>
+  //     </tr>
+  //   })
+  // }
+
+  console.log(`this is the firstname ${fullName}`)
 
   return (
     <div>
@@ -63,7 +77,6 @@ function Update() {
           placeholder="Enter a fullname..."
           onChange={handlechange}
           value={fullName}
-      
         />
 
         <input
@@ -73,11 +86,10 @@ function Update() {
           placeholder="Enter the quantity..."
           onChange={handlechange}
           value={quantity}
-  
         />
 
         <input
-          type="date"
+          type="text"
           id="date"
           name="date"
           placeholder="Enter the date..."
@@ -92,7 +104,6 @@ function Update() {
           placeholder="Enter the farmersID..."
           onChange={handlechange}
           value={farmersID}
-        
         />
         <button type="submit" value="Add" onSubmit={Handledefault}>
           update

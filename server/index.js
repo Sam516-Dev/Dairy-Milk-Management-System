@@ -8,7 +8,7 @@ const port = 3001
 app.use(
   cors({
     origin: ['http://localhost:3000'],
-    methods: ['GET', 'POST', 'DELETE'],
+    methods: ['GET', 'POST', 'DELETE', 'PUT'],
     credentials: true,
   }),
 )
@@ -167,6 +167,23 @@ app.delete('/delete/:id', (req, res) => {
     }
   })
 })
+
+
+//this route is used to update the user through the use of ID
+app.put('/user/:id', (req, res) => {
+  const id = req.params.id
+  db.query('SELECT * FROM deliveries WHERE id = ?', id, (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(result)
+      console.log(`this is the result from the database ${result}`)
+    }
+  })
+})
+
+
+
 
 app.listen(port, () => {
   console.log(`listening on port ${port}...`)
