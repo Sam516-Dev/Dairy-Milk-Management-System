@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Milktitle } from '../../../styled-componets/styles'
-import { useHistory, useLocation, useParams } from 'react-router-dom'
+import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import Axios from 'axios'
 import './Update.css'
 import { ToastContainer, toast } from 'react-toastify'
+import { Buttondiv } from '../../../styled-componets/styles'
 
 function Update() {
   const [fullName, setfullName] = useState('')
@@ -11,8 +12,6 @@ function Update() {
 
   const [date, setdate] = useState('')
   const [farmersID, setfarmersID] = useState('')
-
-
 
   const [alldata, setalldata] = useState({
     fullName: '',
@@ -39,6 +38,13 @@ function Update() {
   const location = useLocation()
   const val = location?.state
 
+  //this replaced useHistory on the previous version of react-router
+  const navigate = useNavigate();
+  function handleClick() {
+    navigate("/deliveries")
+  }
+
+
   //console.log('test', val)
 
   useEffect(() => {
@@ -52,27 +58,48 @@ function Update() {
     }
   }, [val])
   console.log(date)
-  console.log(val.id);
+  console.log(val.id)
 
-  console.log(`this is the firstname ${fullName}`)
+  //console.log(`this is the firstname ${fullName}`)
+  // const UpdateDelivery = () => {
+  // Axios.put(`http://localhost:3001/Update`).then((response) => {
+  //newContact: newContact,
+  //     fullName: fullName,
+  //     quantity: quantity,
+  //     date: date,
+  // farmersID: farmersID,
 
+  //   if (response.data) {
+  //     setalldata(response.data)
+  //     console.log(response.data)
+  //   }
+  // console.log('the record was successifully deleted !!')
+  // toast.success('record was successifully deleted')
+  // })
+  // console.log(setalldata);
+  // }
+  const id = val.id;
+  //console.log(`THIS IS THE CONVERTED id will it work ${id}`)
 
-
-
-  const UpdateDelivery = (id) => {
-    Axios.put(`http://localhost:3001/Update/${id}`).then((response) => {
-      if (response.data) {
-        setalldata(response.data)
-        console.log(response.data)
-      }
-     // console.log('the record was successifully deleted !!')
-      //toast.success('record was successifully deleted')
+  const UpdateDelivery = () => {
+    Axios.put("http://localhost:3001/Update", {
+      // const newContact={
+      fullName: fullName,
+      quantity: quantity,
+      date: date,
+      farmersID: farmersID,
+      id : id,
+      
+      // }
+    }).then(() => {
+      console.log(fullName + quantity + date + farmersID)
     })
+    toast.success('data updated successifully')
+    //setinitialData(initialData)
+    //})
   }
 
-
-
-
+  // console.log(fullName + quantity + date + farmersID);
 
   return (
     <div>
@@ -112,11 +139,36 @@ function Update() {
           onChange={(e) => setfarmersID(e.target.value)}
           value={farmersID}
         />
-        <button type="submit" value={val.id ? "Update" : "Add"} onSubmit={UpdateDelivery}>
+        <button
+          type="submit"
+          value={val.id ? 'Update' : 'Add'}
+          onClick={UpdateDelivery}
+        >
           update
         </button>
       </form>
+
+      <Buttondiv style={{ background: 'white' }}>
+      <button
+        style={{
+          background: '#009999',
+          marginTop: '50px',
+          width: '100px',
+          height: '50px',
+                    fontSize: '25px',
+                    borderRadius: '8px',
+                  color: '#FFFFFF'
+                }}
+                onClick={handleClick}
+      >
+        back
+      </button>
+    </Buttondiv>
+
+
+
     </div>
+    
   )
 }
 

@@ -12,6 +12,8 @@ import AnalyticsApp from './components/Analytics/Analytics'
 import Registerpage from './components/register/register'
 import Update from './components/Homepage/DeliveriesPage/DeliveryComponents/Update'
 import { HomeIcon, Title, Wrapper } from './components/styled-componets/styles'
+import View from './components/Homepage/DeliveriesPage/DeliveryComponents/View'
+
 
 function App() {
   //added this comment to test something
@@ -29,7 +31,8 @@ function App() {
         <Route path="/farmers" element={<FarmersRoute />} />
         <Route path="/deliveries" element={<DeliveriesPage />} />
         <Route path="/analytics" element={<AnalyticsApp />} />
-        <Route path="deliveries/Update" element={<Update/>} />
+        <Route path="deliveries/Update" element={<Update />} />
+        <Route path="deliveries/View" element={<View/>} />
       </Routes>
     </>
   )

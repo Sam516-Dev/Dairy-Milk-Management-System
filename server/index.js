@@ -169,22 +169,34 @@ app.delete('/delete/:id', (req, res) => {
 })
 
 //this route is used to update the user through the use of ID
-app.put('/Update/:id', (req, res) => {
-  const id = req.params.id
-  //UPDATE entries SET employeeID = ? WHERE entrieId = ?
+app.put('/Update', (req, res) => {
+  //const id = req.params.id
   const fullName = req.body.fullName
   const quantity = req.body.quantity
   const date = req.body.date
   const farmersID = req.body.farmersID
-  console.log(fullName + quantity + date + farmersID)
+  const id = req.body.id
+
+  console.log(
+    `values coming to the backened are this ${
+      fullName + quantity + date + farmersID + id
+    }`,
+  )
   db.query(
-    `UPDATE SET deliveries (farmersID, fullName, quantity, date, id) VALUES ( "${id}", "${farmersID}", "${fullName}", "${quantity}", "${date}")`,
+    // `UPDATE tblbillboardcomplete SET artist = ? WHERE id = ?`
+    // `UPDATE deliveries SET (farmersID, fullName, quantity, date) WHERE id=? VALUES ("${farmersID}", "${fullName}", "${quantity}", "${date}")`,
+    `UPDATE deliveries farmersID = ? fullName =? quantity = ? date = ? WHERE id=? VALUES ("${farmersID}", "${fullName}", "${quantity}", "${date}")`,
+
     [(farmersID, fullName, quantity, date)],
 
     (err, result) => {
       if (err) {
         console.log(err)
-        console.log(fullName + quantity + date + farmersID)
+        console.log(
+          `values coming to the backened are this ${
+            fullName + quantity + date + farmersID + id
+          }`,
+        )
       } else {
         console.log('values UPDATED in the database successifully ')
       }

@@ -114,7 +114,7 @@ const DeliveriesPage = () => {
           <td>{new Date(val.date).toLocaleDateString()}</td>
           <td>{val.farmersid}</td>
 
-          <div class="button-wrap">
+          <td class="button-wrap">
             <Link to={`/deliveries/Update`} state={val}>
               <button class="btn-update">Update</button>
             </Link>
@@ -127,7 +127,13 @@ const DeliveriesPage = () => {
             >
               Delete
             </button>
-          </div>
+
+            <div class="button-wrap">
+            <Link to={`/deliveries/view`} state={val}>
+              <button class="btn-update">View</button>
+            </Link>
+            </div>
+          </td>
         </tr>
       )
     })
