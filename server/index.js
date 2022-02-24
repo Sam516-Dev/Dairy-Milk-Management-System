@@ -168,22 +168,40 @@ app.delete('/delete/:id', (req, res) => {
   })
 })
 
-
 //this route is used to update the user through the use of ID
-app.put('/user/:id', (req, res) => {
+app.put('/Update/:id', (req, res) => {
   const id = req.params.id
-  db.query('SELECT * FROM deliveries WHERE id = ?', id, (err, result) => {
-    if (err) {
-      console.log(err)
-    } else {
-      res.send(result)
-      console.log(`this is the result from the database ${result}`)
-    }
-  })
+  //UPDATE entries SET employeeID = ? WHERE entrieId = ?
+  const fullName = req.body.fullName
+  const quantity = req.body.quantity
+  const date = req.body.date
+  const farmersID = req.body.farmersID
+  console.log(fullName + quantity + date + farmersID)
+  db.query(
+    `UPDATE SET deliveries (farmersID, fullName, quantity, date, id) VALUES ( "${id}", "${farmersID}", "${fullName}", "${quantity}", "${date}")`,
+    [(farmersID, fullName, quantity, date)],
+
+    (err, result) => {
+      if (err) {
+        console.log(err)
+        console.log(fullName + quantity + date + farmersID)
+      } else {
+        console.log('values UPDATED in the database successifully ')
+      }
+    },
+  )
+  res.send({ message: 'values updated in the database' })
 })
 
-
-
+//   db.query('UPDATE * FROM deliveries WHERE id = ?', id, (err, result) => {
+//     if (err) {
+//       console.log(err)
+//     } else {
+//       res.send(result)
+//       console.log(`this is the result from the database ${result}`)
+//     }
+//   })
+// })
 
 app.listen(port, () => {
   console.log(`listening on port ${port}...`)

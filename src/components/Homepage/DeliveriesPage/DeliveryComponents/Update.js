@@ -3,38 +3,37 @@ import { Milktitle } from '../../../styled-componets/styles'
 import { useHistory, useLocation, useParams } from 'react-router-dom'
 import Axios from 'axios'
 import './Update.css'
+import { ToastContainer, toast } from 'react-toastify'
 
 function Update() {
-  // const initialData = {
-  //   fullName: '',
-  //   quantity: '',
-  //   date: '',
-  //   farmersID: '',
-  // }
-
-  // const [State, setState] = useState(initialData)
-
-  // const { fullName, quantity, date, farmersID } = initialData
-
   const [fullName, setfullName] = useState('')
   const [quantity, setquantity] = useState('')
 
   const [date, setdate] = useState('')
   const [farmersID, setfarmersID] = useState('')
 
+
+
+  const [alldata, setalldata] = useState({
+    fullName: '',
+    quantity: '',
+    date: '',
+    farmersID: '',
+  })
+
   const handleFormSubmit = (e) => {
     e.preventDefault()
   }
 
-  const Handledefault = (e) => {
-    e.preventDefault()
-  }
+  // const Handledesubmit = (e) => {
+  //   e.preventDefault()
+  // }
 
   // this fuction hundles deafault
   const handlechange = (e) => {
     e.preventDefault()
-    let { name, value } = e.target
-    // setState({ ...State, [name]: value })
+    //let { name, value } = e.target
+    //setState({ ...State, [name]: value })
   }
 
   const location = useLocation()
@@ -54,18 +53,26 @@ function Update() {
   }, [val])
   console.log(date)
   console.log(val.id);
-  // const renderTable = () => {
-  //   setState.map((val) => {
-  //     <tr>
-  //       <td>{val.fullName}</td>
-  //       <td>{val.quantity}</td>
-  //       <td>{new Date(val.date).toLocaleDateString()}</td>
-  //       <td>{val.farmersid}</td>
-  //     </tr>
-  //   })
-  // }
 
   console.log(`this is the firstname ${fullName}`)
+
+
+
+
+  const UpdateDelivery = (id) => {
+    Axios.put(`http://localhost:3001/Update/${id}`).then((response) => {
+      if (response.data) {
+        setalldata(response.data)
+        console.log(response.data)
+      }
+     // console.log('the record was successifully deleted !!')
+      //toast.success('record was successifully deleted')
+    })
+  }
+
+
+
+
 
   return (
     <div>
@@ -75,7 +82,7 @@ function Update() {
           id="fullName"
           name="FullName"
           placeholder="Enter a fullname..."
-          onChange={handlechange}
+          onChange={(e) => setfullName(e.target.value)}
           value={fullName}
         />
 
@@ -84,7 +91,7 @@ function Update() {
           id="quantity"
           name="quantity"
           placeholder="Enter the quantity..."
-          onChange={handlechange}
+          onChange={(e) => setquantity(e.target.value)}
           value={quantity}
         />
 
@@ -93,7 +100,7 @@ function Update() {
           id="date"
           name="date"
           placeholder="Enter the date..."
-          onChange={handlechange}
+          onChange={(e) => setdate(e.target.value)}
           value={date}
         />
 
@@ -102,10 +109,10 @@ function Update() {
           id="farmersID"
           name="farmersID"
           placeholder="Enter the farmersID..."
-          onChange={handlechange}
+          onChange={(e) => setfarmersID(e.target.value)}
           value={farmersID}
         />
-        <button type="submit" value="Add" onSubmit={Handledefault}>
+        <button type="submit" value={val.id ? "Update" : "Add"} onSubmit={UpdateDelivery}>
           update
         </button>
       </form>

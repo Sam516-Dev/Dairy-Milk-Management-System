@@ -29,6 +29,7 @@ function Registerpage() {
   //     console.log(username + password)
   // }
 
+
   return (
     <Wrapper>
       <Form>
