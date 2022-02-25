@@ -1,4 +1,4 @@
-import {  useNavigate, useLocation, useParams } from 'react-router-dom'
+import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
 import { Buttondiv, Button } from '../../../styled-componets/styles'
 
@@ -12,13 +12,13 @@ function View() {
   const location = useLocation()
   const val = location?.state
 
-//this replaced useHistory on the previous version of react-router
-  const navigate = useNavigate();
+  //this replaced useHistory on the previous version of react-router
+  const navigate = useNavigate()
   function handleClick() {
-    navigate("/deliveries")
+    navigate('/deliveries')
   }
 
-//when the page loads this gets executed
+  //when the page loads this gets executed
   useEffect(() => {
     if (val) {
       setfullName(val.fullName)
@@ -60,11 +60,11 @@ function View() {
             marginTop: '50px',
             width: '100px',
             height: '50px',
-                      fontSize: '25px',
-                      borderRadius: '8px',
-                    color: '#FFFFFF'
-                  }}
-                  onClick={handleClick}
+            fontSize: '25px',
+            borderRadius: '8px',
+            color: '#FFFFFF',
+          }}
+          onClick={handleClick}
         >
           back
         </button>

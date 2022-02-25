@@ -185,9 +185,9 @@ app.put('/Update', (req, res) => {
   db.query(
     // `UPDATE tblbillboardcomplete SET artist = ? WHERE id = ?`
     // `UPDATE deliveries SET (farmersID, fullName, quantity, date) WHERE id=? VALUES ("${farmersID}", "${fullName}", "${quantity}", "${date}")`,
-    `UPDATE deliveries farmersID = ? fullName =? quantity = ? date = ? WHERE id=? VALUES ("${farmersID}", "${fullName}", "${quantity}", "${date}")`,
-
-    [(farmersID, fullName, quantity, date)],
+    // `UPDATE deliveries  SET farmersid=? fullName=? quantity=? date=? WHERE id=?`,
+    `UPDATE deliveries  SET ? WHERE id=?`,
+    [{ farmersid: farmersID, fullName, quantity, date }, id],
 
     (err, result) => {
       if (err) {

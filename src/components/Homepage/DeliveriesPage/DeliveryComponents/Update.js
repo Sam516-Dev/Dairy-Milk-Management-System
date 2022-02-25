@@ -5,6 +5,8 @@ import Axios from 'axios'
 import './Update.css'
 import { ToastContainer, toast } from 'react-toastify'
 import { Buttondiv } from '../../../styled-componets/styles'
+//import * as moment from 'Moment'
+// import Moment from 'moment';
 
 function Update() {
   const [fullName, setfullName] = useState('')
@@ -86,7 +88,7 @@ function Update() {
       // const newContact={
       fullName: fullName,
       quantity: quantity,
-      date: date,
+      date: new Date(val.date).toLocaleDateString(),
       farmersID: farmersID,
       id : id,
       
@@ -98,6 +100,9 @@ function Update() {
     //setinitialData(initialData)
     //})
   }
+  //moment(date).format('YYYY-MM-DD')
+  // moment(yourDate).format("YYYY/MM/DD kk:mm:ss");
+
 
   // console.log(fullName + quantity + date + farmersID);
 
@@ -123,7 +128,7 @@ function Update() {
         />
 
         <input
-          type="text"
+          type="date"
           id="date"
           name="date"
           placeholder="Enter the date..."
