@@ -5,8 +5,7 @@ import Axios from 'axios'
 import './Update.css'
 import { ToastContainer, toast } from 'react-toastify'
 import { Buttondiv } from '../../../styled-componets/styles'
-//import * as moment from 'Moment'
-// import Moment from 'moment';
+
 
 function Update() {
   const [fullName, setfullName] = useState('')
@@ -15,26 +14,8 @@ function Update() {
   const [date, setdate] = useState('')
   const [farmersID, setfarmersID] = useState('')
 
-  const [alldata, setalldata] = useState({
-    fullName: '',
-    quantity: '',
-    date: '',
-    farmersID: '',
-  })
-
   const handleFormSubmit = (e) => {
     e.preventDefault()
-  }
-
-  // const Handledesubmit = (e) => {
-  //   e.preventDefault()
-  // }
-
-  // this fuction hundles deafault
-  const handlechange = (e) => {
-    e.preventDefault()
-    //let { name, value } = e.target
-    //setState({ ...State, [name]: value })
   }
 
   const location = useLocation()
@@ -45,64 +26,32 @@ function Update() {
   function handleClick() {
     navigate("/deliveries")
   }
-
-
-  //console.log('test', val)
-
+  //runs when the page loads
   useEffect(() => {
     if (val) {
       setfullName(val.fullName)
       setquantity(val.quantity)
       setdate(new Date(val.date).toLocaleDateString())
       setfarmersID(val.farmersid)
-
-      // console.log(fullName + quantity + date + farmersID)
     }
   }, [val])
   console.log(date)
   console.log(val.id)
-
-  //console.log(`this is the firstname ${fullName}`)
-  // const UpdateDelivery = () => {
-  // Axios.put(`http://localhost:3001/Update`).then((response) => {
-  //newContact: newContact,
-  //     fullName: fullName,
-  //     quantity: quantity,
-  //     date: date,
-  // farmersID: farmersID,
-
-  //   if (response.data) {
-  //     setalldata(response.data)
-  //     console.log(response.data)
-  //   }
-  // console.log('the record was successifully deleted !!')
-  // toast.success('record was successifully deleted')
-  // })
-  // console.log(setalldata);
-  // }
   const id = val.id;
-  //console.log(`THIS IS THE CONVERTED id will it work ${id}`)
 
   const UpdateDelivery = () => {
     Axios.put("http://localhost:3001/Update", {
-      // const newContact={
       fullName: fullName,
       quantity: quantity,
-      date: new Date(val.date).toLocaleDateString(),
+      date:date,
       farmersID: farmersID,
       id : id,
-      
-      // }
     }).then(() => {
       console.log(fullName + quantity + date + farmersID)
     })
     toast.success('data updated successifully')
-    //setinitialData(initialData)
-    //})
   }
-  //moment(date).format('YYYY-MM-DD')
-  // moment(yourDate).format("YYYY/MM/DD kk:mm:ss");
-
+ 
 
   // console.log(fullName + quantity + date + farmersID);
 

@@ -19,17 +19,6 @@ const DeliveriesPage = () => {
 
   //this function runs when we try a new delivery in the deliveries list
   //newFormData is the current entered element in the input field through spread (...)
-  // const handleAddFormChange = (event) => {
-  //   event.preventDefault()
-  //   const fieldName = event.target.getAttribute('name')
-
-  //   const fieldValue = event.target.value
-  //   const newFormData = { ...initialData }
-  //   newFormData[fieldName] = fieldValue
-  //   setinitialData(initialData)
-  // }
-  //this function runs when we try a new delivery in the deliveries list
-  //newFormData is the current entered element in the input field through spread (...)
   const handleAddFormChange = (event) => {
     const { name, value } = event.target
     setinitialData({ ...initialData, [name]: value })
@@ -194,22 +183,3 @@ const DeliveriesPage = () => {
 }
 
 export default DeliveriesPage
-
-//return this in the tbody section -- quite important
-// {contacts.map((contact) => (
-//   <Fragment>
-//     {editContactId === contact.id ? (
-//       <EditableRow
-//         editFormData={editFormData}
-//         handleEditFormChange={handleEditFormChange}
-//         handleCancelClick={handleCancelClick}
-//       />
-//     ) : (
-//       <ReadOnlyRow
-//         contact={contact}
-//         handleEditClick={handleEditClick}
-//         handleDeleteClick={handleDeleteClick}
-//       />
-//     )}
-//   </Fragment>
-// ))}

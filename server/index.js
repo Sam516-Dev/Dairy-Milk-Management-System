@@ -176,7 +176,7 @@ app.put('/Update', (req, res) => {
   const date = req.body.date
   const farmersID = req.body.farmersID
   const id = req.body.id
-
+  //date = STR_TO_DATE(`${date}`,'%Y-%m-%d')
   console.log(
     `values coming to the backened are this ${
       fullName + quantity + date + farmersID + id
@@ -186,6 +186,7 @@ app.put('/Update', (req, res) => {
     // `UPDATE tblbillboardcomplete SET artist = ? WHERE id = ?`
     // `UPDATE deliveries SET (farmersID, fullName, quantity, date) WHERE id=? VALUES ("${farmersID}", "${fullName}", "${quantity}", "${date}")`,
     // `UPDATE deliveries  SET farmersid=? fullName=? quantity=? date=? WHERE id=?`,
+    //STR_TO_DATE('07-25-2012','%m-%d-%Y'
     `UPDATE deliveries  SET ? WHERE id=?`,
     [{ farmersid: farmersID, fullName, quantity, date }, id],
 
