@@ -89,7 +89,7 @@ const DeliveriesPage = () => {
         }),
       )
       console.log('the record was successifully deleted !!')
-      toast.success('record was successifully deleted')
+      toast.success('record deleted successifully')
     })
   }
 

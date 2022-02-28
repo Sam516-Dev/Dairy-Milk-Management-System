@@ -86,15 +86,10 @@ app.post('/register', (req, res) => {
   })
 })
 
+//this is a login route or end point
 app.post('/login', (req, res) => {
   const username = req.body.username
   const password = req.body.password
-
-  //check if the input field are empty...
-  // if (!(username && password)) {
-  //   return res.status(400).send('All input is required')
-  // }
-
   db.query(
     'SELECT * FROM admin WHERE username = ?;',
     [username],
@@ -169,24 +164,19 @@ app.delete('/delete/:id', (req, res) => {
 })
 
 //this route is used to update the user through the use of ID
+//API for adding/put/update deliveries that are already in the database
 app.put('/Update', (req, res) => {
-  //const id = req.params.id
   const fullName = req.body.fullName
   const quantity = req.body.quantity
   const date = req.body.date
   const farmersID = req.body.farmersID
   const id = req.body.id
-  //date = STR_TO_DATE(`${date}`,'%Y-%m-%d')
   console.log(
     `values coming to the backened are this ${
       fullName + quantity + date + farmersID + id
     }`,
   )
   db.query(
-    // `UPDATE tblbillboardcomplete SET artist = ? WHERE id = ?`
-    // `UPDATE deliveries SET (farmersID, fullName, quantity, date) WHERE id=? VALUES ("${farmersID}", "${fullName}", "${quantity}", "${date}")`,
-    // `UPDATE deliveries  SET farmersid=? fullName=? quantity=? date=? WHERE id=?`,
-    //STR_TO_DATE('07-25-2012','%m-%d-%Y'
     `UPDATE deliveries  SET ? WHERE id=?`,
     [{ farmersid: farmersID, fullName, quantity, date }, id],
 
@@ -206,22 +196,7 @@ app.put('/Update', (req, res) => {
   res.send({ message: 'values updated in the database' })
 })
 
-//   db.query('UPDATE * FROM deliveries WHERE id = ?', id, (err, result) => {
-//     if (err) {
-//       console.log(err)
-//     } else {
-//       res.send(result)
-//       console.log(`this is the result from the database ${result}`)
-//     }
-//   })
-// })
-
 app.listen(port, () => {
   console.log(`listening on port ${port}...`)
 })
 
-//API for adding/put/update deliveries that are already in the database
-//app.put()
-
-//an Api for deleting deliveries contents in the database
-//app.delete()

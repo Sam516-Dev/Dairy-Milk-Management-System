@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Milktitle } from '../../../styled-componets/styles'
 import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import Axios from 'axios'
 import './Update.css'
@@ -40,6 +39,15 @@ function Update() {
   const id = val.id;
 
   const UpdateDelivery = () => {
+    if (
+      !fullName ||
+      !quantity ||
+      !date ||
+      !farmersID
+    ) {
+      toast.error('please input all the fields')
+      return console.log('no details entered !!')
+    } else {
     Axios.put("http://localhost:3001/Update", {
       fullName: fullName,
       quantity: quantity,
@@ -48,11 +56,14 @@ function Update() {
       id : id,
     }).then(() => {
       console.log(fullName + quantity + date + farmersID)
+    }).then(() => {
+      toast.success('data updated successifully')
+      navigate("/deliveries")
     })
-    toast.success('data updated successifully')
+      
+    }
+    
   }
- 
-
   // console.log(fullName + quantity + date + farmersID);
 
   return (
@@ -61,6 +72,7 @@ function Update() {
         <input
           type="text"
           id="fullName"
+          required
           name="FullName"
           placeholder="Enter a fullname..."
           onChange={(e) => setfullName(e.target.value)}
@@ -71,6 +83,7 @@ function Update() {
           type="text"
           id="quantity"
           name="quantity"
+          required
           placeholder="Enter the quantity..."
           onChange={(e) => setquantity(e.target.value)}
           value={quantity}
@@ -78,6 +91,7 @@ function Update() {
 
         <input
           type="date"
+          required
           id="date"
           name="date"
           placeholder="Enter the date..."
@@ -89,6 +103,7 @@ function Update() {
           type="farmersID"
           id="farmersID"
           name="farmersID"
+          required
           placeholder="Enter the farmersID..."
           onChange={(e) => setfarmersID(e.target.value)}
           value={farmersID}
@@ -109,18 +124,15 @@ function Update() {
           marginTop: '50px',
           width: '100px',
           height: '50px',
-                    fontSize: '25px',
-                    borderRadius: '8px',
-                  color: '#FFFFFF'
+          fontSize: '25px',
+          borderRadius: '8px',
+          color: '#FFFFFF'
                 }}
                 onClick={handleClick}
       >
         back
       </button>
     </Buttondiv>
-
-
-
     </div>
     
   )
