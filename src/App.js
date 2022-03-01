@@ -8,12 +8,12 @@ import { Routes, Route } from 'react-router-dom'
 import FarmersRoute from './components/Homepage/FarmersRoute/FarmersPage'
 import DeliveriesPage from './components/Homepage/DeliveriesPage/DeliveriesPage'
 import GobackHomeApp from './components/Homepage/FarmersRoute/GobackHomePage'
-import AnalyticsApp from './components/Analytics/Analytics'
+import ViewAllDeliveries from './components/ViewAllDeliveries/ViewAllDeliveries'
 import Registerpage from './components/register/register'
 import Update from './components/Homepage/DeliveriesPage/DeliveryComponents/Update'
 import { HomeIcon, Title, Wrapper } from './components/styled-componets/styles'
 import View from './components/Homepage/DeliveriesPage/DeliveryComponents/View'
-
+import Newdelivery from './components/Homepage/DeliveriesPage/DeliveryComponents/NewDelivery'
 
 function App() {
   //added this comment to test something
@@ -30,9 +30,10 @@ function App() {
         <Route path="/milkprice" element={<MilkPerLitreApp />} />
         <Route path="/farmers" element={<FarmersRoute />} />
         <Route path="/deliveries" element={<DeliveriesPage />} />
-        <Route path="/analytics" element={<AnalyticsApp />} />
+        <Route path="/ViewAllDeliveries" element={<ViewAllDeliveries />} />
         <Route path="deliveries/Update" element={<Update />} />
-        <Route path="deliveries/View" element={<View/>} />
+        <Route path="deliveries/View" element={<View />} />
+        <Route path="deliveries/Newdelivery" element={<Newdelivery />} />
       </Routes>
     </>
   )

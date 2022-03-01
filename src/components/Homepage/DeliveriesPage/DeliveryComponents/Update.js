@@ -20,6 +20,17 @@ function Update() {
   const location = useLocation()
   const val = location?.state
 
+
+
+  const current = new Date()
+  const todaysdate =
+    current.getFullYear() +
+    '/' +
+    current.getDate() +
+    1 +
+    '/' +
+    current.getMonth()
+
   //this replaced useHistory on the previous version of react-router
   const navigate = useNavigate();
   function handleClick() {
@@ -30,7 +41,7 @@ function Update() {
     if (val) {
       setfullName(val.fullName)
       setquantity(val.quantity)
-      setdate(new Date(val.date).toLocaleDateString())
+      //setdate(new Date(val.date).toLocaleDateString())
       setfarmersID(val.farmersid)
     }
   }, [val])
@@ -42,8 +53,7 @@ function Update() {
     if (
       !fullName ||
       !quantity ||
-      !date ||
-      !farmersID
+          !farmersID
     ) {
       toast.error('please input all the fields')
       return console.log('no details entered !!')
@@ -51,11 +61,11 @@ function Update() {
     Axios.put("http://localhost:3001/Update", {
       fullName: fullName,
       quantity: quantity,
-      date:date,
+      date:todaysdate,
       farmersID: farmersID,
       id : id,
     }).then(() => {
-      console.log(fullName + quantity + date + farmersID)
+      console.log(fullName + quantity + todaysdate + farmersID)
     }).then(() => {
       toast.success('data updated successifully')
       navigate("/deliveries")
@@ -68,6 +78,20 @@ function Update() {
 
   return (
     <div>
+    <h2
+    style={{
+      background: '#2fbd82',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontSize: '25px',
+      marginTop: '20px',
+      marginBottom: '15px',
+      color: '#ffffff',
+    }}
+  >
+    Update Farmer delivery
+  </h2>
       <form onSubmit={handleFormSubmit}>
         <input
           type="text"
@@ -89,15 +113,7 @@ function Update() {
           value={quantity}
         />
 
-        <input
-          type="date"
-          required
-          id="date"
-          name="date"
-          placeholder="Enter the date..."
-          onChange={(e) => setdate(e.target.value)}
-          value={date}
-        />
+        <input type="text" value={todaysdate} readOnly="true" />
 
         <input
           type="farmersID"
@@ -109,6 +125,14 @@ function Update() {
           value={farmersID}
         />
         <button
+        style={{
+          background: '#009999',
+          width: '100px',
+          height: '50px',
+          fontSize: '20px',
+          borderRadius: '4px',
+          color: '#FFFFFF',
+        }}
           type="submit"
           value={val.id ? 'Update' : 'Add'}
           onClick={UpdateDelivery}

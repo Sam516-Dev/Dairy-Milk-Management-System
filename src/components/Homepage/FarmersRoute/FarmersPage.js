@@ -2,23 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Axios from 'axios'
-import { Link } from 'react-router-dom'
 
 import './farmerspage.css'
 function FarmersRoute() {
-  const [contacts, setContacts] = useState('')
-
-  // const [initialData, setinitialData] = useState({
-  //   fullName: '',
-  //   quantity: '',
-  //   date: '',
-  //   farmersID: '',
-  // })
   const [alldata, setalldata] = useState([])
 
   const [fullName, setfullName] = useState('')
   const [quantity, setquantity] = useState('')
-  // const [date, setdate] = useState('')
   const [farmersID, setfarmersID] = useState('')
 
   const current = new Date()

@@ -12,10 +12,10 @@ function Homepage() {
   return (
     <Homediv>
       <NavbarLink to="/"> Home</NavbarLink>
-      <NavbarLink to="/farmers"> farmers </NavbarLink>
+      <NavbarLink to="/farmers"> add farmers </NavbarLink>
       <NavbarLink to="/deliveries"> Deliveries </NavbarLink>
       <NavbarLink to="/milkprice"> milk price</NavbarLink>
-      <NavbarLink to="/analytics"> Analytics </NavbarLink>
+      <NavbarLink to="/ViewAllDeliveries">All Deliveries </NavbarLink>
 
 
       <img

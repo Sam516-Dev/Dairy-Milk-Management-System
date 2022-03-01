@@ -116,21 +116,21 @@ app.post('/login', (req, res) => {
   )
 })
 
-//inserting deliveries in the database
-app.post('/adddelivery', (req, res) => {
+///inserting dairy milk in the database
+app.post('/adddairymilk', (req, res) => {
   const fullName = req.body.fullName
   const quantity = req.body.quantity
   const date = req.body.date
   const farmersID = req.body.farmersID
-  console.log(fullName + quantity + date + farmersID)
+  console.log(fullName + quantity + farmersID)
   db.query(
-    `INSERT INTO deliveries (farmersID, fullName, quantity, date) VALUES ( "${farmersID}", "${fullName}", "${quantity}", "${date}")`,
+    `INSERT INTO dairymilk (farmersID, fullName, quantity,date) VALUES ( "${farmersID}", "${fullName}", "${quantity}","${date}")`,
     [(farmersID, fullName, quantity, date)],
 
     (err, result) => {
       if (err) {
         console.log(err)
-        console.log(fullName + quantity + date + farmersID)
+        console.log(fullName + quantity + farmersID + date)
       } else {
         console.log('values inserted in the database successifully ')
       }
@@ -142,6 +142,18 @@ app.post('/adddelivery', (req, res) => {
 //tying to fetch deliveries
 app.get('/fetchalldeliveries', (req, res) => {
   db.query('SELECT * FROM deliveries;', (err, results) => {
+    if (err) {
+      return res.send({ err: err })
+    } else {
+      res.send(results)
+      //console.log(results)
+    }
+  })
+})
+
+//tying to fetch alldeliveries
+app.get('/ViewAllDeliveries', (req, res) => {
+  db.query('SELECT * FROM dairymilk;', (err, results) => {
     if (err) {
       return res.send({ err: err })
     } else {
@@ -199,4 +211,3 @@ app.put('/Update', (req, res) => {
 app.listen(port, () => {
   console.log(`listening on port ${port}...`)
 })
-

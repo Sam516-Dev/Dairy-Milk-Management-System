@@ -34,6 +34,20 @@ function View() {
   console.log(fullName + quantity + date + farmersID)
   return (
     <>
+      <h2
+        style={{
+          background: '#2fbd82',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontSize: '25px',
+          marginTop: '20px',
+          marginBottom: '15px',
+          color: '#ffffff',
+        }}
+      >
+        Welcome {fullName}
+      </h2>
       <form>
         <table>
           <thead>
