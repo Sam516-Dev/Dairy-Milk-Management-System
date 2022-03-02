@@ -13,14 +13,14 @@ function ViewAllDeliveries() {
 
   const [searchName, setsearchName] = useState('')
 
-  const current = new Date()
-  const todaysdate =
-    current.getFullYear() +
-    '/' +
-    current.getDate() +
-    1 +
-    '/' +
-    current.getMonth()
+//   const current = new Date()
+//   const todaysdate =
+//     current.getFullYear() +
+//     '/' +
+//     current.getDate() +
+//     1 +
+//     '/' +
+//     current.getMonth()
 
   //useEffect hook for rendering all deliveries
   useEffect(() => {
@@ -80,6 +80,7 @@ function ViewAllDeliveries() {
           marginTop: '5px',
           marginBottom: '10px',
           marginLeft: '175px',
+          height: '35px',
           color: 'black',
         }}
         type="text"

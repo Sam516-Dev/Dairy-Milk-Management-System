@@ -38,7 +38,7 @@ const DeliveriesPage = () => {
   }
 
   //this function runs whenever the add button is clicked
- 
+
   //useEffect hook for rendering all deliveries
   useEffect(() => {
     Axios.get('http://localhost:3001/fetchalldeliveries').then((response) => {
@@ -86,10 +86,11 @@ const DeliveriesPage = () => {
             </button>
 
             <div class="button-wrap">
-              <Link to={`/deliveries/view`} state={val}>
+              <Link to={`/deliveries/View`} state={val}>
                 <button class="btn-update">View</button>
               </Link>
             </div>
+          
             <div class="button-wrap">
               <Link to={`/deliveries/Newdelivery`} state={val}>
                 <button class="btn-update">+ new </button>

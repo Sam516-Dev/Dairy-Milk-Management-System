@@ -151,6 +151,27 @@ app.get('/fetchalldeliveries', (req, res) => {
   })
 })
 
+//app.delete('/delete/:id', (req, res) => {
+//how the user will view based on their farmersID
+//'SELECT * FROM admin WHERE username = ?;',
+app.get('/View/:id', (req, res) => {
+  const farmersID = req.params.id
+  console.log(req.params.id)
+
+  db.query(
+    'SELECT * FROM dairymilk WHERE farmersid = ?',
+    farmersID,
+    (err, results) => {
+      if (err) {
+        return res.send({ err: err })
+      } else {
+        res.send(results)
+        console.log('data queried successifully ')
+      }
+    },
+  )
+})
+
 //tying to fetch alldeliveries
 app.get('/ViewAllDeliveries', (req, res) => {
   db.query('SELECT * FROM dairymilk;', (err, results) => {

@@ -32,8 +32,8 @@ function App() {
         <Route path="/deliveries" element={<DeliveriesPage />} />
         <Route path="/ViewAllDeliveries" element={<ViewAllDeliveries />} />
         <Route path="deliveries/Update" element={<Update />} />
-        <Route path="deliveries/View" element={<View />} />
-        <Route path="deliveries/Newdelivery" element={<Newdelivery />} />
+        <Route path="/deliveries/View" element={<View />} />
+        <Route path="/deliveries/Newdelivery" element={<Newdelivery />} />
       </Routes>
     </>
   )
