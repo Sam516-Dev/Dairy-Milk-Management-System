@@ -4,6 +4,9 @@ import 'react-toastify/dist/ReactToastify.css'
 import Axios from 'axios'
 
 import './farmerspage.css'
+
+
+//this component Add farmers
 function FarmersRoute() {
   const [alldata, setalldata] = useState([])
 
@@ -81,7 +84,7 @@ function FarmersRoute() {
       )
     })
   }
-
+//add farmers component
   return (
     <div>
       <ToastContainer position="top-center" />

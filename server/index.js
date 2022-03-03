@@ -116,7 +116,7 @@ app.post('/login', (req, res) => {
   )
 })
 
-///inserting dairy milk in the database
+///inserting dairy milk in the database from the +NEW route
 app.post('/adddairymilk', (req, res) => {
   const fullName = req.body.fullName
   const quantity = req.body.quantity
@@ -184,6 +184,38 @@ app.get('/ViewAllDeliveries', (req, res) => {
   })
 })
 
+//tying to fetch MilkPrice
+app.get('/MilkPrice', (req, res) => {
+  db.query('SELECT * FROM priceperlitre;', (err, results) => {
+    if (err) {
+      return res.send({ err: err })
+    } else {
+      res.send(results)
+      //console.log(results)
+    }
+  })
+})
+//inserting milk price in the database
+app.post('/InputPrice', (req, res) => {
+  const price = req.body.price
+  console.log(`this is the price ${price}`)
+  db.query(
+    `INSERT INTO priceperlitre (price) VALUES ( "${price}")`,
+    [(price)],
+
+    (err, result) => {
+      if (err) {
+        console.log(err)
+        console.log(price)
+      } else {
+        console.log('price inserted in the database successifully ')
+      }
+    },
+  )
+  res.send({ message: 'values inserted in the database' })
+})
+
+
 //this is the route for deleting deliveries from the backened
 app.delete('/delete/:id', (req, res) => {
   const id = req.params.id
@@ -195,6 +227,34 @@ app.delete('/delete/:id', (req, res) => {
     }
   })
 })
+
+
+//inserting a new famrmer in the deliveries database
+app.post('/adddelivery', (req, res) => {
+  const fullName = req.body.fullName
+  const quantity = req.body.quantity
+  const date = req.body.date
+  const farmersID = req.body.farmersID
+  console.log(fullName + quantity + farmersID)
+  db.query(
+    `INSERT INTO deliveries (farmersID, fullName, quantity,date) VALUES ( "${farmersID}", "${fullName}", "${quantity}","${date}")`,
+    [(farmersID, fullName, quantity, date)],
+
+    (err, result) => {
+      if (err) {
+        console.log(err)
+        console.log(fullName + quantity + farmersID + date)
+      } else {
+        console.log('values inserted in the database successifully ')
+      }
+    },
+  )
+  res.send({ message: 'values inserted in the database' })
+})
+
+
+
+
 
 //this route is used to update the user through the use of ID
 //API for adding/put/update deliveries that are already in the database

@@ -82,7 +82,7 @@ function View() {
           color: '#ffffff',
         }}
       >
-        Your delivery
+        All Your delivery {fullName}
       </h2>
       <form onSubmit={handleEditFormSubmit}>
         <table>
