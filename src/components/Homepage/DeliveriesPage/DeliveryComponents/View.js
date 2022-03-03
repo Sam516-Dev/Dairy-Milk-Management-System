@@ -55,6 +55,21 @@ function View() {
     event.preventDefault()
   }
 
+
+   //this is function is called when the delete button is clicked
+   const deleteDelivery = (id) => {
+    Axios.delete(`http://localhost:3001/deleteuser/${farmersID}`).then((response) => {
+      setalldata(
+        alldata.filter((val) => {
+          return val.farmersid != val.farmersid
+        }),
+      )
+      console.log('the record was successifully deleted !!')
+      console.log(farmersID);
+      toast.success('record deleted successifully')
+    })
+  }
+
   const renderTable = () => {
     return alldata.map((val) => {
       return (
@@ -63,6 +78,16 @@ function View() {
           <td>{val.quantity}</td>
           <td>{new Date(val.date).toLocaleDateString()}</td>
           <td>{val.farmersid}</td>
+          <td>
+          <button
+              class="btn-delete"
+              onClick={() => {
+                deleteDelivery(val.farmersid)
+              }}
+            >
+              Delete
+            </button>
+            </td>
         </tr>
       )
     })
@@ -82,7 +107,7 @@ function View() {
           color: '#ffffff',
         }}
       >
-        All Your delivery {fullName}
+       Welcome {fullName}
       </h2>
       <form onSubmit={handleEditFormSubmit}>
         <table>
@@ -92,6 +117,8 @@ function View() {
               <th>Quantity</th>
               <th>Date</th>
               <th>ID</th>
+              <th>Actions</th>
+
             </tr>
           </thead>
           <tbody>{renderTable()}</tbody>

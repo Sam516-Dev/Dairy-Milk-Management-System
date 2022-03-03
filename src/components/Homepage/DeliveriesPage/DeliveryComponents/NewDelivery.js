@@ -27,9 +27,8 @@ function Newdelivery() {
     current.getFullYear() +
     '/' +
     current.getDate() +
-    1 +
     '/' +
-    current.getMonth()
+    (current.getMonth() + 1)
 
   //this replaced useHistory on the previous version of react-router
   const navigate = useNavigate()

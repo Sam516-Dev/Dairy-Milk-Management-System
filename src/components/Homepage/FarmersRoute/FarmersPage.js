@@ -19,9 +19,8 @@ function FarmersRoute() {
     current.getFullYear() +
     '/' +
     current.getDate() +
-    1 +
     '/' +
-    current.getMonth()
+    (current.getMonth()+ 1)
 
   //useEffect hook for rendering all deliveries
   useEffect(() => {
@@ -44,10 +43,10 @@ function FarmersRoute() {
     console.log(`this is the newContact ${newContact}`)
 
     if (!fullName || !quantity || !farmersID) {
-      toast.error('please input all the fields')
+      toast.error('please input all farmer details')
       return console.log('no details entered !!')
     } else {
-      Axios.post('http://localhost:3001/adddelivery', {
+      Axios.post('http://localhost:3001/addfarmer', {
         //newContact: newContact,
         fullName: newContact.fullName,
         quantity: newContact.quantity,
@@ -64,7 +63,7 @@ function FarmersRoute() {
           },
         ])
       })
-      toast.success('a new delivery added successifully')
+      toast.success('a new farmer added successifully')
     }
   }
 
@@ -87,6 +86,20 @@ function FarmersRoute() {
 //add farmers component
   return (
     <div>
+    <h2
+    style={{
+      background: '#2fbd82',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontSize: '25px',
+      marginTop: '20px',
+      marginBottom: '15px',
+      color: '#ffffff',
+    }}
+  >
+    Add a new farmers here
+  </h2>
       <ToastContainer position="top-center" />
       <form onSubmit={handleEditFormSubmit}>
         <table>

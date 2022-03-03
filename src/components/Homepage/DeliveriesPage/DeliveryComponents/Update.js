@@ -27,9 +27,8 @@ function Update() {
     current.getFullYear() +
     '/' +
     current.getDate() +
-    1 +
     '/' +
-    current.getMonth()
+    (current.getMonth()+ 1)
 
   //this replaced useHistory on the previous version of react-router
   const navigate = useNavigate();
@@ -122,6 +121,7 @@ function Update() {
           required
           placeholder="Enter the farmersID..."
           onChange={(e) => setfarmersID(e.target.value)}
+          readOnly="true"
           value={farmersID}
         />
         <button

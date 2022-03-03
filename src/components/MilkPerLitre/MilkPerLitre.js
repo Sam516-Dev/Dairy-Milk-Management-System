@@ -59,7 +59,7 @@ function MilkPerLitreApp() {
           fontSize: '30px',
           marginTop: '20px',
           // marginBottom: '5px',
-          color: '#2fbd82',
+          color: '#ffffff',
         }}
       >
         sam
@@ -97,7 +97,7 @@ function MilkPerLitreApp() {
           }}
           onClick={AddPrice}
         >
-          Milk Price
+          Insert Price
         </button>
       </form>
 

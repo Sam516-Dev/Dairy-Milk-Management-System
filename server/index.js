@@ -214,6 +214,36 @@ app.post('/InputPrice', (req, res) => {
   )
   res.send({ message: 'values inserted in the database' })
 })
+//update price
+app.put('/UpdatePrice', (req, res) => {
+  const price = req.body.price
+  console.log(
+    `price coming to the backened is ${
+      price
+    }`,
+  )
+  db.query(
+    `UPDATE priceperlitre  SET ? WHERE price=?`,
+    [{ price}, id],
+
+    (err, result) => {
+      if (err) {
+        console.log(err)
+        console.log(
+          `price coming to the backened are this ${
+            price
+          }`,
+        )
+      } else {
+        console.log('price UPDATED in the database successifully ')
+      }
+    },
+  )
+  res.send({ message: 'values updated in the database' })
+})
+
+
+
 
 
 //this is the route for deleting deliveries from the backened
@@ -228,9 +258,25 @@ app.delete('/delete/:id', (req, res) => {
   })
 })
 
+//this is the route for deleting on the view component
+app.delete('/deleteuser/:farmersID', (req, res) => {
+  const farmersid = req.params.farmersID
+  console.log(farmersid);
+  db.query('DELETE FROM dairymilk WHERE farmersid = ?', farmersid, (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(result)
+      console.log("deleted successifully !");
+    }
+  })
+})
+
+
+
 
 //inserting a new famrmer in the deliveries database
-app.post('/adddelivery', (req, res) => {
+app.post('/addfarmer', (req, res) => {
   const fullName = req.body.fullName
   const quantity = req.body.quantity
   const date = req.body.date
@@ -245,16 +291,12 @@ app.post('/adddelivery', (req, res) => {
         console.log(err)
         console.log(fullName + quantity + farmersID + date)
       } else {
-        console.log('values inserted in the database successifully ')
+        console.log('new farmer added !')
       }
     },
   )
   res.send({ message: 'values inserted in the database' })
 })
-
-
-
-
 
 //this route is used to update the user through the use of ID
 //API for adding/put/update deliveries that are already in the database
