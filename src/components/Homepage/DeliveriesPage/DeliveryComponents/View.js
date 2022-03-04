@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Axios from 'axios'
+import { Buttondiv } from '../../../styled-componets/styles'
+
 import { useNavigate, useLocation, useParams } from 'react-router-dom'
 //import './farmerspage.css'
 function View() {
@@ -11,23 +13,13 @@ function View() {
   const [quantity, setquantity] = useState('')
   const [farmersID, setfarmersID] = useState('')
   const [date, setdate] = useState('')
-
   const [searchName, setsearchName] = useState('')
+  const [total, settotal] = useState('')
 
   const location = useLocation()
   const val = location?.state
 
-  //   const current = new Date()
-  //   const todaysdate =
-  //     current.getFullYear() +
-  //     '/' +
-  //     current.getDate() +
-  //     1 +
-  //     '/' +
-  //     current.getMonth()
-
   //useEffect hook for rendering all deliveries
-
   //runs when the page loads
   useEffect(() => {
     if (val) {
@@ -42,32 +34,40 @@ function View() {
   const id = val.id
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/View/${val.farmersid}`).then((response) => {
-      //farmersID=farmersID
-      if (response.data) {
-        setalldata(response.data)
-         console.log(response.data)
-      }
-    })
+    Axios.get(`http://localhost:3001/View/${val.farmersid}`).then(
+      (response) => {
+        //farmersID=farmersID
+        if (response.data) {
+          setalldata(response.data)
+          console.log(response.data)
+        }
+      },
+    )
   }, [])
 
   const handleEditFormSubmit = (event) => {
     event.preventDefault()
   }
 
+  const navigate = useNavigate()
+  function handleClick() {
+    navigate('/deliveries')
+  }
 
-   //this is function is called when the delete button is clicked
-   const deleteDelivery = (id) => {
-    Axios.delete(`http://localhost:3001/deleteuser/${farmersID}`).then((response) => {
-      setalldata(
-        alldata.filter((val) => {
-          return val.farmersid != val.farmersid
-        }),
-      )
-      console.log('the record was successifully deleted !!')
-      console.log(farmersID);
-      toast.success('record deleted successifully')
-    })
+  //this is function is called when the delete button is clicked
+  const deleteDelivery = (id) => {
+    Axios.delete(`http://localhost:3001/deleteuser/${farmersID}`).then(
+      (response) => {
+        setalldata(
+          alldata.filter((val) => {
+            return val.farmersid != val.farmersid
+          }),
+        )
+        console.log('the record was successifully deleted !!')
+        console.log(farmersID)
+        toast.success('record deleted successifully')
+      },
+    )
   }
 
   const renderTable = () => {
@@ -79,7 +79,7 @@ function View() {
           <td>{new Date(val.date).toLocaleDateString()}</td>
           <td>{val.farmersid}</td>
           <td>
-          <button
+            <button
               class="btn-delete"
               onClick={() => {
                 deleteDelivery(val.farmersid)
@@ -87,12 +87,15 @@ function View() {
             >
               Delete
             </button>
-            </td>
+          </td>
         </tr>
       )
     })
   }
-
+  let totalQuanity = alldata
+    .map((item) => item.quantity)
+    .reduce((p, c) => p + c, 0)
+  console.log('totalQuanity', totalQuanity)
   return (
     <div>
       <h2
@@ -107,7 +110,7 @@ function View() {
           color: '#ffffff',
         }}
       >
-       Welcome {fullName}
+        Welcome {fullName} your total milk is {totalQuanity}
       </h2>
       <form onSubmit={handleEditFormSubmit}>
         <table>
@@ -118,12 +121,27 @@ function View() {
               <th>Date</th>
               <th>ID</th>
               <th>Actions</th>
-
             </tr>
           </thead>
           <tbody>{renderTable()}</tbody>
         </table>
       </form>
+      <Buttondiv style={{ background: 'white' }}>
+        <button
+          style={{
+            background: '#009999',
+            marginTop: '50px',
+            width: '100px',
+            height: '50px',
+            fontSize: '25px',
+            borderRadius: '8px',
+            color: '#FFFFFF',
+          }}
+          onClick={handleClick}
+        >
+          back
+        </button>
+      </Buttondiv>
     </div>
   )
 }

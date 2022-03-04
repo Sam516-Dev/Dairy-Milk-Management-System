@@ -128,6 +128,7 @@ function FarmersRoute() {
           name="quantity"
           placeholder="enter quantity..."
           required="required"
+         
           onChange={(e) => setquantity(e.target.value)}
         />
         <input type="text" value={todaysdate} readOnly="true" />
