@@ -44,6 +44,7 @@ app.use(
 app.get('/login', (req, res) => {
   if (req.session.user) {
     res.send({ loggedIn: true, user: req.session.user })
+    console.log(req.session.user);
   } else {
     res.send({ loggedIn: false })
   }
@@ -185,37 +186,37 @@ app.get('/ViewAllDeliveries', (req, res) => {
 })
 
 //tying to fetch MilkPrice
-app.get('/MilkPrice', (req, res) => {
-  db.query('SELECT * FROM priceperlitre;', (err, results) => {
+app.get('/getMilkPrice', (req, res) => {
+  db.query('SELECT dbprice FROM priceperlitre;', (err, results) => {
     if (err) {
       return res.send({ err: err })
     } else {
       res.send(results)
-      //console.log(results)
+      console.log('database price', results)
     }
   })
 })
 //inserting milk price in the database
-app.post('/InputPrice', (req, res) => {
-  const price = req.body.price
-  console.log(`this is the price ${price}`)
-  db.query(
-    `INSERT INTO priceperlitre (price) VALUES ( "${price}")`,
-    [(price)],
+// app.post('/InputPrice', (req, res) => {
+//   const price = req.body.price
+//   console.log(`this is the price ${price}`)
+//   db.query(
+//     `INSERT INTO priceperlitre (price) VALUES ( "${price}")`,
+//     [(price)],
 
-    (err, result) => {
-      if (err) {
-        console.log(err)
-        console.log(price)
-      } else {
-        console.log('price inserted in the database successifully ')
-      }
-    },
-  )
-  res.send({ message: 'values inserted in the database' })
-})
+//     (err, result) => {
+//       if (err) {
+//         console.log(err)
+//         console.log(price)
+//       } else {
+//         console.log('price inserted in the database successifully ')
+//       }
+//     },
+//   )
+//   res.send({ message: 'values inserted in the database' })
+// })
 //update price
-app.put('/UpdatePrice', (req, res) => {
+app.put('/UpdateMilkPrice/:priceUpdated', (req, res) => {
   const price = req.body.price
   console.log(
     `price coming to the backened is ${
@@ -223,8 +224,8 @@ app.put('/UpdatePrice', (req, res) => {
     }`,
   )
   db.query(
-    `UPDATE priceperlitre  SET ? WHERE price=?`,
-    [{ price}, id],
+    `UPDATE priceperlitre  SET  ? `,
+    [{ dbprice : price}],
 
     (err, result) => {
       if (err) {

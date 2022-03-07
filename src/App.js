@@ -14,6 +14,9 @@ import Update from './components/Homepage/DeliveriesPage/DeliveryComponents/Upda
 import { HomeIcon, Title, Wrapper } from './components/styled-componets/styles'
 import View from './components/Homepage/DeliveriesPage/DeliveryComponents/View'
 import Newdelivery from './components/Homepage/DeliveriesPage/DeliveryComponents/NewDelivery'
+import Analysis from './components/Homepage/DeliveriesPage/DeliveryComponents/Analysis'
+
+
 
 function App() {
   //added this comment to test something
@@ -21,6 +24,7 @@ function App() {
   return (
     <>
       <GlobalStyles />
+     
       <GobackHomeApp />
       <Title> DAIRY MILK MANAGEMENT SYSTEM </Title>
       <Routes>
@@ -34,6 +38,9 @@ function App() {
         <Route path="deliveries/Update" element={<Update />} />
         <Route path="/deliveries/View" element={<View />} />
         <Route path="/deliveries/Newdelivery" element={<Newdelivery />} />
+        <Route path="/View/Analysis" element={<Analysis />} />
+        
+
       </Routes>
     </>
   )

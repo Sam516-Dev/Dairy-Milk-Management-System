@@ -18,9 +18,9 @@ function FarmersRoute() {
   const todaysdate =
     current.getFullYear() +
     '/' +
-    current.getDate() +
+    (current.getMonth() + 1) +
     '/' +
-    (current.getMonth()+ 1)
+    current.getDate();
 
   //useEffect hook for rendering all deliveries
   useEffect(() => {

@@ -4,29 +4,46 @@ import { Milktitle, MilkLabel, Milkp } from '../styled-componets/styles'
 import Axios from 'axios'
 import reactDom from 'react-dom'
 function MilkPerLitreApp() {
-  const [price, setprice] = useState('')
+  const [price, setprice] = useState([])
+  const [priceUpdated, setpriceUpdated] = useState("")
+  const [IspriceUpdated, setIspriceUpdated] = useState(false)
+
+
+
 
   const UpdatePrice = (event) => {
     event.preventDefault()
     console.log('clicked !')
   }
   //fetch on loading
+
+
+  //pulling price from the database
   useEffect(() => {
-    Axios.get('http://localhost:3001/MilkPrice').then((response) => {
+    Axios.get('http://localhost:3001/getMilkPrice').then((response) => {
       if (response.data) {
+        console.log('price here', response.data)
+        setIspriceUpdated(true)
         setprice(response.data)
-        console.log(setprice)
+        // console.log('setnewprice', setprice );
       }
     })
   }, [])
 
+
   //post inputs
-  const AddPrice = (event) => {
+  const Update = (event) => {
     event.preventDefault()
-    Axios.post('http://localhost:3001/InputPrice', {
-      price: price,
+    Axios.put(`http://localhost:3001/UpdateMilkPrice/${priceUpdated}`, {
+      price: priceUpdated,
     }).then(() => {
-      console.log('new delivery added successifully !')
+      let tempPrice = []
+      let te ={dbprice :priceUpdated }
+      tempPrice.push(te);
+
+      setIspriceUpdated(true)
+      setprice(tempPrice)
+      console.log('price updated successifully !',priceUpdated )
       //navigate('/deliveries')
     })
   }
@@ -59,10 +76,13 @@ function MilkPerLitreApp() {
           fontSize: '30px',
           marginTop: '20px',
           // marginBottom: '5px',
-          color: '#ffffff',
+          color: 'blue',
         }}
       >
-        sam
+        
+        {price.map(item => {
+          return item.dbprice
+        })}
       </h1>
       <form
         style={{
@@ -82,9 +102,9 @@ function MilkPerLitreApp() {
             width: '40%',
             borderRadius: '8px',
           }}
-          type="text"
-          placeholder="insert milk Price..."
-          onChange={(e) => setprice(e.target.value)}
+          type="number"
+          placeholder="Update milk Price..."
+          onChange={(e) => setpriceUpdated(e.target.value)}
         />
 
         <button
@@ -95,43 +115,7 @@ function MilkPerLitreApp() {
             borderRadius: '8px',
             color: '#FFFFFF',
           }}
-          onClick={AddPrice}
-        >
-          Insert Price
-        </button>
-      </form>
-
-      <form
-        style={{
-          // background: '#009999',
-          marginTop: '70px',
-          width: '50%',
-          height: '60px',
-          fontSize: '18px',
-          borderRadius: '8px',
-          color: '#FFFFFF',
-          marginLeft: '520px',
-        }}
-      >
-        <input
-          style={{
-            color: 'black',
-            width: '40%',
-            borderRadius: '8px',
-          }}
-          type="text"
-          placeholder=" insert price to update..."
-          onChange={(e) => setprice(e.target.value)}
-        />
-        <button
-          style={{
-            background: '#009999',
-            width: '100px',
-            fontSize: '18px',
-            borderRadius: '8px',
-            color: '#FFFFFF',
-          }}
-          onClick={UpdatePrice}
+          onClick={Update}
         >
           Update Price
         </button>

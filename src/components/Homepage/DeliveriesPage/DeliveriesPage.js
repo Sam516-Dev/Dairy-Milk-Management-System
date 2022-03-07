@@ -21,11 +21,9 @@ const DeliveriesPage = () => {
   const todaysdate =
     current.getFullYear() +
     '/' +
-    current.getDate() +
-    1 +
+    (current.getMonth() + 1) +
     '/' +
-    current.getMonth()
-
+    current.getDate();
   //this function runs when we try a new delivery in the deliveries list
   //newFormData is the current entered element in the input field through spread (...)
   const handleAddFormChange = (event) => {

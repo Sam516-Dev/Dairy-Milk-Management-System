@@ -22,13 +22,15 @@ function Newdelivery() {
   const location = useLocation()
   const val = location?.state
 
+
+//good format
   const current = new Date()
   const todaysdate =
     current.getFullYear() +
     '/' +
-    current.getDate() +
+    (current.getMonth() + 1) +
     '/' +
-    (current.getMonth() + 1)
+    current.getDate();
 
   //this replaced useHistory on the previous version of react-router
   const navigate = useNavigate()

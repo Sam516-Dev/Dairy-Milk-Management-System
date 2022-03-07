@@ -3,18 +3,21 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Axios from 'axios'
 import { Buttondiv } from '../../../styled-componets/styles'
-
+import { Link } from 'react-router-dom'
 import { useNavigate, useLocation, useParams } from 'react-router-dom'
 //import './farmerspage.css'
+
 function View() {
   const [alldata, setalldata] = useState([])
-
+  const [IspriceUpdated, setIspriceUpdated] = useState(false)
+  const [price, setprice] = useState([])
+  const [comingprice, setcomingprice] = useState([])
   const [fullName, setfullName] = useState('')
   const [quantity, setquantity] = useState('')
   const [farmersID, setfarmersID] = useState('')
   const [date, setdate] = useState('')
   const [searchName, setsearchName] = useState('')
-  const [total, settotal] = useState('')
+  const [total, settotal] = useState(0)
 
   const location = useLocation()
   const val = location?.state
@@ -54,6 +57,40 @@ function View() {
     navigate('/deliveries')
   }
 
+  //pulling price from the database
+  useEffect(() => {
+    Axios.get('http://localhost:3001/getMilkPrice').then((response) => {
+      if (response.data) {
+        console.log('price here', response.data[0])
+        setIspriceUpdated(true)
+        setprice(response.data[0])
+        console.log('setnewprice bv;jhvjv', price)
+      }
+    })
+  }, [])
+
+  // const renderPrice = () => {
+  //   return comingprice.map((val) => {
+  //     return (
+  //         <h1>{val.price}</h1>
+  //     )
+  //   })
+  // }
+
+  const renderPrice = () => {
+    return price.map((item) => {
+      return item.dbprice
+    })
+  }
+  console.log('price ya hapa ', price.dbprice)
+
+  // useEffect(() => {
+  //   renderPrice()
+  //   console.log("val.dbprice", val.price);
+  //   console.log("price ya hapa ", price);
+
+  // }, []);
+
   //this is function is called when the delete button is clicked
   const deleteDelivery = (id) => {
     Axios.delete(`http://localhost:3001/deleteuser/${farmersID}`).then(
@@ -70,11 +107,24 @@ function View() {
     )
   }
 
+  useEffect(() => {
+    totalAmount()
+    console.log('val.dbprice', val.price)
+    console.log('price ya hapa ', price)
+  }, [price])
+
+  const totalAmount = () => {
+    settotal(price.dbprice * totalQuanity)
+    console.log('sjkfsdfsdf price.dbprice', price.dbprice)
+    console.log('sjkfsdfsdf totalQuantity', totalQuanity)
+  }
+  console.log('total amount generated ', total)
+  console.log('above this line ')
+
   const renderTable = () => {
     return alldata.map((val) => {
       return (
         <tr>
-          <td>{val.fullName}</td>
           <td>{val.quantity}</td>
           <td>{new Date(val.date).toLocaleDateString()}</td>
           <td>{val.farmersid}</td>
@@ -110,13 +160,27 @@ function View() {
           color: '#ffffff',
         }}
       >
-        Welcome {fullName} your total milk is {totalQuanity}
+        {fullName} total milk: {totalQuanity} litres
+      </h2>
+      //the Analysis can come here !!
+      <h2
+        style={{
+          background: '#ffffff',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontSize: '25px',
+          marginTop: '10px',
+          marginBottom: '10px',
+          color: '#2fbd82',
+        }}
+      >
+        total Amount is KSH:{total}
       </h2>
       <form onSubmit={handleEditFormSubmit}>
         <table>
           <thead>
             <tr>
-              <th>FullName</th>
               <th>Quantity</th>
               <th>Date</th>
               <th>ID</th>
@@ -142,6 +206,34 @@ function View() {
           back
         </button>
       </Buttondiv>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          height: '50px',
+          fontSize: '25px',
+          marginLeft: '500px',
+          color: '#FFFFFF',
+          marginTop: '-50px',
+        }}
+      >
+        <Link to={`/View/Analysis`} state={val}>
+          <button
+            style={{
+              background: '#009999',
+              width: '150px',
+              height: '50px',
+              fontSize: '25px',
+              borderRadius: '8px',
+              color: '#FFFFFF',
+            }}
+          >
+            Analysis
+          </button>
+        </Link>
+      </div>
     </div>
   )
 }
