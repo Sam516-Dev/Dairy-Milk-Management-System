@@ -116,7 +116,7 @@ function View() {
   const totalAmount = () => {
     settotal(price.dbprice * totalQuanity)
     console.log('sjkfsdfsdf price.dbprice', price.dbprice)
-    console.log('sjkfsdfsdf totalQuantity', totalQuanity)
+    //console.log('sjkfsdfsdf totalQuantity', totalQuanity)
   }
   console.log('total amount generated ', total)
   console.log('above this line ')
@@ -162,7 +162,7 @@ function View() {
       >
         {fullName} total milk: {totalQuanity} litres
       </h2>
-      //the Analysis can come here !!
+  
       <h2
         style={{
           background: '#ffffff',
@@ -219,7 +219,7 @@ function View() {
           marginTop: '-50px',
         }}
       >
-        <Link to={`/View/Analysis`} state={val}>
+        <Link to={`/deliveries/View/Barchart`} state={val}>
           <button
             style={{
               background: '#009999',
@@ -230,8 +230,7 @@ function View() {
               color: '#FFFFFF',
             }}
           >
-            Analysis
-          </button>
+            Milk Graph          </button>
         </Link>
       </div>
     </div>

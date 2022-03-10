@@ -15,7 +15,7 @@ import { HomeIcon, Title, Wrapper } from './components/styled-componets/styles'
 import View from './components/Homepage/DeliveriesPage/DeliveryComponents/View'
 import Newdelivery from './components/Homepage/DeliveriesPage/DeliveryComponents/NewDelivery'
 import Analysis from './components/Homepage/DeliveriesPage/DeliveryComponents/Analysis'
-
+import BarChart from './components/Barchart/Barchart'
 
 
 function App() {
@@ -38,7 +38,8 @@ function App() {
         <Route path="deliveries/Update" element={<Update />} />
         <Route path="/deliveries/View" element={<View />} />
         <Route path="/deliveries/Newdelivery" element={<Newdelivery />} />
-        <Route path="/View/Analysis" element={<Analysis />} />
+        <Route path="/deliveries/View/Analysis" element={<Analysis />} />
+        <Route path="/deliveries/View/Barchart" element={<BarChart />} />
         
 
       </Routes>
