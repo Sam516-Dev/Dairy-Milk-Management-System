@@ -128,16 +128,6 @@ function View() {
           <td>{val.quantity}</td>
           <td>{new Date(val.date).toLocaleDateString()}</td>
           <td>{val.farmersid}</td>
-          <td>
-            <button
-              class="btn-delete"
-              onClick={() => {
-                deleteDelivery(val.farmersid)
-              }}
-            >
-              Delete
-            </button>
-          </td>
         </tr>
       )
     })
@@ -162,7 +152,7 @@ function View() {
       >
         {fullName} total milk: {totalQuanity} litres
       </h2>
-  
+
       <h2
         style={{
           background: '#ffffff',
@@ -184,7 +174,6 @@ function View() {
               <th>Quantity</th>
               <th>Date</th>
               <th>ID</th>
-              <th>Actions</th>
             </tr>
           </thead>
           <tbody>{renderTable()}</tbody>
@@ -197,7 +186,7 @@ function View() {
             marginTop: '50px',
             width: '100px',
             height: '50px',
-            fontSize: '25px',
+            fontSize: '20px',
             borderRadius: '8px',
             color: '#FFFFFF',
           }}
@@ -214,24 +203,43 @@ function View() {
           width: '100%',
           height: '50px',
           fontSize: '25px',
-          marginLeft: '500px',
+          marginLeft: '400px',
           color: '#FFFFFF',
-          marginTop: '-50px',
+          marginTop: '-55px',
         }}
       >
         <Link to={`/deliveries/View/Barchart`} state={val}>
           <button
             style={{
               background: '#009999',
-              width: '150px',
+              width: '130px',
               height: '50px',
-              fontSize: '25px',
+              fontSize: '20px',
+              marginRight: '100px',
               borderRadius: '8px',
               color: '#FFFFFF',
             }}
           >
-            Milk Graph          </button>
+            Milk Graph{' '}
+          </button>
         </Link>
+
+        <button
+          style={{
+            background: 'red',
+            marginTop: '-5px',
+            width: '120px',
+            height: '50px',
+            fontSize: '20px',
+            borderRadius: '8px',
+            color: '#FFFFFF',
+          }}
+          onClick={() => {
+            deleteDelivery(val.farmersid)
+          }}
+        >
+          Delete All
+        </button>
       </div>
     </div>
   )
