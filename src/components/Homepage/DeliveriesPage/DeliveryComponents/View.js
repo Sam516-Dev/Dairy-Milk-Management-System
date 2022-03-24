@@ -147,10 +147,10 @@ function View() {
           fontSize: '25px',
           marginTop: '20px',
           marginBottom: '15px',
-          color: '#ffffff',
+          color: 'black',
         }}
       >
-        {fullName} total milk: {totalQuanity} litres
+       Welcome {fullName} total milk: {totalQuanity} litres
       </h2>
 
       <h2

@@ -65,6 +65,7 @@ function FarmersRoute() {
       })
       toast.success('a new farmer added successifully')
     }
+    // setalldata([])
   }
 
   const handleEditFormSubmit = (event) => {
@@ -95,7 +96,7 @@ function FarmersRoute() {
       fontSize: '25px',
       marginTop: '20px',
       marginBottom: '15px',
-      color: '#ffffff',
+      color: 'black',
     }}
   >
     Add a new farmers here

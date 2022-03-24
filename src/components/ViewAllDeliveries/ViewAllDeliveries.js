@@ -70,7 +70,7 @@ function ViewAllDeliveries() {
           fontSize: '25px',
           marginTop: '20px',
           marginBottom: '15px',
-          color: '#ffffff',
+          color: 'black',
         }}
       >
         All deliveries

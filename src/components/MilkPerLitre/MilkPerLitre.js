@@ -60,7 +60,7 @@ function MilkPerLitreApp() {
       fontSize: '25px',
       marginTop: '20px',
       marginBottom: '15px',
-      color: '#ffffff',
+      color: 'black',
     }}
   >
     Price Per Litre
@@ -76,7 +76,7 @@ function MilkPerLitreApp() {
           fontSize: '30px',
           marginTop: '20px',
           // marginBottom: '5px',
-          color: 'blue',
+          color: '#009999',
         }}
       >
         
