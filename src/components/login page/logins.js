@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
-
+import LocalStorage from '../LocalStorage'
 import {
   Form,
   Input,
@@ -10,7 +10,10 @@ import {
   Wrapper,
 } from '../styled-componets/styles'
 
+
 function Loginpage() {
+
+  const [user, setUser, removeUser] = LocalStorage("LocalUser", []);
   //states of the application
   const [username, setusername] = useState('')
   const [password, setpassword] = useState('')
@@ -25,8 +28,10 @@ function Loginpage() {
       username: username,
       password: password,
     }).then((response) => {
-      if (response.data.message) {
-        return setLoginStatus(response.data.message)
+      if (response) {
+        console.log('response', response.data);
+        setUser()
+        //return setLoginStatus(response.data.message)
       } else {
         setLoginStatus(response.data[0].username)
       }

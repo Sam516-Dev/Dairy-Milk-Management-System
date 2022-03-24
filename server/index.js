@@ -41,14 +41,14 @@ app.use(
 )
 
 //get method here.. route
-app.get('/login', (req, res) => {
-  if (req.session.user) {
-    res.send({ loggedIn: true, user: req.session.user })
-    console.log(req.session.user);
-  } else {
-    res.send({ loggedIn: false })
-  }
-})
+// app.get('/login', (req, res) => {
+//   if (req.session.user) {
+//     res.send({ loggedIn: true, user: req.session.user })
+//     console.log(req.session.user);
+//   } else {
+//     res.send({ loggedIn: false })
+//   }
+// })
 
 // creating database connection
 const db = mysql.createConnection({
@@ -101,9 +101,13 @@ app.post('/login', (req, res) => {
       if (result.length > 0) {
         bcrypt.compare(password, result[0].password, (error, response) => {
           if (response) {
-            req.session.user = result
-            console.log(req.session.user)
-            return res.send(result)
+
+            // res.send(response)
+            // console.log('response', response );
+            // req.session.user = result
+            // console.log(req.session.user)
+             res.send(result)
+            console.log('result', result );
           } else {
             return res.send({
               message: 'Wrong username / password comination!',
