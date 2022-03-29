@@ -3,17 +3,22 @@ const mysql = require('mysql')
 const cors = require('cors')
 const app = express()
 const port = 3001
+const path = require('path')
 
-//app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cors())
+// app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(
   cors({
-    origin: ['http://localhost:3000'],
-    methods: ['GET', 'POST', 'DELETE', 'PUT'],
+    // origin: ['http://localhost:3000'],
+    origin: "*",
+    methods: ['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS'],
     credentials: true,
   }),
 )
+app.use(cors({ credentials: true }))
+// ... cross origin resource sharing
 
-//app.use(cors())... cross origin resource sharing
+
 app.use(express.json())
 
 const bodyParser = require('body-parser')
@@ -40,6 +45,19 @@ app.use(
   }),
 )
 
+
+
+// Enable CORS>> added
+app.use((req, res, next) => {
+  res.set('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,PUT')
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested With, Content-Type, Accept',
+  )
+  next()
+})
+
 //get method here.. route
 // app.get('/login', (req, res) => {
 //   if (req.session.user) {
@@ -49,6 +67,9 @@ app.use(
 //     res.send({ loggedIn: false })
 //   }
 // })
+
+
+
 
 // creating database connection
 const db = mysql.createConnection({
@@ -85,40 +106,6 @@ app.post('/register', (req, res) => {
       },
     )
   })
-})
-
-//this is a login route or end point
-app.post('/login', (req, res) => {
-  const username = req.body.username
-  const password = req.body.password
-  db.query(
-    'SELECT * FROM admin WHERE username = ?;',
-    [username],
-    (err, result) => {
-      if (err) {
-        return res.send({ err: err })
-      }
-      if (result.length > 0) {
-        bcrypt.compare(password, result[0].password, (error, response) => {
-          if (response) {
-
-            // res.send(response)
-            // console.log('response', response );
-            // req.session.user = result
-            // console.log(req.session.user)
-             res.send(result)
-            console.log('result', result );
-          } else {
-            return res.send({
-              message: 'Wrong username / password comination!',
-            })
-          }
-        })
-      } else {
-        res.send({ message: "User doesn't exists" })
-      }
-    },
-  )
 })
 
 ///inserting dairy milk in the database from the +NEW route
@@ -200,6 +187,82 @@ app.get('/getMilkPrice', (req, res) => {
     }
   })
 })
+
+//this is a login route or end point
+// app.post('/login', (req, res) => {
+//   const FullName = req.body.FullName
+//   const Password = req.body.Password
+//   db.query(
+//     'SELECT * FROM deliveries WHERE FullName = ? AND Password = ?',
+//     [FullName, Password],
+//     (err, result) => {
+//       if (err) {
+//         return res.send({ err: err })
+//       }
+//       if (result.length > 0) {
+//         bcrypt.compare(Password, result[0].Password, (error, response) => {
+//           if (result) {
+//             //  res.send(response)
+//             // console.log('response', response );
+//             // req.session.user = result
+//             // console.log(req.session.user)
+//             res.send(result)
+//             console.log('result', result)
+//           } else {
+//            res.send({
+//               message: 'Wrong username / password combination!',
+//             })
+//           }
+//         })
+//       } else {
+//         res.send({ message: "User doesn't exists" })
+//       }
+//     },
+//   )
+// })
+
+
+
+app.post("/login", (req, res) => {
+  const FullName = req.body.FullName;
+  const Password = req.body.Password;
+
+  db.query(
+    "SELECT * FROM deliveries WHERE FullName = ?;",
+    FullName,
+    (err, result) => {
+      if (err) {
+        res.send({ err: err });
+      }
+
+      if (result.length > 0) {
+        bcrypt.compare(Password, result[0].Password, (error, response) => {
+          if (response) {
+            //res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+            req.session.user = result;
+            console.log('session print', req.session.user);
+            res.send(result);
+            console.log('result', result);
+          } else {
+            res.send({ message: "Wrong username/password combination!" });
+          }
+        });
+      } else {
+        res.send({ message: "User doesn't exist" });
+      }
+    }
+  );
+});
+
+
+app.get("/login", (req, res) => {
+  if (req.session.user) {
+    res.send({ loggedIn: true, user: req.session.user });
+  } else {
+    res.send({ loggedIn: false });
+  }
+});
+
 //inserting milk price in the database
 // app.post('/InputPrice', (req, res) => {
 //   const price = req.body.price
@@ -222,23 +285,15 @@ app.get('/getMilkPrice', (req, res) => {
 //update price
 app.put('/UpdateMilkPrice/:priceUpdated', (req, res) => {
   const price = req.body.price
-  console.log(
-    `price coming to the backened is ${
-      price
-    }`,
-  )
+  console.log(`price coming to the backened is ${price}`)
   db.query(
     `UPDATE priceperlitre  SET  ? `,
-    [{ dbprice : price}],
+    [{ dbprice: price }],
 
     (err, result) => {
       if (err) {
         console.log(err)
-        console.log(
-          `price coming to the backened are this ${
-            price
-          }`,
-        )
+        console.log(`price coming to the backened are this ${price}`)
       } else {
         console.log('price UPDATED in the database successifully ')
       }
@@ -246,10 +301,6 @@ app.put('/UpdateMilkPrice/:priceUpdated', (req, res) => {
   )
   res.send({ message: 'values updated in the database' })
 })
-
-
-
-
 
 //this is the route for deleting deliveries from the backened
 app.delete('/delete/:id', (req, res) => {
@@ -266,19 +317,20 @@ app.delete('/delete/:id', (req, res) => {
 //this is the route for deleting on the view component
 app.delete('/deleteuser/:farmersID', (req, res) => {
   const farmersid = req.params.farmersID
-  console.log(farmersid);
-  db.query('DELETE FROM dairymilk WHERE farmersid = ?', farmersid, (err, result) => {
-    if (err) {
-      console.log(err)
-    } else {
-      res.send(result)
-      console.log("deleted successifully !");
-    }
-  })
+  console.log(farmersid)
+  db.query(
+    'DELETE FROM dairymilk WHERE farmersid = ?',
+    farmersid,
+    (err, result) => {
+      if (err) {
+        console.log(err)
+      } else {
+        res.send(result)
+        console.log('deleted successifully !')
+      }
+    },
+  )
 })
-
-
-
 
 //inserting a new famrmer in the deliveries database
 app.post('/addfarmer', (req, res) => {
@@ -286,20 +338,28 @@ app.post('/addfarmer', (req, res) => {
   const quantity = req.body.quantity
   const date = req.body.date
   const farmersID = req.body.farmersID
-  console.log(fullName + quantity + farmersID)
-  db.query(
-    `INSERT INTO deliveries (farmersID, fullName, quantity,date) VALUES ( "${farmersID}", "${fullName}", "${quantity}","${date}")`,
-    [(farmersID, fullName, quantity, date)],
+  const Password = req.body.Password
+  console.log(fullName + quantity + farmersID + Password)
 
-    (err, result) => {
-      if (err) {
-        console.log(err)
-        console.log(fullName + quantity + farmersID + date)
-      } else {
-        console.log('new farmer added !')
-      }
-    },
-  )
+  bcrypt.hash(Password, saltRound, (err, hash) => {
+    db.query(
+      `INSERT INTO deliveries (farmersID, fullName, quantity,date,Password) VALUES ( "${farmersID}", "${fullName}", "${quantity}","${date}", ? )`,
+      // `INSERT INTO deliveries (farmersID, fullName, quantity,date,Password) VALUES ( ?, ?, ?, ?, ?)`,
+
+      // 'INSERT INTO admin (username, password) VALUES (?,?)',
+      [(farmersID, fullName, quantity, date, hash)],
+
+      (err, result) => {
+        if (err) {
+          console.log(err)
+          console.log(fullName + quantity + farmersID + date + hash)
+        } else {
+          console.log('new farmer added !')
+        }
+      },
+    )
+  })
+
   res.send({ message: 'values inserted in the database' })
 })
 

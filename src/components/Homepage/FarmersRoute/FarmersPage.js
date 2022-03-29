@@ -5,12 +5,13 @@ import Axios from 'axios'
 
 import './farmerspage.css'
 
-
 //this component Add farmers
 function FarmersRoute() {
   const [alldata, setalldata] = useState([])
 
   const [fullName, setfullName] = useState('')
+  const [Password, setPassword] = useState('')
+
   const [quantity, setquantity] = useState('')
   const [farmersID, setfarmersID] = useState('')
 
@@ -20,7 +21,7 @@ function FarmersRoute() {
     '/' +
     (current.getMonth() + 1) +
     '/' +
-    current.getDate();
+    current.getDate()
 
   //useEffect hook for rendering all deliveries
   useEffect(() => {
@@ -39,10 +40,11 @@ function FarmersRoute() {
       quantity: quantity,
       date: todaysdate,
       farmersID: farmersID,
+      Password: Password,
     }
     console.log(`this is the newContact ${newContact}`)
 
-    if (!fullName || !quantity || !farmersID) {
+    if (!fullName || !quantity || !farmersID || !Password) {
       toast.error('please input all farmer details')
       return console.log('no details entered !!')
     } else {
@@ -52,6 +54,7 @@ function FarmersRoute() {
         quantity: newContact.quantity,
         date: todaysdate,
         farmersID: newContact.farmersID,
+        Password: newContact.Password,
       }).then(() => {
         setalldata([
           ...alldata,
@@ -65,7 +68,7 @@ function FarmersRoute() {
       })
       toast.success('a new farmer added successifully')
     }
-    // setalldata([])
+    // setalldata([(fullName = ''), (quantity = ''), (farmersID = '')])
   }
 
   const handleEditFormSubmit = (event) => {
@@ -79,28 +82,27 @@ function FarmersRoute() {
           <td>{val.fullName}</td>
           <td>{val.quantity}</td>
           <td>{new Date(val.date).toLocaleDateString()}</td>
-          <td>{val.farmersid}</td>
         </tr>
       )
     })
   }
-//add farmers component
+  //add farmers component
   return (
     <div>
-    <h2
-    style={{
-      background: '#2fbd82',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      fontSize: '25px',
-      marginTop: '20px',
-      marginBottom: '15px',
-      color: 'black',
-    }}
-  >
-    Add a new farmers here
-  </h2>
+      <h2
+        style={{
+          background: '#2fbd82',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontSize: '25px',
+          marginTop: '20px',
+          marginBottom: '15px',
+          color: 'black',
+        }}
+      >
+        Add a new farmers here
+      </h2>
       <ToastContainer position="top-center" />
       <form onSubmit={handleEditFormSubmit}>
         <table>
@@ -109,7 +111,6 @@ function FarmersRoute() {
               <th>FullName</th>
               <th>Quantity</th>
               <th>Date</th>
-              <th>ID</th>
             </tr>
           </thead>
           <tbody>{renderTable()}</tbody>
@@ -129,18 +130,23 @@ function FarmersRoute() {
           name="quantity"
           placeholder="enter quantity..."
           required="required"
-         
           onChange={(e) => setquantity(e.target.value)}
         />
         <input type="text" value={todaysdate} readOnly="true" />
         <input
-          type="text"
+          type="number"
           name="id"
           placeholder="enter ID..."
           required="required"
           onChange={(e) => setfarmersID(e.target.value)}
         />
-
+        <input
+          type="number"
+          name="Password"
+          placeholder="user's password ID..."
+          required="required"
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <button onClick={handleAdd}> Add</button>
       </form>
     </div>

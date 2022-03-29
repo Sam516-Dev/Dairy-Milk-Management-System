@@ -52,7 +52,7 @@ function Registerpage() {
       </Form>
 
       <Buttondiv>
-        <Button onClick={register}> Register here </Button>
+        <Button onClick={register}> Register </Button>
       </Buttondiv>
     </Wrapper>
   )
