@@ -10,14 +10,13 @@ app.use(cors())
 app.use(
   cors({
     // origin: ['http://localhost:3000'],
-    origin: "*",
+    origin: '*',
     methods: ['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS'],
     credentials: true,
   }),
 )
 app.use(cors({ credentials: true }))
 // ... cross origin resource sharing
-
 
 app.use(express.json())
 
@@ -45,8 +44,6 @@ app.use(
   }),
 )
 
-
-
 // Enable CORS>> added
 app.use((req, res, next) => {
   res.set('Access-Control-Allow-Origin', '*')
@@ -67,9 +64,6 @@ app.use((req, res, next) => {
 //     res.send({ loggedIn: false })
 //   }
 // })
-
-
-
 
 // creating database connection
 const db = mysql.createConnection({
@@ -221,47 +215,46 @@ app.get('/getMilkPrice', (req, res) => {
 //   )
 // })
 
-
-
-app.post("/login", (req, res) => {
-  const FullName = req.body.FullName;
-  const Password = req.body.Password;
+app.post('/login', (req, res) => {
+  const FullName = req.body.FullName
+  const Password = req.body.Password
 
   db.query(
-    "SELECT * FROM deliveries WHERE FullName = ?;",
+    'SELECT * FROM deliveries WHERE FullName = ?;',
     FullName,
     (err, result) => {
       if (err) {
-        res.send({ err: err });
-      }
-
-      if (result.length > 0) {
+        res.send({ err: err })
+      } else if (FullName === '') {
+        res.send({ success: false, message: 'Username required' })
+      } else if (Password === '') {
+        res.send({ success: false, message: 'password required' })
+      } else if (result.length > 0) {
         bcrypt.compare(Password, result[0].Password, (error, response) => {
           if (response) {
             //res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-            req.session.user = result;
-            console.log('session print', req.session.user);
-            res.send(result);
-            console.log('result', result);
+            req.session.user = result
+            console.log('session print', req.session.user)
+            res.send(result)
+            console.log('result', result)
           } else {
-            res.send({ message: "Wrong username/password combination!" });
+            res.send({ message: 'Wrong username/password combination!' })
           }
-        });
+        })
       } else {
-        res.send({ message: "User doesn't exist" });
+        res.send({ message: "User doesn't exist" })
       }
-    }
-  );
-});
+    },
+  )
+})
 
-
-app.get("/login", (req, res) => {
+app.get('/login', (req, res) => {
   if (req.session.user) {
-    res.send({ loggedIn: true, user: req.session.user });
+    res.send({ loggedIn: true, user: req.session.user })
   } else {
-    res.send({ loggedIn: false });
+    res.send({ loggedIn: false })
   }
-});
+})
 
 //inserting milk price in the database
 // app.post('/InputPrice', (req, res) => {
@@ -368,31 +361,36 @@ app.post('/addfarmer', (req, res) => {
 app.put('/Update', (req, res) => {
   const fullName = req.body.fullName
   const quantity = req.body.quantity
-  const date = req.body.date
+  //const date = req.body.date
   const farmersID = req.body.farmersID
   const id = req.body.id
+  const Role = req.body.Role
   console.log(
     `values coming to the backened are this ${
-      fullName + quantity + date + farmersID + id
+      fullName + quantity + farmersID + id + Role
     }`,
   )
+  if (!fullName || !quantity || !Role) {
+    res.send({ message: 'All values required !' })
+  } else {
   db.query(
     `UPDATE deliveries  SET ? WHERE id=?`,
-    [{ farmersid: farmersID, fullName, quantity, date }, id],
+    [{ farmersid: farmersID, fullName, quantity, Role }, id],
 
     (err, result) => {
       if (err) {
         console.log(err)
         console.log(
           `values coming to the backened are this ${
-            fullName + quantity + date + farmersID + id
+            fullName + quantity + date + farmersID + id + Role
           }`,
         )
       } else {
         console.log('values UPDATED in the database successifully ')
       }
     },
-  )
+    )
+  }
   res.send({ message: 'values updated in the database' })
 })
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
-
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import {
   Form,
   Input,
@@ -9,6 +10,8 @@ import {
   Buttondiv,
   Wrapper,
 } from '../styled-componets/styles'
+import { UseadminContext } from '../AdminContext'
+
 
 function Loginpage() {
   //states of the application ...
@@ -16,21 +19,31 @@ function Loginpage() {
   const [Password, setPassword] = useState('')
   const [loginStatus, setLoginStatus] = useState("");
 
+  const { setNewUser,LocalUser } = UseadminContext();
+
 
   //post request
+  
   const login = () => {
-    Axios.post('http://localhost:3001/login', {
-      FullName: FullName,
-      Password: Password,
-    }).then((response) => {
-      console.log("response", response.data)
-      if (response.data) {
-        setLoginStatus(response.data[0].fullName);
-      } else {
-        setLoginStatus(response.data[0].fullName);
-      }
+    // if (!FullName || !Password) {
+    //   toast.error('please input FullName and Password')
+    //   return console.log('no details entered !!')
+    // } else {
+      Axios.post('http://localhost:3001/login', {
+        FullName: FullName,
+        Password: Password,
+      }).then((response) => {
+        setNewUser(response.data);
+        console.log("response", response.data)
+        if (response.data.message) {
+          
+          setLoginStatus(response.data.message);
+        } else {
+          setLoginStatus(response.data[0].fullName);
+        }
 
-    })
+      })
+    //}
   }
 
   useEffect(() => {
@@ -49,19 +62,20 @@ function Loginpage() {
 
   return (
     <Wrapper>
+    <ToastContainer position="top-center" />
       <Form>
         <Label>FullName:</Label>
         <Input
           type="text"
-          name="username"
-          placeholder="username..."
+          name="FullName"
+          placeholder="FullName..."
           required
           onChange={(e) => setFullName(e.target.value)}
         />
         <Label>Password:</Label>
         <Input
-          type="password"
-          name="password"
+          type="Password"
+          name="Password"
           placeholder="ID No..."
           required
           onChange={(e) => setPassword(e.target.value)}

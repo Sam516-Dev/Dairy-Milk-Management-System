@@ -5,9 +5,12 @@ import Axios from 'axios'
 import { Buttondiv } from '../../../styled-componets/styles'
 import { Link } from 'react-router-dom'
 import { useNavigate, useLocation, useParams } from 'react-router-dom'
+import { UseadminContext } from '../../../AdminContext'
 //import './farmerspage.css'
 
 function View() {
+  const { LocalUser } = UseadminContext();
+
   const [alldata, setalldata] = useState([])
   const [IspriceUpdated, setIspriceUpdated] = useState(false)
   const [price, setprice] = useState([])
@@ -150,7 +153,7 @@ function View() {
           color: 'black',
         }}
       >
-       Welcome {fullName} total milk: {totalQuanity} litres
+       Welcome {LocalUser.map(item=>item.fullName)} total milk: {totalQuanity} litres
       </h2>
 
       <h2

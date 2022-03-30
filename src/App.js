@@ -16,6 +16,7 @@ import View from './components/Homepage/DeliveriesPage/DeliveryComponents/View'
 import Newdelivery from './components/Homepage/DeliveriesPage/DeliveryComponents/NewDelivery'
 import Analysis from './components/Homepage/DeliveriesPage/DeliveryComponents/Analysis'
 import BarChart from './components/Barchart/Barchart'
+import {AdminContextProvider} from './components/AdminContext'
 
 
 function App() {
@@ -27,6 +28,8 @@ function App() {
      
       <GobackHomeApp />
       <Title> DAIRY MILK MANAGEMENT SYSTEM </Title>
+      <AdminContextProvider>
+      
       <Routes>
         <Route path="/login" element={<Loginpage />} />
         <Route path="/register" element={<Registerpage />} />
@@ -43,6 +46,7 @@ function App() {
         
 
       </Routes>
+      </AdminContextProvider>
     </>
   )
 }
