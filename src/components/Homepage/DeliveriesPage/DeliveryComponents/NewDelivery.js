@@ -52,7 +52,7 @@ function Newdelivery() {
 
   const handleAdd = (event) => {
     event.preventDefault()
-    if (!quantity) {
+    if (!quantity || quantity==0) {
       toast.error('please input the new milk delivered')
       console.log('no quantity entered !!')
     } else {
@@ -73,6 +73,8 @@ function Newdelivery() {
 
   return (
     <div>
+    <ToastContainer position="top-center" />
+      
       <h2
         style={{
           background: '#2fbd82',

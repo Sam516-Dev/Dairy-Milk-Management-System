@@ -12,57 +12,52 @@ import {
 } from '../styled-componets/styles'
 import { UseadminContext } from '../AdminContext'
 
-
 function Loginpage() {
   //states of the application ...
   const [FullName, setFullName] = useState('')
   const [Password, setPassword] = useState('')
-  const [loginStatus, setLoginStatus] = useState("");
+  const [loginStatus, setLoginStatus] = useState('')
 
-  const { setNewUser,LocalUser } = UseadminContext();
-
+  const { setNewUser, LocalUser } = UseadminContext()
 
   //post request
-  
+
   const login = () => {
-    // if (!FullName || !Password) {
-    //   toast.error('please input FullName and Password')
-    //   return console.log('no details entered !!')
-    // } else {
+    if (!FullName || !Password) {
+      toast.error('please input FullName and Password')
+      return console.log('no details entered !!')
+    }   else{
       Axios.post('http://localhost:3001/login', {
         FullName: FullName,
         Password: Password,
       }).then((response) => {
-        setNewUser(response.data);
-        console.log("response", response.data)
+        setNewUser(response.data)
+        console.log('response', response.data)
         if (response.data.message) {
-          
-          setLoginStatus(response.data.message);
+          setLoginStatus(response.data.message)
         } else {
-          setLoginStatus(response.data[0].fullName);
+          setLoginStatus(response.data[0].fullName)
         }
-
       })
-    //}
+    }
   }
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/login").then((response) => {
+    Axios.get('http://localhost:3001/login').then((response) => {
       if (response.data.loggedIn == true) {
-        setLoginStatus(response.data[0].fullName);
-        console.log("this user logged in", response.data[0].fullName)
+        setLoginStatus(response.data[0].fullName)
+        console.log('this user logged in', response.data[0].fullName)
       }
-    });
-  }, []);
+    })
+  }, [])
 
   // const register = () => {
   //     console.log(username + password)
   // }
 
-
   return (
     <Wrapper>
-    <ToastContainer position="top-center" />
+      <ToastContainer position="top-center" />
       <Form>
         <Label>FullName:</Label>
         <Input
@@ -93,16 +88,6 @@ function Loginpage() {
 export default Loginpage
 
 //<Input type="submit" value="Submit" />
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useState, useEffect } from 'react'
 // import Axios from 'axios'

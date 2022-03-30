@@ -3,6 +3,10 @@ import React, { useState, useEffect } from 'react'
 import { Milktitle, MilkLabel, Milkp } from '../styled-componets/styles'
 import Axios from 'axios'
 import reactDom from 'react-dom'
+import { ToastContainer, toast } from 'react-toastify'
+
+
+
 function MilkPerLitreApp() {
   const [price, setprice] = useState([])
   const [priceUpdated, setpriceUpdated] = useState("")
@@ -34,6 +38,10 @@ function MilkPerLitreApp() {
   //post inputs
   const Update = (event) => {
     event.preventDefault()
+    if (priceUpdated == 0 || priceUpdated == '')
+    {
+      toast.error('price cannot be zero or empty')
+    } else {
     Axios.put(`http://localhost:3001/UpdateMilkPrice/${priceUpdated}`, {
       price: priceUpdated,
     }).then(() => {
@@ -47,9 +55,12 @@ function MilkPerLitreApp() {
       //navigate('/deliveries')
     })
   }
+      
+  }
 
   return (
     <>
+    <ToastContainer position="top-center" />
    
     <h2
     style={{

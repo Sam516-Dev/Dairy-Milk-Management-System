@@ -226,7 +226,9 @@ app.post('/login', (req, res) => {
       if (err) {
         res.send({ err: err })
       } else if (FullName === '') {
-        res.send({ success: false, message: 'Username required' })
+        res.status(400).send({
+        msg: 'Please pass Role ID, email, password, phone or fullname.'
+      })
       } else if (Password === '') {
         res.send({ success: false, message: 'password required' })
       } else if (result.length > 0) {

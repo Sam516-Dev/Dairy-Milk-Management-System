@@ -3,12 +3,10 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Axios from 'axios'
 
-
 import './farmerspage.css'
 
 //this component Add farmers
 function FarmersRoute() {
-  
   const [alldata, setalldata] = useState([])
 
   const [fullName, setfullName] = useState('')
@@ -30,7 +28,7 @@ function FarmersRoute() {
     Axios.get('http://localhost:3001/fetchalldeliveries').then((response) => {
       if (response.data) {
         setalldata(response.data)
-        // console.log(response.data)
+        // console.log(' response dot data ', response.data)
       }
     })
   }, [])
@@ -49,7 +47,18 @@ function FarmersRoute() {
     if (!fullName || !quantity || !farmersID || !Password) {
       toast.error('please input all farmer details')
       return console.log('no details entered !!')
-    } else {
+    }else if
+    (farmersID.length < 4 || farmersID==0 ) {
+    toast.error("farmersID cannot be zero, too short/long")
+  }
+    else if
+      (Password.length < 4 || Password==0 ||Password.length > 10) {
+      toast.error("Password cannot be Zero or too short/long")
+    } else if
+    (Password == farmersID) {
+    toast.error("ID should not be your password")
+  }
+    else {
       Axios.post('http://localhost:3001/addfarmer', {
         //newContact: newContact,
         fullName: newContact.fullName,
