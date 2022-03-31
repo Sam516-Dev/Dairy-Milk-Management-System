@@ -1,11 +1,28 @@
+import { FaEdit,FaUserAlt } from 'react-icons/fa'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { AiOutlineHome } from 'react-icons/ai'
+ import { AiOutlineHome } from 'react-icons/ai'
+// import  FaUserAlt from 'react-icons/ai'
+
+// import {
+//   FaUserAlt
+// } from 'react-icons/lib/Fa';
+
 
 export const HomeIcon = styled(AiOutlineHome)`
   color: #008080;
   font-size: 40px;
   margin-left: 85px;
+  margin-top: 10px;
+  :hover {
+    cursor: pointer;
+  }
+`
+
+export const UserIcon = styled(FaUserAlt)`
+  color: #008080;
+  font-size: 40px;
+  margin-left: 1100px;
   margin-top: 10px;
   :hover {
     cursor: pointer;
@@ -123,7 +140,7 @@ export const NavbarLink = styled(Link)`
   display: flex;
   font-weight: bold;
   display: inline;
-justify-content: center;
+  justify-content: center;
   margin-left: 125px;
   margin-top: 100px;
   color: #1c95a6;
