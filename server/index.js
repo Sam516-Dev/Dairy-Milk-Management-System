@@ -227,8 +227,8 @@ app.post('/login', (req, res) => {
         res.send({ err: err })
       } else if (FullName === '') {
         res.status(400).send({
-        msg: 'Please pass Role ID, email, password, phone or fullname.'
-      })
+          msg: 'Please pass Role ID, email, password, phone or fullname.',
+        })
       } else if (Password === '') {
         res.send({ success: false, message: 'password required' })
       } else if (result.length > 0) {
@@ -375,22 +375,22 @@ app.put('/Update', (req, res) => {
   if (!fullName || !quantity || !Role) {
     res.send({ message: 'All values required !' })
   } else {
-  db.query(
-    `UPDATE deliveries  SET ? WHERE id=?`,
-    [{ farmersid: farmersID, fullName, quantity, Role }, id],
+    db.query(
+      `UPDATE deliveries  SET ? WHERE id=?`,
+      [{ farmersid: farmersID, fullName, quantity, Role }, id],
 
-    (err, result) => {
-      if (err) {
-        console.log(err)
-        console.log(
-          `values coming to the backened are this ${
-            fullName + quantity + date + farmersID + id + Role
-          }`,
-        )
-      } else {
-        console.log('values UPDATED in the database successifully ')
-      }
-    },
+      (err, result) => {
+        if (err) {
+          console.log(err)
+          console.log(
+            `values coming to the backened are this ${
+              fullName + quantity + date + farmersID + id + Role
+            }`,
+          )
+        } else {
+          console.log('values UPDATED in the database successifully ')
+        }
+      },
     )
   }
   res.send({ message: 'values updated in the database' })

@@ -4,8 +4,11 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Axios from 'axios'
 import { Link } from 'react-router-dom'
+// import { LocalUser } from UseadminContext();
+import { UseadminContext } from '../../AdminContext'
 
 const DeliveriesPage = () => {
+  const { LocalUser } = UseadminContext();
   const [alldeliveries, setalldeliveries] = useState([])
 
   const [contacts, setContacts] = useState('')
@@ -62,41 +65,43 @@ const DeliveriesPage = () => {
   //here we're rendering the table through maping all the data in the database
   const renderTable = () => {
     return alldeliveries.map((val) => {
-      return (
-        <tr>
-          <td>{val.fullName}</td>
-          <td>{val.quantity}</td>
-          <td>{new Date(val.date).toLocaleDateString()}</td>
-          <td>{val.farmersid}</td>
-
-          <td class="button-wrap">
-            <Link to={`/deliveries/Update`} state={val}>
-              <button class="btn-update">Update</button>
+      if (LocalUser[0].farmersid === val.farmersid) {  
+        return (
+          <tr>
+            <td>{val.fullName}</td>
+            <td>{val.quantity}</td>
+            <td>{new Date(val.date).toLocaleDateString()}</td>
+            <td>{val.farmersid}</td>
+  
+            <td class="button-wrap">
+          {LocalUser[0].Role =='Admin' ?     <Link to={`/deliveries/Update`} state={val}>
+          <button class="btn-update">Update</button>
+        </Link> :''}
+  
+             {LocalUser[0].Role == 'Admin' ?  <button
+             class="btn-delete"
+             onClick={() => {
+               deleteDelivery(val.id)
+             }}
+           >
+             Delete
+           </button>:''}
+  
+              <div class="button-wrap">
+                <Link to={`/deliveries/View`} state={val}>
+                  <button class="btn-update">View</button>
+                </Link>
+              </div>
+            
+            {LocalUser[0].Role =='Admin' ?   <div class="button-wrap">
+            <Link to={`/deliveries/Newdelivery`} state={val}>
+              <button class="btn-update">+ new </button>
             </Link>
-
-            <button
-              class="btn-delete"
-              onClick={() => {
-                deleteDelivery(val.id)
-              }}
-            >
-              Delete
-            </button>
-
-            <div class="button-wrap">
-              <Link to={`/deliveries/View`} state={val}>
-                <button class="btn-update">View</button>
-              </Link>
-            </div>
-          
-            <div class="button-wrap">
-              <Link to={`/deliveries/Newdelivery`} state={val}>
-                <button class="btn-update">+ new </button>
-              </Link>
-            </div>
-          </td>
-        </tr>
-      )
+          </div>:''}
+            </td>
+          </tr>
+        )
+      }
     })
   }
 

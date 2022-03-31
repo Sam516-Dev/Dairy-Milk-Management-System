@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
 import {
   Form,
@@ -13,6 +14,7 @@ import {
 import { UseadminContext } from '../AdminContext'
 
 function Loginpage() {
+  const navigate = useNavigate();
   //states of the application ...
   const [FullName, setFullName] = useState('')
   const [Password, setPassword] = useState('')
@@ -32,11 +34,19 @@ function Loginpage() {
         Password: Password,
       }).then((response) => {
         setNewUser(response.data)
-        console.log('response', response.data)
-        if (response.data.message) {
-          setLoginStatus(response.data.message)
-        } else {
-          setLoginStatus(response.data[0].fullName)
+
+        // console.log('response', response.data)
+        // if (response.data.message) {
+        //   setLoginStatus(response.data.message)
+        // } else {
+        //   setLoginStatus(response.data[0].fullName)
+        // }
+      
+        if (response.data[0].Role == "normal") {
+          navigate('/deliveries');
+        }
+        else {
+          navigate('/');
         }
       })
     }

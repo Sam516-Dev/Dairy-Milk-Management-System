@@ -17,7 +17,7 @@ import Newdelivery from './components/Homepage/DeliveriesPage/DeliveryComponents
 import Analysis from './components/Homepage/DeliveriesPage/DeliveryComponents/Analysis'
 import BarChart from './components/Barchart/Barchart'
 import {AdminContextProvider} from './components/AdminContext'
-
+import MyRoutes from './MyRoutes'
 
 function App() {
   //added this comment to test something
@@ -29,23 +29,8 @@ function App() {
       <GobackHomeApp />
       <Title> DAIRY MILK MANAGEMENT SYSTEM </Title>
       <AdminContextProvider>
-      
-      <Routes>
-        <Route path="/login" element={<Loginpage />} />
-        <Route path="/register" element={<Registerpage />} />
-        <Route path="/" element={<Homepage />} />
-        <Route path="/milkprice" element={<MilkPerLitreApp />} />
-        <Route path="/farmers" element={<FarmersRoute />} />
-        <Route path="/deliveries" element={<DeliveriesPage />} />
-        <Route path="/ViewAllDeliveries" element={<ViewAllDeliveries />} />
-        <Route path="deliveries/Update" element={<Update />} />
-        <Route path="/deliveries/View" element={<View />} />
-        <Route path="/deliveries/Newdelivery" element={<Newdelivery />} />
-        <Route path="/deliveries/View/Analysis" element={<Analysis />} />
-        <Route path="/deliveries/View/Barchart" element={<BarChart />} />
-        
-
-      </Routes>
+      <MyRoutes/>
+     
       </AdminContextProvider>
     </>
   )
