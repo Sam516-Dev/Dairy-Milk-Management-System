@@ -1,9 +1,10 @@
 import React,{useState,useEffect,useCallback} from 'react'
-
+import { useNavigate, useLocation } from 'react-router-dom'
 
 
 export default function LocalStorage(key, intialValue)
 {
+    const navigate = useNavigate()
     const PREFIX ='MOVIESEnt-'
     const prefixKey = PREFIX + key;
     const [value, setValue] = useState(() =>
@@ -21,7 +22,8 @@ export default function LocalStorage(key, intialValue)
     const removeValue = useCallback(
         () => {
              localStorage.removeItem(prefixKey);
-           setValue({}) 
+            setValue([]) 
+            navigate('/')
         },
         [],
     )

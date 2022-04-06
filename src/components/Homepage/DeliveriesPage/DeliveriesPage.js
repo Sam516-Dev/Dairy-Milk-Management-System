@@ -75,7 +75,7 @@ const DeliveriesPage = () => {
             <td>{val.quantity}</td>
             <td>{new Date(val.date).toLocaleDateString()}</td>
             <td>{val.farmersid}</td>
-
+            <td> { val.Expenses }</td>
             <td class="button-wrap">
               {LocalUser[0].Role == 'Admin' ? (
                 <Link to={`/deliveries/Update`} state={val}>
@@ -123,6 +123,8 @@ const DeliveriesPage = () => {
             <td>{val.quantity}</td>
             <td>{new Date(val.date).toLocaleDateString()}</td>
             <td>{val.farmersid}</td>
+            <td> { val.Expenses }</td>
+
 
             <td class="button-wrap">
               <Link to={`/deliveries/Update`} state={val}>
@@ -166,7 +168,9 @@ const DeliveriesPage = () => {
               <th>Quantity (kg) </th>
               <th>Date</th>
               <th>farmersID</th>
+              <th>Expenses</th>
               <th>Actions</th>
+
             </tr>
           </thead>
           <tbody>{renderTable()}</tbody>

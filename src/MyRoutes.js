@@ -1,11 +1,11 @@
 import React from 'react'
 import {
-    BrowserRouter as Router,
-    Route,
-    Routes,
-    Navigate,
-    useLocation,
-} from "react-router-dom";
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+  useLocation,
+} from 'react-router-dom'
 import GlobalStyles from './components/styled-componets/Global.styled'
 import MilkPerLitreApp from './components/MilkPerLitre/MilkPerLitre'
 import Loginpage from './components/login page/logins'
@@ -25,44 +25,99 @@ import BarChart from './components/Barchart/Barchart'
 import { UseadminContext } from './components/AdminContext'
 
 export default function MyRoutes() {
-    const { LocalUser } = UseadminContext();
-    // console.log("testing", Object.keys(LocalUser[0]).length);
-    function RequireAuth({ children }) {
-        let location = useLocation();
-        if (LocalUser.length == 0) {
-            return <Navigate to="/login" state={{ from: location }} replace />;
-        }
-        return children;
+  const { LocalUser } = UseadminContext()
+  // console.log("testing", Object.keys(LocalUser[0]).length);
+  function RequireAuth({ children }) {
+    let location = useLocation()
+    if (LocalUser.length == 0) {
+      return <Navigate to="/login" state={{ from: location }} replace />
     }
-    function RequireAuthAdmin({ children }) {
-        // console.log("LocalUser", LocalUser.userRole);
-        let location = useLocation();
-        if (LocalUser.length == 0) {
-            return <Navigate to="/login" state={{ from: location }} replace />;
-        }
-        if (LocalUser[0].Role != "Admin") {
-            return <Navigate to="/login" state={{ from: location }} replace />;
-        }
+    return children
+  }
+  function RequireAuthAdmin({ children }) {
+    // console.log("LocalUser", LocalUser.userRole);
+    let location = useLocation()
+    if (LocalUser.length == 0) {
+      return <Navigate to="/login" state={{ from: location }} replace />
+    }
+    if (LocalUser[0].Role != 'Admin') {
+      return <Navigate to="/login" state={{ from: location }} replace />
+    }
 
-        return children;
-    }
+    return children
+  }
   return (
-      <React.Fragment>
+    <React.Fragment>
       <Routes>
-      <Route path="/login" element={<Loginpage />} />
-      <Route path="/register" element={<Registerpage />} />
-      <Route path="/" element={<Homepage />} />
-      <Route path="/milkprice" element={<RequireAuthAdmin><MilkPerLitreApp /></RequireAuthAdmin>} />
-      <Route path="/farmers" element={<RequireAuthAdmin><FarmersRoute /></RequireAuthAdmin>} />
-      <Route path="/deliveries" element={<RequireAuth><DeliveriesPage /></RequireAuth>} />
-      <Route path="/ViewAllDeliveries" element={<RequireAuth><ViewAllDeliveries /></RequireAuth>} />
-      <Route path="deliveries/Update" element={<RequireAuthAdmin><Update /></RequireAuthAdmin>} />
-      <Route path="/deliveries/View" element={<RequireAuth><View /></RequireAuth>} />
-      <Route path="/deliveries/Newdelivery" element={<RequireAuthAdmin><Newdelivery /></RequireAuthAdmin>} />
-      <Route path="/deliveries/View/Analysis" element={<RequireAuth><Analysis /></RequireAuth>} />
-      <Route path="/deliveries/View/Barchart" element={<BarChart />} />
-          </Routes>
-      
-      </React.Fragment>
+        <Route path="/login" element={<Loginpage />} />
+        <Route path="/register" element={<Registerpage />} />
+        <Route path="/" element={<Homepage />} />
+        <Route
+          path="/milkprice"
+          element={
+            <RequireAuth>
+              <MilkPerLitreApp />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/farmers"
+          element={
+            <RequireAuthAdmin>
+              <FarmersRoute />
+            </RequireAuthAdmin>
+          }
+        />
+        <Route
+          path="/deliveries"
+          element={
+            <RequireAuth>
+              <DeliveriesPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/ViewAllDeliveries"
+          element={
+            <RequireAuth>
+              <ViewAllDeliveries />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="deliveries/Update"
+          element={
+            <RequireAuthAdmin>
+              <Update />
+            </RequireAuthAdmin>
+          }
+        />
+        <Route
+          path="/deliveries/View"
+          element={
+            <RequireAuth>
+              <View />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/deliveries/Newdelivery"
+          element={
+            <RequireAuthAdmin>
+              <Newdelivery />
+            </RequireAuthAdmin>
+          }
+        />
+        <Route
+          path="/deliveries/View/Analysis"
+          element={
+            <RequireAuth>
+              <Analysis />
+            </RequireAuth>
+          }
+        />
+        <Route path="/deliveries/View/Barchart" element={<BarChart />} />
+      </Routes>
+    </React.Fragment>
   )
 }

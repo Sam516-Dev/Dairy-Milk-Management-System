@@ -53,7 +53,6 @@ function ViewAllDeliveries() {
             <td>{val.fullName}</td>
             <td>{val.quantity}</td>
             <td>{new Date(val.date).toLocaleDateString()}</td>
-            <td>{val.farmersid}</td>
           </tr>
         )
       })
@@ -95,7 +94,7 @@ function ViewAllDeliveries() {
               <th>FullName</th>
               <th>Quantity</th>
               <th>Date</th>
-              <th>ID</th>
+            
             </tr>
           </thead>
           <tbody>{renderTable()}</tbody>

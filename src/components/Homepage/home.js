@@ -7,10 +7,18 @@ import {
   Tablerow,
   NavbarLink,
 } from '../styled-componets/styles'
+import { UseadminContext } from '../AdminContext'
+
+
+
 
 function Homepage() {
+  const { LocalUser } = UseadminContext()
+
   return (
+    
     <Homediv>
+    
       <NavbarLink to="/"> Home</NavbarLink>
       <NavbarLink to="/farmers"> add farmers </NavbarLink>
       <NavbarLink to="/deliveries"> Deliveries </NavbarLink>

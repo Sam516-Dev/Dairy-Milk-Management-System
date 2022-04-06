@@ -5,6 +5,8 @@ const app = express()
 const port = 3001
 const path = require('path')
 
+
+
 app.use(cors())
 // app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(
@@ -158,6 +160,7 @@ app.get('/View/:id', (req, res) => {
   )
 })
 
+
 //tying to fetch alldeliveries
 app.get('/ViewAllDeliveries', (req, res) => {
   db.query('SELECT * FROM dairymilk;', (err, results) => {
@@ -225,7 +228,7 @@ app.post('/login', (req, res) => {
     (err, result) => {
       if (err) {
         res.send({ err: err })
-      } else if (FullName === '') {
+      } else if (FullName === '' || typeof(FullName) ==='number') {
         res.status(400).send({
           msg: 'Please pass Role ID, email, password, phone or fullname.',
         })
@@ -236,15 +239,18 @@ app.post('/login', (req, res) => {
           if (response) {
             //res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
             req.session.user = result
+            req.session.LoggedIn = true;
+            
             console.log('session print', req.session.user)
             res.send(result)
             console.log('result', result)
           } else {
-            res.send({ message: 'Wrong username/password combination!' })
+           return res.send({ message: 'Icorrect Username/Password' })
           }
         })
       } else {
-        res.send({ message: "User doesn't exist" })
+         res.send({ message: "User doesn't exist" })
+        req.session.LoggedIn = false;
       }
     },
   )
@@ -336,26 +342,34 @@ app.post('/addfarmer', (req, res) => {
   const Password = req.body.Password
   console.log(fullName + quantity + farmersID + Password)
 
+
+  //    //checking username exists
+  //    if(result.lenght){
+  //   console.log('username taken');
+  // }
+  // else {
   bcrypt.hash(Password, saltRound, (err, hash) => {
     db.query(
       `INSERT INTO deliveries (farmersID, fullName, quantity,date,Password) VALUES ( "${farmersID}", "${fullName}", "${quantity}","${date}", ? )`,
       // `INSERT INTO deliveries (farmersID, fullName, quantity,date,Password) VALUES ( ?, ?, ?, ?, ?)`,
-
-      // 'INSERT INTO admin (username, password) VALUES (?,?)',
       [(farmersID, fullName, quantity, date, hash)],
 
       (err, result) => {
         if (err) {
-          console.log(err)
-          console.log(fullName + quantity + farmersID + date + hash)
+           console.log(err)
+          // console.log(fullName + quantity + farmersID + date + hash)
         } else {
           console.log('new farmer added !')
+         
         }
       },
-    )
+      )
+      
   })
+// }
 
   res.send({ message: 'values inserted in the database' })
+
 })
 
 //this route is used to update the user through the use of ID
@@ -364,27 +378,28 @@ app.put('/Update', (req, res) => {
   const fullName = req.body.fullName
   const quantity = req.body.quantity
   //const date = req.body.date
+  const Expenses = req.body.Expenses
   const farmersID = req.body.farmersID
   const id = req.body.id
   const Role = req.body.Role
   console.log(
     `values coming to the backened are this ${
-      fullName + quantity + farmersID + id + Role
+      fullName + quantity + farmersID + id + Role + Expenses
     }`,
   )
-  if (!fullName || !quantity || !Role) {
+  if (!fullName || !quantity || !Role || !Expenses) {
     res.send({ message: 'All values required !' })
   } else {
     db.query(
       `UPDATE deliveries  SET ? WHERE id=?`,
-      [{ farmersid: farmersID, fullName, quantity, Role }, id],
+      [{ farmersid: farmersID, fullName, quantity, Role , Expenses }, id],
 
       (err, result) => {
         if (err) {
           console.log(err)
           console.log(
             `values coming to the backened are this ${
-              fullName + quantity + date + farmersID + id + Role
+              fullName + quantity + date + farmersID + id + Role + Expenses
             }`,
           )
         } else {

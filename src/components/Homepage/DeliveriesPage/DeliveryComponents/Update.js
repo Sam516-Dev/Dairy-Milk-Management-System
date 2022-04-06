@@ -10,12 +10,17 @@ const Choose = [
   { label: 'Admin', value: 'Admin' },
   { label: 'Farmer', value: 'Normal' },
 ]
+const Choose2 = [
+  { label: 'Dairy Meal', value: 2000 },
+  { label: 'Salt', value: 500 },
+]
 
 function Update() {
   const [fullName, setfullName] = useState('')
   const [quantity, setquantity] = useState('')
   const [Role, setRole] = useState('')
   // const [date, setdate] = useState('')
+  const [Expenses, setExpenses ] = useState('')
   const [farmersID, setfarmersID] = useState('')
 
   const handleFormSubmit = (e) => {
@@ -52,7 +57,7 @@ function Update() {
   const id = val.id
 
   const UpdateDelivery = () => {
-    if (!fullName || !quantity ||quantity==0 || !farmersID || !Role) {
+    if (!fullName || !quantity ||quantity==0 || !farmersID || !Role || !Expenses) {
       toast.error('please input all the fields correctly ')
       return console.log('no details entered !!')
     } else {
@@ -60,12 +65,13 @@ function Update() {
         fullName: fullName,
         quantity: quantity,
         //date: todaysdate,
+        Expenses: Expenses,
         farmersID: farmersID,
         id: id,
         Role: Role,
       })
         .then(() => {
-          console.log(fullName + quantity + farmersID + Role)
+          console.log(fullName + quantity + farmersID + Role + Expenses)
         })
         .then(() => {
           toast.success('data updated successifully')
@@ -152,7 +158,7 @@ function Update() {
             fontSize: '20px',
             background: '#009999',
             color: 'black',
-            marginLeft: '957px',
+            marginLeft: '1110px',
             borderRadius: '12px',
             marginTop: '10px',
             padding: '2px 5px',
@@ -162,6 +168,24 @@ function Update() {
             options={Choose}
             // defaultValue={Choose[1]}            
             onChange={(opt) => setRole(opt.value)}
+          />
+        </div>
+        <div
+          style={{
+            width: '320px',
+            fontSize: '20px',
+            background: '#009999',
+            color: 'black',
+            marginLeft: '1110px',
+            borderRadius: '12px',
+            marginTop: '10px',
+            padding: '2px 5px',
+          }}
+        >
+          <Select
+            options={Choose2}
+            // defaultValue={Choose[1]}            
+            onChange={(exp) => setExpenses(exp.value)}
           />
         </div>
       </div>

@@ -22,7 +22,7 @@ export const HomeIcon = styled(AiOutlineHome)`
 export const UserIcon = styled(FaUserAlt)`
   color: #008080;
   font-size: 40px;
-  margin-left: 1100px;
+  margin-left: 1200px;
   margin-top: 10px;
   :hover {
     cursor: pointer;
@@ -33,6 +33,7 @@ export const Title = styled.h1`
   font-size: 2.5em;
   text-align: center;
   color: #008080;
+  margin-top: 0px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 `
 

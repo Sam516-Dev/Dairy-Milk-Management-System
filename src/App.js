@@ -26,9 +26,10 @@ function App() {
     <>
       <GlobalStyles />
      
-      <GobackHomeApp />
       <Title> DAIRY MILK MANAGEMENT SYSTEM </Title>
+     
       <AdminContextProvider>
+      <GobackHomeApp />
       <MyRoutes/>
      
       </AdminContextProvider>

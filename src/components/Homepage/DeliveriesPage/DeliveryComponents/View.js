@@ -9,7 +9,7 @@ import { UseadminContext } from '../../../AdminContext'
 //import './farmerspage.css'
 
 function View() {
-  const { LocalUser } = UseadminContext();
+  const { LocalUser } = UseadminContext()
 
   const [alldata, setalldata] = useState([])
   const [IspriceUpdated, setIspriceUpdated] = useState(false)
@@ -21,6 +21,7 @@ function View() {
   const [date, setdate] = useState('')
   const [searchName, setsearchName] = useState('')
   const [total, settotal] = useState(0)
+  const [Expenses, setExpenses ] = useState('')
 
   const location = useLocation()
   const val = location?.state
@@ -32,12 +33,14 @@ function View() {
       setfullName(val.fullName)
       setquantity(val.quantity)
       //setdate(new Date(val.date).toLocaleDateString())
+      setExpenses(val.Expenses)
       setfarmersID(val.farmersid)
     }
   }, [val])
   console.log(`this is farmersID ${farmersID}`)
-  console.log(`this is val.farmersid ${val.farmersid}`)
+  console.log(`this is val.Expenses ${val.Expenses}`)
   const id = val.id
+
 
   useEffect(() => {
     Axios.get(`http://localhost:3001/View/${val.farmersid}`).then(
@@ -130,7 +133,6 @@ function View() {
         <tr>
           <td>{val.quantity}</td>
           <td>{new Date(val.date).toLocaleDateString()}</td>
-          
         </tr>
       )
     })
@@ -139,113 +141,284 @@ function View() {
     .map((item) => item.quantity)
     .reduce((p, c) => p + c, 0)
   console.log('totalQuanity', totalQuanity)
-  return (
-    <div>
-      <h2
-        style={{
-          background: '#2fbd82',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: '25px',
-          marginTop: '20px',
-          marginBottom: '15px',
-          color: 'black',
-        }}
-      >
-       Welcome {LocalUser.map(item=>item.fullName)} total milk: {totalQuanity} litres
-      </h2>
 
-      <h2
-        style={{
-          background: '#ffffff',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: '25px',
-          marginTop: '10px',
-          marginBottom: '10px',
-          color: '#2fbd82',
-        }}
-      >
-        total Amount is KSH:{total}
-      </h2>
-      <form onSubmit={handleEditFormSubmit}>
-        <table>
-          <thead>
-            <tr>
-              <th>Quantity</th>
-              <th>Date</th>
-           
-            </tr>
-          </thead>
-          <tbody>{renderTable()}</tbody>
-        </table>
-      </form>
-      <Buttondiv style={{ background: 'white' }}>
-        <button
+  const Loan = (total * 1) / 4
+  const Min = 4000
+  console.log(' loan available ', Loan)
+  const Money = total - val.Expenses
+
+  if (LocalUser[0].Role == 'normal') {
+    return (
+      <div>
+        <h2
           style={{
-            background: '#009999',
-            marginTop: '50px',
-            width: '100px',
-            height: '50px',
-            fontSize: '20px',
-            borderRadius: '8px',
-            color: '#FFFFFF',
+            background: '#2fbd82',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: '25px',
+            marginTop: '20px',
+            marginBottom: '15px',
+            color: 'black',
           }}
-          onClick={handleClick}
         >
-          back
-        </button>
-      </Buttondiv>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '100%',
-          height: '50px',
-          fontSize: '25px',
-          marginLeft: '400px',
-          color: '#FFFFFF',
-          marginTop: '-55px',
-        }}
-      >
-        <Link to={`/deliveries/View/Barchart`} state={val}>
+          Welcome {LocalUser.map((item) => item.fullName)} total milk:{' '}
+          {totalQuanity} litres
+        </h2>
+
+        <h2
+          style={{
+            background: '#ffffff',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: '25px',
+            marginTop: '10px',
+            marginBottom: '10px',
+            color: '#2fbd82',
+          }}
+        >
+          total Amount is KSH:{Money}
+        </h2>
+
+        {Loan >= Min ? (
+          <h2
+            style={{
+              background: '#ffffff',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginLeft: '1100px',
+              fontSize: '15px',
+              marginTop: '-10px',
+              marginBottom: '10px',
+              color: 'grey',
+            }}
+          >
+            {' '}
+            <em>Login Status</em> Available Ksh: {Math.round(Loan)}
+          </h2>
+        ) : (
+          <h2
+            style={{
+              background: '#ffffff',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginLeft: '1100px',
+              fontSize: '15px',
+              marginTop: '-10px',
+              marginBottom: '10px',
+              color: 'red',
+            }}
+          >
+            <em>Loan status: Not Available </em>
+          </h2>
+        )}
+
+        <form onSubmit={handleEditFormSubmit}>
+          <table>
+            <thead>
+              <tr>
+                <th>Quantity</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>{renderTable()}</tbody>
+          </table>
+        </form>
+        <Buttondiv style={{ background: 'white' }}>
           <button
             style={{
               background: '#009999',
-              width: '130px',
+              marginTop: '50px',
+              width: '100px',
               height: '50px',
               fontSize: '20px',
-              marginRight: '100px',
               borderRadius: '8px',
               color: '#FFFFFF',
             }}
+            onClick={handleClick}
           >
-            Milk Graph{' '}
+            back
           </button>
-        </Link>
-
-        <button
+        </Buttondiv>
+        <div
           style={{
-            background: 'red',
-            marginTop: '-5px',
-            width: '120px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
             height: '50px',
-            fontSize: '20px',
-            borderRadius: '8px',
+            fontSize: '25px',
+            marginLeft: '400px',
             color: '#FFFFFF',
-          }}
-          onClick={() => {
-            deleteDelivery(val.farmersid)
+            marginTop: '-50px',
           }}
         >
-          Delete All
-        </button>
+          <Link to={`/deliveries/View/Barchart`} state={val}>
+            <button
+              style={{
+                background: '#009999',
+                width: '130px',
+                height: '50px',
+                fontSize: '20px',
+                marginRight: '100px',
+                borderRadius: '8px',
+                color: '#FFFFFF',
+              }}
+            >
+              Milk Graph{' '}
+            </button>
+          </Link>
+        </div>
       </div>
-    </div>
-  )
+    )
+  } else {
+    return (
+      <div>
+        <h2
+          style={{
+            background: '#2fbd82',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: '25px',
+            marginTop: '20px',
+            marginBottom: '15px',
+            color: 'black',
+          }}
+        >
+          Welcome {LocalUser.map((item) => item.fullName)} total milk:{' '}
+          {totalQuanity} litres
+        </h2>
+
+        <h2
+          style={{
+            background: '#ffffff',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: '25px',
+            marginTop: '10px',
+            marginBottom: '10px',
+            color: '#2fbd82',
+          }}
+        >
+          total Amount is KSH:{Money}
+        </h2>
+
+        {Loan >= Min ? (
+          <h2
+            style={{
+              background: '#ffffff',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginLeft: '1100px',
+              fontSize: '15px',
+              marginTop: '-10px',
+              marginBottom: '10px',
+              color: 'red',
+            }}
+          >
+            {' '}
+            <em>Loan Status Available Ksh</em>: {Math.round(Loan)}
+          </h2>
+        ) : (
+          <h2
+            style={{
+              background: '#ffffff',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginLeft: '1100px',
+              fontSize: '15px',
+              marginTop: '-10px',
+              marginBottom: '10px',
+              color: 'red',
+            }}
+          >
+            <em>Loan status: Not Available </em>
+          </h2>
+        )}
+
+        <form onSubmit={handleEditFormSubmit}>
+          <table>
+            <thead>
+              <tr>
+                <th>Quantity</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>{renderTable()}</tbody>
+          </table>
+        </form>
+        <Buttondiv style={{ background: 'white' }}>
+          <button
+            style={{
+              background: '#009999',
+              marginTop: '50px',
+              width: '100px',
+              height: '50px',
+              fontSize: '20px',
+              borderRadius: '8px',
+              color: '#FFFFFF',
+            }}
+            onClick={handleClick}
+          >
+            back
+          </button>
+        </Buttondiv>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: '50px',
+            fontSize: '25px',
+            marginLeft: '400px',
+            color: '#FFFFFF',
+            marginTop: '-55px',
+          }}
+        >
+          <Link to={`/deliveries/View/Barchart`} state={val}>
+            <button
+              style={{
+                background: '#009999',
+                width: '130px',
+                height: '50px',
+                fontSize: '20px',
+                marginRight: '100px',
+                borderRadius: '8px',
+                color: '#FFFFFF',
+              }}
+            >
+              Milk Graph{' '}
+            </button>
+          </Link>
+
+          <button
+            style={{
+              background: 'red',
+              marginTop: '-5px',
+              width: '120px',
+              height: '50px',
+              fontSize: '20px',
+              borderRadius: '8px',
+              color: '#FFFFFF',
+            }}
+            onClick={() => {
+              deleteDelivery(val.farmersid)
+            }}
+          >
+            Delete All
+          </button>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default View
