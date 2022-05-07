@@ -1,14 +1,15 @@
-import { FaEdit,FaUserAlt } from 'react-icons/fa'
+import { FaEdit, FaUserAlt } from 'react-icons/fa'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
- import { AiOutlineHome } from 'react-icons/ai'
+import { AiOutlineHome } from 'react-icons/ai'
 // import  FaUserAlt from 'react-icons/ai'
 
 // import {
 //   FaUserAlt
 // } from 'react-icons/lib/Fa';
 
-
+// this component contains most of what
+//we can call Styled Components
 export const HomeIcon = styled(AiOutlineHome)`
   color: #008080;
   font-size: 40px;
