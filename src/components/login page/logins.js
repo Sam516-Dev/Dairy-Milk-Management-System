@@ -14,7 +14,7 @@ import {
 import { UseadminContext } from '../AdminContext'
 
 function Loginpage() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   //states of the application ...
   const [FullName, setFullName] = useState('')
   const [Password, setPassword] = useState('')
@@ -24,52 +24,43 @@ function Loginpage() {
 
   //post request
 
-
-
   useEffect(() => {
     Axios.get('http://localhost:3001/login').then((response) => {
       if (response.data.loggedIn == true) {
         setLoginStatus(response.data[0].fullName)
         console.log('response.data.loggedIn', response.data.loggedIn)
-      } 
+      }
     })
   }, [])
-
 
   const login = () => {
     if (!FullName || !Password) {
       toast.error('please input FullName and Password')
       return console.log('no details entered !!')
       // console.log(typeof(FullName))
-    } else if (typeof(FullName) ==='number') { 
-    toast.error('username cannot be a number ')
-    }
-    else {
+    } else if (typeof FullName === 'number') {
+      toast.error('username cannot be a number ')
+    } else {
       Axios.post('http://localhost:3001/login', {
         FullName: FullName,
         Password: Password,
       }).then((response) => {
-
-      
-
         // console.log('response', response.data)
         if (response.data.message) {
           setLoginStatus(response.data.message)
         } else {
           setNewUser(response.data)
           // setLoginStatus(response.data[0].fullName)
-          if (response?.data[0].Role == "normal") {
-            navigate('/milkprice');
-          }
-          else if(response?.data[0].Role == "Admin") {
-            navigate('/');
+          if (response?.data[0].Role == 'normal') {
+            navigate('/deliveries')
+          } else if (response?.data[0].Role == 'Admin') {
+            navigate('/')
           }
         }
         // <h1> {loginStatus}</h1>
       })
     }
   }
-
 
   // const register = () => {
   //     console.log(username + password)
@@ -104,10 +95,11 @@ function Loginpage() {
         style={{
           backgroundColor: 'white',
           color: 'red',
-          marginLeft: '10px'
-      }}
-      
-      >{loginStatus} </h3>
+          marginLeft: '10px',
+        }}
+      >
+        {loginStatus}{' '}
+      </h3>
     </Wrapper>
   )
 }
