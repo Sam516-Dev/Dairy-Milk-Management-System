@@ -1,7 +1,8 @@
 import React,{useState,useEffect,useCallback} from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-
+//this is the component that let's the user exist in 
+//the LocalStorage of the browser
 export default function LocalStorage(key, intialValue)
 {
     const navigate = useNavigate()
