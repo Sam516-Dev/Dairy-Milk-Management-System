@@ -28,7 +28,7 @@ function GobackHomeApp() {
           />
           <p
             style={{
-              color: 'black',
+              color: 'red',
               fontSize: '15px',
               marginLeft: '1322px',
               fontWeight: 'bold',

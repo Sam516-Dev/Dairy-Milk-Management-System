@@ -8,7 +8,7 @@ import Select from 'react-select'
 
 const Choose = [
   { label: 'Admin', value: 'Admin' },
-  { label: 'Farmer', value: 'Normal' },
+  { label: 'Farmer', value: 'normal' },
 ]
 const Choose2 = [
   { label: 'Dairy Meal', value: 2000 },

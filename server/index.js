@@ -58,14 +58,14 @@ app.use((req, res, next) => {
 })
 
 //get method here.. route
-// app.get('/login', (req, res) => {
-//   if (req.session.user) {
-//     res.send({ loggedIn: true, user: req.session.user })
-//     console.log(req.session.user);
-//   } else {
-//     res.send({ loggedIn: false })
-//   }
-// })
+app.get('/login', (req, res) => {
+  if (req.session.user) {
+    res.send({ loggedIn: true, user: req.session.user })
+    console.log(req.session.user);
+  } else {
+    res.send({ loggedIn: false })
+  }
+})
 
 // creating database connection
 const db = mysql.createConnection({

@@ -57,7 +57,7 @@ function Loginpage() {
           setLoginStatus(response.data.message)
         } else {
           setNewUser(response.data)
-          setLoginStatus(response.data[0].fullName)
+          // setLoginStatus(response.data[0].fullName)
           if (response?.data[0].Role == "normal") {
             navigate('/deliveries');
           }
