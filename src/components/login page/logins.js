@@ -59,7 +59,7 @@ function Loginpage() {
           setNewUser(response.data)
           // setLoginStatus(response.data[0].fullName)
           if (response?.data[0].Role == "normal") {
-            navigate('/deliveries');
+            navigate('/milkprice');
           }
           else if(response?.data[0].Role == "Admin") {
             navigate('/');
