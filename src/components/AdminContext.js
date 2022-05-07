@@ -10,7 +10,8 @@ export function UseadminContext() {
 
     return useContext(admincontext);
 };
-
+// this components deal with keeping the user who
+//logged in as the current local user in the localstorage
 export function AdminContextProvider({ children }) {
     const [fetchedLanguage, setfetchedLanguage] = useState([]);
     const [loading, setLoading] = useState(true);
