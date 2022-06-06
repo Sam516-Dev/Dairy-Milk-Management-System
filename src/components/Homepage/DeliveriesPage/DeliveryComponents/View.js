@@ -27,7 +27,6 @@ function View() {
   const val = location?.state
 
   //useEffect hook for rendering all deliveries
-  //runs when the page loads
   useEffect(() => {
     if (val) {
       setfullName(val.fullName)
@@ -45,7 +44,7 @@ function View() {
   useEffect(() => {
     Axios.get(`http://localhost:3001/View/${val.farmersid}`).then(
       (response) => {
-        //farmersID=farmersID
+       
         if (response.data) {
           setalldata(response.data)
           console.log(response.data)
@@ -63,7 +62,7 @@ function View() {
     navigate('/deliveries')
   }
 
-  //pulling price from the database
+  // API use for pulling price from the database
   useEffect(() => {
     Axios.get('http://localhost:3001/getMilkPrice').then((response) => {
       if (response.data) {
@@ -147,6 +146,10 @@ function View() {
   console.log(' loan available ', Loan)
   const Money = total - val.Expenses
 
+
+  //the response from the backened
+  //has a role which is used to 
+  //hide some fuctionality
   if (LocalUser[0].Role == 'normal') {
     return (
       <div>
