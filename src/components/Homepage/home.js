@@ -36,14 +36,3 @@ function Homepage() {
   )
 }
 export default Homepage
-
-// <Hometable>
-// <thead>
-//   <tr>
-//     <Tablerow> home </Tablerow>
-//     <Tablerow>farmers </Tablerow>
-//     <Tablerow> Deliveries</Tablerow>
-//     <Tablerow> milk price</Tablerow>
-//   </tr>
-// </thead>
-// </Hometable>

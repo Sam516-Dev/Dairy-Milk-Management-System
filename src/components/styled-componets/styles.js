@@ -29,7 +29,7 @@ export const UserIcon = styled(FaUserAlt)`
     cursor: pointer;
   }
 `
-
+//just addin the comments for recall
 export const Title = styled.h1`
   font-size: 2.5em;
   text-align: center;
