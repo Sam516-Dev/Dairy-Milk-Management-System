@@ -10,7 +10,8 @@ import {
 import { UseadminContext } from '../AdminContext'
 
 
-
+//this is the first page that one
+// comes across if they open the application
 
 function Homepage() {
   const { LocalUser } = UseadminContext()
@@ -26,6 +27,7 @@ function Homepage() {
       <NavbarLink to="/ViewAllDeliveries">All Deliveries </NavbarLink>
 
 
+      
       <img
         src="/homeimages/dairy cows.jpg"
         alt="cow image"

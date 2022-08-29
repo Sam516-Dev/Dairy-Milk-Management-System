@@ -1,5 +1,9 @@
 import { createGlobalStyle } from 'styled-components'
 
+
+//this global style is used all over the application and 
+// is global as stated
+
 export const GlobalStyles = createGlobalStyle`
   * {
     padding: 0;
