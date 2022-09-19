@@ -58,7 +58,7 @@ function Update() {
 
   const UpdateDelivery = () => {
     if (!fullName || !quantity ||quantity==0 || !farmersID || !Role || !Expenses) {
-      toast.error('please input all the fields correctly ')
+      toast.error('please enter all the fields correctly ')
       return console.log('no details entered !!')
     } else {
       Axios.put('http://localhost:3001/Update', {

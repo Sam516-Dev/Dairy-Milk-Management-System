@@ -13,7 +13,6 @@ import { Bar } from 'react-chartjs-2'
 ChartJS.register(CategoryScale, LinearScale, BarElement)
 
 function BarChart() {
-  // const [alldata, setalldata] = useState([])
   const [fullName, setfullName] = useState('')
   const [quantity, setquantity] = useState('')
   const [farmersID, setfarmersID] = useState('')
@@ -53,10 +52,7 @@ function BarChart() {
     // (x) => (x.date = new Date(val.date).toLocaleDateString()),
     datasets: [
       {
-        // label: `${chart?.coins?.length} Coins Available`,
-        //label: `${chart?.length}  Available`,
-        
-
+           
         data: chart?.map((x) => x.quantity),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
