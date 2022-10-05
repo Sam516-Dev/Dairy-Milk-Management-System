@@ -60,10 +60,6 @@ function Loginpage() {
     }
   }
 
-  // const register = () => {
-  //     console.log(username + password)
-  // }
-
   return (
     <Wrapper>
       <ToastContainer position="top-center" />
@@ -96,7 +92,7 @@ function Loginpage() {
           marginLeft: '10px',
         }}
       >
-        {loginStatus}{' '}
+        {loginStatus}
       </h3>
     </Wrapper>
   )

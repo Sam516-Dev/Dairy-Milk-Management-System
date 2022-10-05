@@ -14,7 +14,7 @@ function Analysis() {
     const [farmersID, setfarmersID] = useState('')
 
 
- //useEffect hook runs when the page loads
+ 
  useEffect(() => {
      if (val) {
       setfullName(val.fullName)
