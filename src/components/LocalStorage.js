@@ -40,12 +40,3 @@ export default function LocalStorage(key, intialValue)
 }
 
 
-
-// function LocalStorage() {
-//     return ( 
-
-//         <h1> LocalStorage </h1>
-//      );
-// }
-
-// export default LocalStorage;

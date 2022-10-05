@@ -130,7 +130,7 @@ export const Hometitle = styled.h2`
 `
 export const Homediv = styled.div`
   margin-top: 55px;
-  color: black;
+  color: #008080;
   text-transform: uppercase;
 `
 
