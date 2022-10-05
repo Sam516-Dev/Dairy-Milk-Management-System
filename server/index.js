@@ -18,7 +18,7 @@ app.use(
   }),
 )
 app.use(cors({ credentials: true }))
-// ... cross origin resource sharing
+
 
 app.use(express.json())
 
