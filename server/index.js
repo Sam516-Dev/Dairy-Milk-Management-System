@@ -120,7 +120,7 @@ app.post('/adddairymilk', (req, res) => {
         console.log(err)
         console.log(fullName + quantity + farmersID + date)
       } else {
-        console.log('values inserted in the database successifully ')
+        console.log('values inserted in the database successifully!')
       }
     },
   )
@@ -140,7 +140,6 @@ app.get('/fetchalldeliveries', (req, res) => {
 })
 
 //app.delete('/delete/:id', (req, res) => {
-//how the user will view based on their farmersID
 //'SELECT * FROM admin WHERE username = ?;',
 app.get('/View/:id', (req, res) => {
   const farmersID = req.params.id
