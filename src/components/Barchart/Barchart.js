@@ -48,11 +48,10 @@ function BarChart() {
   }, [])
 
   var data = {
-    labels: chart?.map((x) => x.date = new Date(x.date).toLocaleDateString()),
+    labels: chart?.map((x) => (x.date = new Date(x.date).toLocaleDateString())),
     // (x) => (x.date = new Date(val.date).toLocaleDateString()),
     datasets: [
       {
-           
         data: chart?.map((x) => x.quantity),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -90,10 +89,8 @@ function BarChart() {
   }
 
   return (
-
-      <div >
+    <div>
       <Bar data={data} height={500} width={700} options={options} />
-
     </div>
   )
 }
@@ -151,16 +148,14 @@ export default BarChart
 
 // export default BarChart
 
-
-
-    //     <form >
-    //       <table>
-    //         <thead>
-    //           <tr>
-    //             <th>Quantity</th>
-    //             <th>Date</th>
-    //           </tr>
-    //         </thead>
-    //         <tbody>{renderLine()}</tbody>
-    //       </table>
-    //     </form>
+//     <form >
+//       <table>
+//         <thead>
+//           <tr>
+//             <th>Quantity</th>
+//             <th>Date</th>
+//           </tr>
+//         </thead>
+//         <tbody>{renderLine()}</tbody>
+//       </table>
+//     </form>

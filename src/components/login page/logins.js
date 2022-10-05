@@ -15,7 +15,6 @@ import { UseadminContext } from '../AdminContext'
 
 function Loginpage() {
   const navigate = useNavigate()
-  //states of the application ...
   const [FullName, setFullName] = useState('')
   const [Password, setPassword] = useState('')
   const [loginStatus, setLoginStatus] = useState('')
@@ -37,7 +36,6 @@ function Loginpage() {
     if (!FullName || !Password) {
       toast.error('please input FullName and Password')
       return console.log('no details entered !!')
-      // console.log(typeof(FullName))
     } else if (typeof FullName === 'number') {
       toast.error('username cannot be a number, characters only ')
     } else {
