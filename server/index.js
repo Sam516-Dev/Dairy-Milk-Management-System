@@ -5,8 +5,6 @@ const app = express()
 const port = 3001
 const path = require('path')
 
-
-
 app.use(cors())
 // app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(
@@ -18,7 +16,6 @@ app.use(
   }),
 )
 app.use(cors({ credentials: true }))
-
 
 app.use(express.json())
 
@@ -61,7 +58,7 @@ app.use((req, res, next) => {
 app.get('/login', (req, res) => {
   if (req.session.user) {
     res.send({ loggedIn: true, user: req.session.user })
-    console.log(req.session.user);
+    console.log(req.session.user)
   } else {
     res.send({ loggedIn: false })
   }
@@ -140,6 +137,7 @@ app.get('/fetchalldeliveries', (req, res) => {
 })
 
 //app.delete('/delete/:id', (req, res) => {
+
 //'SELECT * FROM admin WHERE username = ?;',
 app.get('/View/:id', (req, res) => {
   const farmersID = req.params.id
@@ -158,7 +156,6 @@ app.get('/View/:id', (req, res) => {
     },
   )
 })
-
 
 //tying to fetch alldeliveries
 app.get('/ViewAllDeliveries', (req, res) => {
@@ -227,7 +224,7 @@ app.post('/login', (req, res) => {
     (err, result) => {
       if (err) {
         res.send({ err: err })
-      } else if (FullName === '' || typeof(FullName) ==='number') {
+      } else if (FullName === '' || typeof FullName === 'number') {
         res.status(400).send({
           msg: 'Please pass Role ID, email, password, phone or fullname.',
         })
@@ -238,18 +235,18 @@ app.post('/login', (req, res) => {
           if (response) {
             //res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
             req.session.user = result
-            req.session.LoggedIn = true;
-            
+            req.session.LoggedIn = true
+
             console.log('session print', req.session.user)
             res.send(result)
             console.log('result', result)
           } else {
-           return res.send({ message: 'Icorrect Username/Password' })
+            return res.send({ message: 'Icorrect Username/Password' })
           }
         })
       } else {
-         res.send({ message: "User doesn't exist" })
-        req.session.LoggedIn = false;
+        res.send({ message: "User doesn't exist" })
+        req.session.LoggedIn = false
       }
     },
   )
@@ -341,7 +338,6 @@ app.post('/addfarmer', (req, res) => {
   const Password = req.body.Password
   console.log(fullName + quantity + farmersID + Password)
 
-
   //    //checking username exists
   //    if(result.lenght){
   //   console.log('username taken');
@@ -355,20 +351,17 @@ app.post('/addfarmer', (req, res) => {
 
       (err, result) => {
         if (err) {
-           console.log(err)
+          console.log(err)
           // console.log(fullName + quantity + farmersID + date + hash)
         } else {
           console.log('new farmer added !')
-         
         }
       },
-      )
-      
+    )
   })
-// }
+  // }
 
   res.send({ message: 'values inserted in the database' })
-
 })
 
 //this route is used to update the user through the use of ID
@@ -391,7 +384,7 @@ app.put('/Update', (req, res) => {
   } else {
     db.query(
       `UPDATE deliveries  SET ? WHERE id=?`,
-      [{ farmersid: farmersID, fullName, quantity, Role , Expenses }, id],
+      [{ farmersid: farmersID, fullName, quantity, Role, Expenses }, id],
 
       (err, result) => {
         if (err) {
