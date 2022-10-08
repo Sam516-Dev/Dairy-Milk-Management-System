@@ -96,11 +96,3 @@ function BarChart() {
 }
 
 export default BarChart
-
-// import { Pie, defaults } from 'react-chartjs-2'
-// import { Bar } from 'react-chartjs-2'
-// import React, { useState, useEffect } from 'react'
-// import Axios from 'axios'
-
-// const BarChart = () => {
-
