@@ -145,17 +145,3 @@ export default BarChart
 
 //   return <h2> line Graph preparation </h2>
 // }
-
-// export default BarChart
-
-//     <form >
-//       <table>
-//         <thead>
-//           <tr>
-//             <th>Quantity</th>
-//             <th>Date</th>
-//           </tr>
-//         </thead>
-//         <tbody>{renderLine()}</tbody>
-//       </table>
-//     </form>
