@@ -104,21 +104,3 @@ export default BarChart
 
 // const BarChart = () => {
 
-//     const [alldeliveries, setalldeliveries] = useState([])
-//     const [chartData, setChartData] = useState({})
-
-//     const [initialData, setinitialData] = useState({
-//         fullName: '',
-//         quantity: '',
-//          date: '',
-//         farmersID: '',
-//     })
-
-//     // useEffect(() => {
-//     //     Axios.get('http://localhost:3001/fetchalldeliveries').then((response) => {
-//     //         if (response.data) {
-//     //             setalldeliveries(response.data)
-//     //             // console.log(response.data)
-//     //             setChartData({
-//     //               labels: alldeliveries.map((val) => val.date),
-
