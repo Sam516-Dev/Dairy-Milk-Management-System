@@ -122,26 +122,3 @@ export default BarChart
 //     //             setChartData({
 //     //               labels: alldeliveries.map((val) => val.date),
 
-//     //               datasets: [
-//     //                   {
-//     //                     label: "litres",
-//     //                     quantity: alldeliveries.map((val) => val.quantity),
-//     //                     backgroundColor: [
-//     //                       "#ffbb11",
-//     //                       "#ecf0f1",
-//     //                       "#50AF95",
-//     //                       "#f3ba2f",
-//     //                       "#2a71d0"
-//     //                     ]
-//     //                   }
-//     //                 ]
-//     //               });
-//     //         }
-//     //         // labels: data.data.map((crypto) => crypto.name),
-
-//     //     }, [])
-
-//     //})
-
-//   return <h2> line Graph preparation </h2>
-// }
