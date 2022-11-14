@@ -20,7 +20,7 @@ import {AdminContextProvider} from './components/AdminContext'
 import MyRoutes from './MyRoutes'
 
 function App() {
-  //added this comment to test something
+  //main app
 
   return (
     <>

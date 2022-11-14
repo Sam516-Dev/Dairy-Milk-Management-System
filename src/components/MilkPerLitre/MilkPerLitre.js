@@ -31,7 +31,6 @@ function MilkPerLitreApp() {
         console.log('price here', response.data)
         setIspriceUpdated(true)
         setprice(response.data)
-        // console.log('setnewprice', setprice );
       }
     })
   }, [])
