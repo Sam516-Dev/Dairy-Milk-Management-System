@@ -41,8 +41,6 @@ function Newdelivery() {
   useEffect(() => {
     if (val) {
       setfullName(val.fullName)
-      //setquantity(val.quantity)
-      //setdate(new Date(val.date).toLocaleDateString())
       setfarmersID(val.farmersid)
     }
   }, [val])
@@ -120,7 +118,6 @@ function Newdelivery() {
         <button
           style={{
             background: '#009999',
-            // marginTop: '50px',
             width: '100px',
             height: '50px',
             fontSize: '20px',

@@ -19,7 +19,6 @@ function Update() {
   const [fullName, setfullName] = useState('')
   const [quantity, setquantity] = useState('')
   const [Role, setRole] = useState('')
-  // const [date, setdate] = useState('')
   const [Expenses, setExpenses ] = useState('')
   const [farmersID, setfarmersID] = useState('')
 
@@ -48,7 +47,6 @@ function Update() {
     if (val) {
       setfullName(val.fullName)
       setquantity(val.quantity)
-      //setdate(new Date(val.date).toLocaleDateString())
       setfarmersID(val.farmersid)
     }
   }, [val])
@@ -81,7 +79,6 @@ function Update() {
         })
     }
   }
-  // console.log(fullName + quantity + date + farmersID);
 
   return (
     <div>
@@ -163,8 +160,7 @@ function Update() {
           }}
         >
           <Select
-            options={Choose}
-            // defaultValue={Choose[1]}            
+            options={Choose}          
             onChange={(opt) => setRole(opt.value)}
           />
         </div>
