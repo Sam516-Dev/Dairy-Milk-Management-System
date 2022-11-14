@@ -75,14 +75,6 @@ const db = mysql.createConnection({
 app.post('/register', (req, res) => {
   const username = req.body.username
   const password = req.body.password
-  // console.log('this is the registration filed')
-  // //check if the user exists
-  //  const oldUser = username.findOne(username)
-
-  //  if (oldUser) {
-  //   res.status(409).send('User Already Exist. Please Login')
-  //    console.log('old user exists ')
-  //  }
   bcrypt.hash(password, saltRound, (err, hash) => {
     if (err) {
       return console.log(err)
@@ -339,12 +331,9 @@ app.post('/addfarmer', (req, res) => {
   res.send({ message: 'values inserted in the database' })
 })
 
-//this route is used to update the user through the use of ID
-//API for adding/put/update deliveries that are already in the database
 app.put('/Update', (req, res) => {
   const fullName = req.body.fullName
   const quantity = req.body.quantity
-  //const date = req.body.date
   const Expenses = req.body.Expenses
   const farmersID = req.body.farmersID
   const id = req.body.id
