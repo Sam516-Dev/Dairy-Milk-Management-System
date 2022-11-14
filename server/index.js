@@ -86,7 +86,7 @@ app.post('/register', (req, res) => {
         if (err) {
           console.log(err)
         } else {
-          res.send('values inserted to the database')
+          res.send('values inserted to the database successifully ')
         }
       },
     )

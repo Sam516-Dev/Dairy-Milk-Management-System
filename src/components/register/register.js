@@ -25,11 +25,6 @@ function Registerpage() {
     })
   }
 
-  // const register = () => {
-  //     console.log(username + password)
-  // }
-
-
   return (
     <Wrapper>
       <Form>
@@ -60,4 +55,3 @@ function Registerpage() {
 
 export default Registerpage
 
-//<Input type="submit" value="Submit" />

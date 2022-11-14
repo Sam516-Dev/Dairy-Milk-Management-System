@@ -27,7 +27,6 @@ function ViewAllDeliveries() {
     Axios.get('http://localhost:3001/ViewAllDeliveries').then((response) => {
       if (response.data) {
         setalldata(response.data)
-        // console.log(response.data)
       }
     })
   }, [])
