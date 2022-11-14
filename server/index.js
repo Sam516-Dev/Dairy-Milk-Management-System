@@ -260,25 +260,6 @@ app.get('/login', (req, res) => {
   }
 })
 
-//inserting milk price in the database
-// app.post('/InputPrice', (req, res) => {
-//   const price = req.body.price
-//   console.log(`this is the price ${price}`)
-//   db.query(
-//     `INSERT INTO priceperlitre (price) VALUES ( "${price}")`,
-//     [(price)],
-
-//     (err, result) => {
-//       if (err) {
-//         console.log(err)
-//         console.log(price)
-//       } else {
-//         console.log('price inserted in the database successifully ')
-//       }
-//     },
-//   )
-//   res.send({ message: 'values inserted in the database' })
-// })
 //update price
 app.put('/UpdateMilkPrice/:priceUpdated', (req, res) => {
   const price = req.body.price
@@ -338,15 +319,9 @@ app.post('/addfarmer', (req, res) => {
   const Password = req.body.Password
   console.log(fullName + quantity + farmersID + Password)
 
-  //    //checking username exists
-  //    if(result.lenght){
-  //   console.log('username taken');
-  // }
-  // else {
   bcrypt.hash(Password, saltRound, (err, hash) => {
     db.query(
       `INSERT INTO deliveries (farmersID, fullName, quantity,date,Password) VALUES ( "${farmersID}", "${fullName}", "${quantity}","${date}", ? )`,
-      // `INSERT INTO deliveries (farmersID, fullName, quantity,date,Password) VALUES ( ?, ?, ?, ?, ?)`,
       [(farmersID, fullName, quantity, date, hash)],
 
       (err, result) => {
