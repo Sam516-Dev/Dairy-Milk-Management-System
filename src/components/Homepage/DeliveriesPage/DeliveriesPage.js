@@ -27,8 +27,7 @@ const DeliveriesPage = () => {
     (current.getMonth() + 1) +
     '/' +
     current.getDate()
-  //this function runs when we try a new delivery in the deliveries list
-  //newFormData is the current entered element in the input field through spread (...)
+  
   const handleAddFormChange = (event) => {
     const { name, value } = event.target
     setinitialData({ ...initialData, [name]: value })
@@ -37,8 +36,6 @@ const DeliveriesPage = () => {
   const handleEditFormSubmit = (event) => {
     event.preventDefault()
   }
-
-  //this function runs whenever the add button is clicked
 
   //useEffect hook for rendering all deliveries
   useEffect(() => {
