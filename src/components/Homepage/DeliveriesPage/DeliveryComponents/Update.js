@@ -52,7 +52,6 @@ function Update() {
       setfarmersID(val.farmersid)
     }
   }, [val])
-  // console.log(date)
   console.log(val.id)
   const id = val.id
 
@@ -64,7 +63,6 @@ function Update() {
       Axios.put('http://localhost:3001/Update', {
         fullName: fullName,
         quantity: quantity,
-        //date: todaysdate,
         Expenses: Expenses,
         farmersID: farmersID,
         id: id,

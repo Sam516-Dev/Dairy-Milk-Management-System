@@ -148,7 +148,6 @@ export const NavbarLink = styled(Link)`
   color: #1c95a6;
 `
 
-//end of home page
 
 //milk per litre styles
 export const Milktitle = styled.h2`
