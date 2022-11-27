@@ -46,7 +46,6 @@ const DeliveriesPage = () => {
       }
     })
   }, [])
-  //this is function is called when the delete button is clicked
   const deleteDelivery = (id) => {
     Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
       setalldeliveries(
