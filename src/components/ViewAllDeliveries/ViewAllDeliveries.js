@@ -8,8 +8,7 @@ function ViewAllDeliveries() {
   const [alldata, setalldata] = useState([])
 
   //   const [fullName, setfullName] = useState('')
-  //   const [quantity, setquantity] = useState('')
-  //   const [farmersID, setfarmersID] = useState('')
+
 
   const [searchName, setsearchName] = useState('')
 
@@ -22,7 +21,6 @@ function ViewAllDeliveries() {
 //     '/' +
 //     current.getMonth()
 
-  //useEffect hook for rendering all deliveries
   useEffect(() => {
     Axios.get('http://localhost:3001/ViewAllDeliveries').then((response) => {
       if (response.data) {

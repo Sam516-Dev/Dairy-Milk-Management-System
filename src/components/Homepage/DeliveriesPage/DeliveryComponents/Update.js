@@ -205,4 +205,3 @@ function Update() {
 
 export default Update
 
-//<input type="text" value={todaysdate} readOnly="true" />

@@ -178,10 +178,4 @@ const DeliveriesPage = () => {
 
 export default DeliveriesPage
 
-// <input
-//   type="date"
-//   name="date"
-//   required="required"
-//   placeholder="Enter the date..."
-//   onChange={handleAddFormChange}
-// />
+
