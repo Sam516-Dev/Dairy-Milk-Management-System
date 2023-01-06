@@ -28,7 +28,7 @@ export default function LocalStorage(key, intialValue)
         [],
     )
        
-   
+   //use effect re-renders the page incase there is any change 
     useEffect(() =>
     { 
         if (value === undefined) return  localStorage.removeItem(prefixKey) 

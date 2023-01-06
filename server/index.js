@@ -25,7 +25,7 @@ const session = require('express-session')
 
 //for hashing passwords
 const bcrypt = require('bcrypt')
-//defines the number of hashing rounds is done during the bcrypt hashing
+
 const saltRound = 10
 
 app.use(cookieParser())
@@ -54,7 +54,7 @@ app.use((req, res, next) => {
   next()
 })
 
-//get method here.. route
+
 app.get('/login', (req, res) => {
   if (req.session.user) {
     res.send({ loggedIn: true, user: req.session.user })
@@ -64,7 +64,7 @@ app.get('/login', (req, res) => {
   }
 })
 
-// creating database connection
+
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'sam',
