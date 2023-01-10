@@ -22,15 +22,14 @@ function Newdelivery() {
   const location = useLocation()
   const val = location?.state
 
-
-//good format
+  //good format
   const current = new Date()
   const todaysdate =
     current.getFullYear() +
     '/' +
     (current.getMonth() + 1) +
     '/' +
-    current.getDate();
+    current.getDate()
 
   const navigate = useNavigate()
   function handleClick() {
@@ -49,7 +48,7 @@ function Newdelivery() {
 
   const handleAdd = (event) => {
     event.preventDefault()
-    if (!quantity || quantity==0) {
+    if (!quantity || quantity == 0) {
       toast.error('please input the new milk delivered')
       console.log('no quantity entered !!')
     } else {
@@ -69,8 +68,8 @@ function Newdelivery() {
 
   return (
     <div>
-    <ToastContainer position="top-center" />
-      
+      <ToastContainer position="top-center" />
+
       <h2
         style={{
           background: '#2fbd82',
