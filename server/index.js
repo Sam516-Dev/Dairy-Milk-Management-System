@@ -130,7 +130,6 @@ app.get('/fetchalldeliveries', (req, res) => {
 
 //app.delete('/delete/:id', (req, res) => {
 
-//'SELECT * FROM admin WHERE username = ?;',
 app.get('/View/:id', (req, res) => {
   const farmersID = req.params.id
   console.log(req.params.id)
@@ -161,7 +160,7 @@ app.get('/ViewAllDeliveries', (req, res) => {
   })
 })
 
-//tying to fetch MilkPrice
+
 app.get('/getMilkPrice', (req, res) => {
   db.query('SELECT dbprice FROM priceperlitre;', (err, results) => {
     if (err) {
@@ -284,7 +283,7 @@ app.delete('/delete/:id', (req, res) => {
   })
 })
 
-//this is the route for deleting on the view component
+
 app.delete('/deleteuser/:farmersID', (req, res) => {
   const farmersid = req.params.farmersID
   console.log(farmersid)

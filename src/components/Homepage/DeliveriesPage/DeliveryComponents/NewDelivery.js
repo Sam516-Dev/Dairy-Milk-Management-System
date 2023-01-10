@@ -32,7 +32,6 @@ function Newdelivery() {
     '/' +
     current.getDate();
 
-  //this replaced useHistory on the previous version of react-router
   const navigate = useNavigate()
   function handleClick() {
     navigate('/deliveries')
@@ -55,7 +54,6 @@ function Newdelivery() {
       console.log('no quantity entered !!')
     } else {
       Axios.post('http://localhost:3001/adddairymilk', {
-        //newContact: newContact,
         fullName: fullName,
         quantity: quantity,
         date: todaysdate,
