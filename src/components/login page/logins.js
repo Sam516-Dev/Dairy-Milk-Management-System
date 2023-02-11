@@ -55,7 +55,6 @@ function Loginpage() {
             navigate('/')
           }
         }
-        // <h1> {loginStatus}</h1>
       })
     }
   }

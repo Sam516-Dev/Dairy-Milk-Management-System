@@ -22,7 +22,7 @@ function Newdelivery() {
   const location = useLocation()
   const val = location?.state
 
-  //good format
+  
   const current = new Date()
   const todaysdate =
     current.getFullYear() +

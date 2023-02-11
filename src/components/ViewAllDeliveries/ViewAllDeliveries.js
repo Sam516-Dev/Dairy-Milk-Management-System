@@ -7,7 +7,6 @@ import Axios from 'axios'
 function ViewAllDeliveries() {
   const [alldata, setalldata] = useState([])
 
-  //   const [fullName, setfullName] = useState('')
 
 
   const [searchName, setsearchName] = useState('')
