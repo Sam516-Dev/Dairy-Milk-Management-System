@@ -21,7 +21,7 @@ function Loginpage() {
 
   const { setNewUser, LocalUser } = UseadminContext()
 
-  //post request
+ 
 
   useEffect(() => {
     Axios.get('http://localhost:3001/login').then((response) => {
@@ -43,7 +43,6 @@ function Loginpage() {
         FullName: FullName,
         Password: Password,
       }).then((response) => {
-        // console.log('response', response.data)
         if (response.data.message) {
           setLoginStatus(response.data.message)
         } else {

@@ -177,8 +177,7 @@ function Update() {
           }}
         >
           <Select
-            options={Choose2}
-            // defaultValue={Choose[1]}            
+            options={Choose2}          
             onChange={(exp) => setExpenses(exp.value)}
           />
         </div>
